@@ -60,6 +60,19 @@ calcular_indices <- function(votos, ideologia) {
   do.call(rbind, resultado)
 }
 
+aplicar_auditoria <- function(indices, auditoria) {
+  x <- merge(indices, auditoria[c("uf", "cargo", "QT_TOTAL_VOTOS_VALIDOS", "diferenca")],
+             by = c("uf", "cargo"), all.x = TRUE)
+  stopifnot(!anyNA(x$diferenca))
+  x$integro <- x$diferenca == 0
+  x$votos_validos <- x$QT_TOTAL_VOTOS_VALIDOS
+  x$cobertura <- ifelse(x$votos_validos > 0, x$votos_classificados / x$votos_validos, NA_real_)
+  # Nao inventar uma posicao politica onde as fontes de votos nao conciliam.
+  x$nota[!x$integro] <- NA_real_
+  x$desvio[!x$integro] <- NA_real_
+  x
+}
+
 preparar_votos <- function(raiz) {
   brutos <- file.path(raiz, "dados", "brutos")
   entrada <- file.path(raiz, "dados", "entrada")
@@ -86,10 +99,12 @@ preparar_votos <- function(raiz) {
                     by = c("uf", "cargo"), all = TRUE)
   auditoria$diferenca <- auditoria$votos - auditoria$QT_TOTAL_VOTOS_VALIDOS
   stopifnot(nrow(auditoria) == length(ufs_brasil) * length(unique(codigos_cargos)),
-            !anyNA(auditoria$diferenca), all(auditoria$diferenca == 0))
+            !anyNA(auditoria$diferenca))
+  auditoria$integro <- auditoria$diferenca == 0
   write.csv(votos, file.path(entrada, "votos_partido_uf.csv"), row.names = FALSE, fileEncoding = "UTF-8")
   write.csv(totais, file.path(entrada, "totais_uf_cargo.csv"), row.names = FALSE, fileEncoding = "UTF-8")
   write.csv(auditoria, file.path(entrada, "auditoria_eleitoral.csv"), row.names = FALSE, fileEncoding = "UTF-8")
-  message("Votos oficiais agregados e conciliados: ", nrow(auditoria), " combinacoes UF-cargo.")
+  message("Fontes conciliadas: ", sum(auditoria$integro), " de ", nrow(auditoria),
+          " combinacoes UF-cargo. Divergencias serao marcadas como indisponiveis.")
   invisible(votos)
 }
