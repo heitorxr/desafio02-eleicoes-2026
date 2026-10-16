@@ -10,7 +10,11 @@ Projeto da disciplina Visualização de Dados Aplicada, UFPR. Um cartograma com 
 - O professor autorizou ggplot posteriormente ao PDF; priorizar funções geométricas compreensíveis em R.
 - Usar números complexos na geometria dos velocímetros, sem explicação matemática no painel ou PDF principal. A explicação fica no apoio técnico para os colegas apresentarem no vídeo.
 - Entregar programação e notas breves para os colegas prepararem um vídeo de aproximadamente cinco minutos, não produzir o vídeo agora.
-- Cada cargo controla um traço: Presidente = cor; Senador = largura do sorriso; Governador = largura dos olhos; Federal = comprimento do nariz; Estadual/distrital = comprimento das sobrancelhas. Altura e orientação do sorriso são constantes.
+- Cada cargo controla um traço mais pronunciado: Presidente = cor; Senador = abertura do sorriso; Governador = abertura dos olhos; Federal = tamanho do nariz; Estadual/distrital = comprimento das sobrancelhas. Os traços permanecem na escala 0–10, sem amplificação relativa artificial.
+
+## Estado atualizado
+
+Rondônia foi recuperada com votação por seção, cadastro e destinação oficial dos votos: **135/135 totais conciliados**, mantendo a auditoria original e sem alterar votos das outras UFs. Ver `AUDITORIA_RO.md`. O painel possui legenda dos cinco traços imediatamente abaixo do mapa.
 
 ## Cuidados metodológicos
 

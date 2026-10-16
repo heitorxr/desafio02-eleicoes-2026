@@ -23,6 +23,10 @@ with sync_playwright() as p:
     page.wait_for_function("document.getElementById('gauges').complete")
     assert page.locator(".uf-hit").count() == 27
     assert page.locator("#nome-uf").inner_text() == "Paraná / PR"
+    legenda = page.locator("#legenda-face")
+    assert legenda.is_visible()
+    assert legenda.locator("dt").count() == 5
+    assert page.evaluate("document.getElementById('legenda-face').getBoundingClientRect().top >= document.getElementById('mapa-wrap').getBoundingClientRect().bottom")
     page.screenshot(path=str(SCRATCH / "painel_desktop.png"), full_page=True)
     ufs = page.locator(".uf-hit").evaluate_all("els => els.map(x=>x.dataset.uf)")
     for uf in ufs:
@@ -31,9 +35,9 @@ with sync_playwright() as p:
         assert page.locator("#valores tr").count() == 5
         assert page.locator(f'.uf-hit[data-uf="{uf}"]').get_attribute("aria-pressed") == "true"
     page.locator('.uf-hit[data-uf="RO"]').click()
-    assert page.locator('#valores tr[data-cargo="federal"] td').nth(1).inner_text() == "—"
-    assert page.locator('#valores tr[data-cargo="estadual"] td').nth(1).inner_text() == "—"
-    assert "indisponíveis" in page.locator("#aviso").inner_text()
+    assert page.locator('#valores tr[data-cargo="federal"] td').nth(1).inner_text() != "—"
+    assert page.locator('#valores tr[data-cargo="estadual"] td').nth(1).inner_text() != "—"
+    assert "indisponíveis" not in page.locator("#aviso").inner_text()
     page.screenshot(path=str(SCRATCH / "painel_rondonia.png"), full_page=True)
     with page.expect_download() as download:
         page.locator("#baixar").click()

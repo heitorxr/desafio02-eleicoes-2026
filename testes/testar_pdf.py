@@ -7,7 +7,7 @@ with pymupdf.open(raiz / "resultados/Figuras_desafio02.pdf") as pdf:
     assert len(pdf) == 2, "Mapa/legenda e velocímetros devem ocupar duas páginas"
     mapa, velocimetros = [p.get_text() for p in pdf]
     assert "BRASIL" in mapa and "FACES DO VOTO" in mapa
-    assert "Largura do sorriso" in mapa and "sobrancelhas" in mapa
+    assert "Abertura do sorriso" in mapa and "sobrancelhas" in mapa
     assert "Paraná / PR" in velocimetros
     for cargo in ("Presidência", "Governo estadual", "Senado", "Deputados federais", "Estaduais / distritais"):
         assert cargo in velocimetros

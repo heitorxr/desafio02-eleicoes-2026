@@ -33,16 +33,16 @@ Material para os colegas prepararem a apresentação de Visualização de Dados 
 **Tela:** detalhe PR/Presidência; apontar o valor e a cobertura separadamente. A fórmula está no guia técnico de apoio, não no painel principal.
 
 **Fala-base:**
-> Em cada estado e cargo, multiplicamos a nota de cada partido pelos seus votos e dividimos a soma pelos votos dos partidos classificados. Não é uma média simples entre partidos. No Paraná, para Presidência, o índice é aproximadamente 6,700. Foram classificados 6.406.847 dos 6.585.243 votos válidos oficiais: cobertura de 97,29%. Votos sem nota continuam no total da cobertura, mas não recebem nota inventada na média. Brancos e nulos não entram nesse cálculo. Também conciliamos a soma partidária com o total oficial: das 135 combinações, 133 têm índice disponível. Para deputados federais e estaduais de Rondônia, a fonte está incompleta e o índice permanece ausente.
+> Em cada estado e cargo, ponderamos as notas pelos votos dos partidos classificados. No Paraná, para Presidência, o índice é aproximadamente 6,700 e a cobertura é 97,29%. Votos sem nota não recebem classificação inventada; brancos e nulos não entram na média. Conferimos os 135 totais com os dados oficiais. Para Rondônia, recuperamos os votos de deputados a partir das seções, do cadastro de candidatos e da destinação dos votos. Somente os válidos entraram. Os dois totais recuperados conferem exatamente: agora as 135 combinações têm índice.
 
-**Pausa visual:** mostrar RO e a indicação de fonte incompleta; não apresentar esses casos como posições centrais ou apenas como baixa cobertura acadêmica.
+**Pausa visual:** mostrar RO com os dois índices recuperados e a explicação da auditoria; distinguir cobertura acadêmica de integridade eleitoral.
 
 ## 02:05–03:00 — Leitura das faces
 
 **Tela:** aba Como Ler e retorno a um detalhe de UF, mantendo a legenda visível.
 
 **Fala-base:**
-> A cor representa somente a Presidência: vermelho no extremo esquerdo e verde no direito, com escala numérica. A largura dos olhos representa o governo estadual; a largura do sorriso, o Senado; o comprimento do nariz, deputados federais; e o comprimento das sobrancelhas, estaduais ou distritais. As dimensões aumentam com a nota. Os sorrisos mantêm altura e orientação constantes: nenhum lado vira tristeza ou felicidade por posição política. Um ponto de interrogação indica traço indisponível; a cor ausente seria cinza. Os velocímetros ajudam a conferir os valores e a cobertura. E esse é um cartograma esquemático: cada UF tem espaço igual, sem representar sua área ou distância geográfica real.
+> A cor representa a Presidência, do vermelho ao verde. A abertura dos olhos representa o governo estadual; a abertura do sorriso, o Senado; o tamanho do nariz, deputados federais; e o comprimento das sobrancelhas, estaduais ou distritais. Notas maiores abrem mais olhos e boca e aumentam os outros traços. Isso não indica aprovação ou personalidade. A legenda está logo abaixo do mapa. As faces foram ampliadas e os traços reforçados, mantendo a escala original. Os velocímetros mostram números e cobertura com precisão. Cada UF recebe espaço igual, não sua área geográfica real.
 
 **Pausa visual:** apontar os cinco canais em uma única face, sem tentar deduzir valores exatos pela aparência.
 
@@ -72,7 +72,7 @@ Material para os colegas prepararem a apresentação de Visualização de Dados 
 ## Checklist antes da gravação pelos colegas
 
 - Abrir o painel local e testar as abas Explorar, Como Ler e Fontes; para explicar os complexos no vídeo, usar separadamente o guia e o diagrama técnico. Se o painel não estiver disponível, usar os SVGs indicados e os documentos locais de referência.
-- Manter a mesma escala, o exemplo PR/Presidência com raio 0,9 e as ausências legislativas de RO em todas as falas.
+- Manter a escala, o exemplo PR/Presidência com raio 0,9 e a recuperação dos dois cargos legislativos de RO consistentes em todas as falas.
 - Usar `dados/referencia/README_ideologia.md` e `README_layout.md` para a referência acadêmica e a grade; o DOI do artigo é `10.1590/1807-0191202531120`. Não inventar links ou notas partidárias.
 - Informar o uso de IA como apoio à programação e revisão, conforme registrado no README.
 - Definir apresentadores e ensaiar a duração. Acrescentar nomes da equipe e eventual link da gravação apenas quando existirem.

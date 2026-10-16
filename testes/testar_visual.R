@@ -7,9 +7,9 @@ i <- read.csv("resultados/indices_uf_cargo.csv", fileEncoding = "UTF-8")
 g <- read.csv("dados/referencia/layout_ufs.csv", fileEncoding = "UTF-8")
 stopifnot(nrow(i) == 135L, nrow(g) == 27L, !anyDuplicated(i[c("uf", "cargo")]),
           all(is.na(i$nota) | (i$nota >= 0 & i$nota <= 10)),
-          all(i$cobertura >= 0 & i$cobertura <= 1), sum(is.finite(i$nota)) == 133L)
+          all(i$cobertura >= 0 & i$cobertura <= 1), sum(is.finite(i$nota)) == 135L)
 ro <- notas_uf(i, "RO")
-stopifnot(is.na(ro["federal"]), is.na(ro["estadual"]), is.finite(ro["presidente"]))
+stopifnot(all(is.finite(ro)))
 for (uf in g$uf) {
   n <- notas_uf(i, uf)
   stopifnot(identical(names(n), c("presidente", "governador", "senador", "federal", "estadual")))

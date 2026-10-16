@@ -37,7 +37,7 @@ assert len(dados["estados"]) == 27
 assert len(dados["centros"]) == 27
 assert sum(len(x["indices"]) for x in dados["estados"].values()) == 135
 na = {(uf, i["cargo"]) for uf, x in dados["estados"].items() for i in x["indices"] if i["nota"] is None}
-assert na == {("RO", "estadual"), ("RO", "federal")}
+assert not na, "Todos os 135 índices devem estar conciliados após recuperação de RO"
 for x in dados["estados"].values():
     assert len(x["indices"]) == 5
     svg = base64.b64decode(x["imagem"].split(",", 1)[1])

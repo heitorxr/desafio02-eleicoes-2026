@@ -23,7 +23,7 @@ desenhar_cartograma <- function(indices, grade) {
     x <- grade$coluna[j]
     y <- 9 - grade$linha[j]
     uf <- grade$uf[j]
-    desenhar_face(x, y, raio = .37, notas = notas_uf(indices, uf), cex = .9)
+    desenhar_face(x, y, raio = .42, notas = notas_uf(indices, uf), cex = .9)
     text(x, y - .51, uf, font = 2, cex = .88)
     centros <- rbind(centros, data.frame(uf = uf,
       x = 100 * grconvertX(x, from = "user", to = "ndc"),
@@ -86,14 +86,14 @@ legenda_pdf <- function(indices, sobrepor = FALSE) {
   plot.new()
   plot.window(c(0, 1), c(0, 1))
   linhas <- c("FACES DO VOTO", "Votos de 2026 × posições partidárias de 2022", "",
-    "Cor da face       Presidência", "Largura dos olhos Governo estadual",
-    "Largura do sorriso Senado", "Comprimento do nariz Deputados federais",
+    "Cor da face       Presidência", "Abertura dos olhos Governo estadual",
+    "Abertura do sorriso Senado", "Tamanho do nariz Deputados federais",
     "Comprimento das sobrancelhas Estaduais / distritais", "",
-    "Mais à direita = traço mais largo ou longo.", "Todos os sorrisos mantêm a orientação, sem juízo de valor.", "",
+    "Nota maior = mais abertura, tamanho ou comprimento.", "Os traços não indicam aprovação ou personalidade.", "",
     "Índice = soma(votos × nota) / votos classificados", "Notas ausentes não recebem zero nem cinco.",
     "? indica atributo indisponível.", "",
     paste0(sum(indices$integro), " de ", nrow(indices), " totais UF/cargo conciliados."),
-    "RO: dados legislativos incompletos nos arquivos.", "",
+    "RO recuperado: seção e cadastro; totais conferidos.", "",
     "Fontes: TSE e Bolognesi et al. (medição 2022).", "Disposição: geofacet / br_states_grid1.",
     "Cartograma esquemático: não representa áreas.")
   for (j in seq_along(linhas)) text(.02, .94 - (j - 1) * .039, linhas[j], adj = 0,

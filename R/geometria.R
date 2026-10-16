@@ -80,45 +80,54 @@ desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
       length(raio) != 1L || !is.finite(raio) || raio <= 0)
     stop("Centro finito e raio positivo são obrigatórios.")
   t <- normalizar_nota(notas[cargos])
-  largura_olho <- .10 + .09 * t["governador"]
+  largura_olho <- .23
+  abertura_olho <- .02 + .25 * t["governador"]
   distancia_olhos <- .34
-  comprimento_nariz <- .13 + .18 * t["federal"]
-  largura_boca <- .28 + .30 * t["senador"]
-  comprimento_sobrancelha <- .20 + .25 * t["estadual"]
+  comprimento_nariz <- .08 + .28 * t["federal"]
+  largura_nariz <- .04 + .16 * t["federal"]
+  largura_boca <- .76
+  abertura_boca <- .01 + .22 * t["senador"]
+  comprimento_sobrancelha <- .10 + .50 * t["estadual"]
   contorno <- ponto_complexo(seq(0, 2 * pi, length.out = 121), raio, x + 1i * y)
   graphics::polygon(Re(contorno), Im(contorno), col = cor_politica(notas["presidente"]),
                     border = col, lwd = 1.5, ...)
   # Ausência omite o traço dependente: nunca substitui uma nota pelo centro.
-  if (is.na(t["presidente"])) graphics::text(x, y + .70 * raio, "?", cex = .7 * cex, col = col)
-  if (is.na(largura_olho)) {
+  if (is.na(t["presidente"])) graphics::text(x, y + .88 * raio, "?", cex = .7 * cex, col = col)
+  if (is.na(abertura_olho)) {
     graphics::text(x, y + .27 * raio, "?", cex = .8 * cex, col = col)
   } else {
     for (lado in c(-1, 1)) {
       olho <- ponto_complexo(seq(0, 2 * pi, length.out = 41))
       graphics::polygon(x + raio * (lado * distancia_olhos + largura_olho * Re(olho)),
-                        y + raio * (.27 + .115 * Im(olho)), col = "#FFFFFF", border = col)
-      graphics::points(x + lado * distancia_olhos * raio, y + .27 * raio,
-                       pch = 16, col = col, cex = .65 * cex)
+                        y + raio * (.27 + abertura_olho * Im(olho)),
+                        col = "#FFFFFF", border = col, lwd = 1.8)
+      graphics::polygon(x + raio * (lado * distancia_olhos + .065 * Re(olho)),
+                        y + raio * (.27 + min(.085, .65 * abertura_olho) * Im(olho)),
+                        col = col, border = NA)
     }
   }
   if (is.na(comprimento_nariz)) graphics::text(x, y - .08 * raio, "?", cex = .7 * cex, col = col)
-  else graphics::lines(x + raio * c(0, -.045, .045),
-                       y + raio * c(.06, .06 - comprimento_nariz, .06 - comprimento_nariz), col = col)
+  else graphics::polygon(x + raio * c(0, -largura_nariz/2, largura_nariz/2),
+                         y + raio * c(.14, .14 - comprimento_nariz, .14 - comprimento_nariz),
+                         col = "#FFFFFF60", border = col, lwd = 1.8)
   if (is.na(comprimento_sobrancelha)) {
-    graphics::text(x, y + .57 * raio, "?", cex = .7 * cex, col = col)
+    graphics::text(x, y + .67 * raio, "?", cex = .7 * cex, col = col)
   } else {
     for (lado in c(-1, 1)) graphics::segments(
-      x + raio * (lado * distancia_olhos - comprimento_sobrancelha / 2), y + .57 * raio,
-      x + raio * (lado * distancia_olhos + comprimento_sobrancelha / 2), y + .57 * raio,
-      col = col, lwd = 1.5)
+      x + raio * (lado * distancia_olhos - comprimento_sobrancelha / 2), y + .67 * raio,
+      x + raio * (lado * distancia_olhos + comprimento_sobrancelha / 2), y + .67 * raio,
+      col = col, lwd = 2.8)
   }
   u <- seq(-1, 1, length.out = 61)
-  # Senado altera a largura; altura e orientação do sorriso permanecem constantes.
-  boca <- list(x = x + raio * u * largura_boca / 2,
-               y = y + raio * (-.40 + .10 * u^2))
-  if (is.na(largura_boca)) graphics::text(x, y - .40 * raio, "?", cex = .7 * cex, col = col)
-  else graphics::lines(boca$x, boca$y, col = col, lwd = 2)
-  invisible(list(notas = t, largura_olho = largura_olho, distancia_olhos = distancia_olhos,
+  # Senado controla quanto o sorriso se abre, sem inversão para uma expressão triste.
+  superior <- -.35 + .08 * u^2
+  inferior <- superior - abertura_boca * (1 - u^2)
+  boca <- list(x = x + raio * c(u, rev(u)) * largura_boca / 2,
+               y = y + raio * c(superior, rev(inferior)))
+  if (is.na(abertura_boca)) graphics::text(x, y - .40 * raio, "?", cex = .7 * cex, col = col)
+  else graphics::polygon(boca$x, boca$y, col = col, border = col, lwd = 1.6)
+  invisible(list(notas = t, largura_olho = largura_olho, abertura_olho = abertura_olho,
+                 abertura_boca = abertura_boca, distancia_olhos = distancia_olhos,
                  comprimento_nariz = comprimento_nariz, largura_boca = largura_boca,
                  comprimento_sobrancelha = comprimento_sobrancelha, boca = boca))
 }

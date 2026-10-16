@@ -35,7 +35,7 @@ A junção preserva partidos sem nota. Eles não entram no denominador da média
 
 O total partidário é `QT_VOTOS_NOMINAIS_VALIDOS + QT_TOTAL_VOTOS_LEG_VALIDOS`: a segunda parcela já inclui nominais convertidos, que não são somados novamente. Brancos e nulos ficam na auditoria, fora do índice e do denominador de cobertura. Cobertura não mede comparecimento nem percentual de eleitores.
 
-`calcular_indices()` produz uma cobertura preliminar sobre a soma partidária; **`aplicar_auditoria()` a recalcula sobre `QT_TOTAL_VOTOS_VALIDOS`** e exige conciliação (`diferenca == 0`) para manter a nota. As saídas verificadas contêm 135 combinações UF/cargo, 133 conciliadas e com índice; RO/federal e RO/estadual permanecem `NA` por fonte eleitoral incompleta. Não confundir esse problema com simples ausência de classificação partidária.
+`calcular_indices()` produz uma cobertura preliminar; **`aplicar_auditoria()` a recalcula sobre `QT_TOTAL_VOTOS_VALIDOS`** e exige conciliação para manter a nota. Agora são **135/135 índices conciliados**. Os dois cargos legislativos de RO foram recuperados pelo voto por seção, cruzado com cadastro e destinação oficial; anulados e nulos técnicos não entram. Ver `AUDITORIA_RO.md` e `scripts/reconstruir_ro.py`. A auditoria original foi preservada.
 
 Exemplo executável no console R, a partir das entradas já preservadas, sem gravar arquivos:
 
@@ -76,12 +76,12 @@ Saída arredondada: `theta = 1.0368467`, `x = 0.4580434`, `y = 0.7747233`, `raio
 | Variável | Canal visual |
 |---|---|
 | Presidência | Cor: vermelho em 0/esquerda, tom claro em 5, verde em 10/direita. |
-| Governo estadual | Largura dos olhos. |
-| Senado | Largura do sorriso. |
-| Deputados federais | Comprimento do nariz. |
+| Governo estadual | Abertura dos olhos: mais fechados ou mais abertos. |
+| Senado | Abertura do sorriso: boca mais fechada ou mais aberta. |
+| Deputados federais | Tamanho do nariz: comprimento e largura. |
 | Estaduais/distritais | Comprimento das sobrancelhas. |
 
-As dimensões aumentam com a nota; os sorrisos mantêm altura e orientação constantes. O Senado controla a largura do sorriso, e cada outro cargo controla um traço diferente. Traços indisponíveis recebem `?`; Presidência ausente usa cinza. Cada ausência omite apenas seu próprio traço. O cartograma reserva espaço igual às 27 UFs: não representa áreas ou distâncias reais. Para comparar valores, consultar também os velocímetros e a cobertura.
+As notas maiores abrem mais olhos e boca e aumentam nariz e sobrancelhas. Não há inversão do sorriso para tristeza. Traços mais pronunciados e faces maiores favorecem leitura; a escala 0–10 é preservada, sem transformar o menor valor observado em zero. Ausências futuras continuam recebendo `?`, nunca nota inventada. O cartograma reserva espaço igual às 27 UFs; os velocímetros mostram valores precisos e cobertura.
 
 A média não identifica a opinião individual de eleitores ou candidatos e não transforma uma posição partidária medida em 2022 em medição de 2026. Uma média perto de cinco tampouco demonstra consenso: posições diferentes podem se compensar.
 

@@ -12,19 +12,19 @@ Módulo independente em R base (`graphics` e `grDevices`), sem pacotes de desenh
 - `coordenadas_ponteiro()` recebe centro real `c(x,y)` e devolve `list(x,y,z,theta)`; para nota ausente todos os elementos são `NA`. `ponto_complexo()` recebe centro complexo e aceita um vetor de ângulos.
 - Cores: interpolação linear RGB pela paleta `#BF4D45` → `#F2E9D8` → `#43866A`, nas notas 0, 5 e 10. Ausência usa cinza `#B8B8B8`, nunca a cor central.
 
-## Rostos Chernoff, sorriso com altura e orientação fixas
+## Rostos Chernoff, traços pronunciados e independentes
 
 Para cada nota normalizada `t`, as dimensões abaixo são frações do raio:
 
 | Cargo | Canal | Fórmula |
 |---|---|---|
 | presidente | preenchimento da face | interpolação RGB |
-| governador | semilargura dos olhos | `0.10 + 0.09*t` |
-| senador | largura total do sorriso | `0.28 + 0.30*t` |
-| federal | comprimento vertical do nariz | `0.13 + 0.18*t` |
-| estadual | comprimento das sobrancelhas | `0.20 + 0.25*t` |
+| governador | semiabertura vertical dos olhos | `0.02 + 0.25*t` |
+| senador | abertura vertical do sorriso | `0.01 + 0.22*t` |
+| federal | comprimento e largura do nariz | `0.08 + 0.28*t`; `0.04 + 0.16*t` |
+| estadual | comprimento das sobrancelhas | `0.10 + 0.50*t` |
 
-Olhos horizontais e simétricos, com distância fixa de 0,34 do eixo central. O sorriso usa `u` entre -1 e 1: `x_boca = x + raio*u*largura_boca/2` e `y_boca = y + raio*(-0.40 + 0.10*u^2)`. O Senado altera apenas a largura, nunca transforma sorriso em tristeza. Sobrancelhas horizontais ficam em `y + 0.57*raio`. Cada canal ausente omite somente seu próprio traço e recebe `?`. Presidente ausente usa cinza com `?`. Essas escolhas são codificações visuais, não inferências políticas ou psicológicas.
+Olhos simétricos ficam a 0,34 do eixo e têm semilargura fixa 0,23; a pupila é limitada pela abertura. O sorriso tem largura fixa 0,76. Para `u` entre -1 e 1, seu limite superior é `-0.35 + 0.08*u^2` e o inferior subtrai `abertura_boca*(1-u^2)`. Assim, a abertura muda sem inverter a expressão. Sobrancelhas horizontais ficam em `y + 0.67*raio`. As coordenadas são multiplicadas pelo raio da face. Cada cargo ausente omite somente seu traço e recebe `?`; Presidente ausente usa cinza. Não há interpretação de personalidade ou aprovação política.
 
 ## Integração
 
@@ -49,6 +49,6 @@ Executar na raiz do projeto:
 "D:/Program Files/R/R-4.5.2/bin/Rscript.exe" testes/testar_geometria.R
 ```
 
-Testes escritos e executados em vermelho antes da implementação de cada grupo (geometria, cores e desenhos), seguidos de execução verde. Incluem extremos, centro, simetria, módulo complexo, translação, invariância ao raio, escala inválida, ausências completas/parciais, independência dos cinco canais e altura fixa do sorriso. Todas as entradas são **fixtures matemáticas**, não registros eleitorais.
+Testes cobrem extremos, centro, simetria, módulo complexo, translação, raio, entradas inválidas, ausências e independência dos cinco canais. Campos retornados são exigidos explicitamente: um campo ausente não pode passar por produzir vetor lógico vazio. Todas as entradas são **fixtures matemáticas**, não registros eleitorais.
 
 As provas PNG/PDF são criadas exclusivamente em `C:/Users/heito/AppData/Local/hermes/cache/scratch`, verificadas por assinatura e tamanho, e excluídas automaticamente, inclusive em falha. O teste transforma avisos de desenho em erros. Nenhum pacote externo é necessário.
