@@ -25,4 +25,10 @@ stopifnot(i$nota == 2, i$votos_validos == 35, i$votos_classificados == 15,
           abs(i$cobertura - 15 / 35) < 1e-12)
 i <- calcular_indices(v, data.frame(sigla = "C", nota = 9, ano_fonte = 2022))
 stopifnot(is.na(i$nota), i$cobertura == 0)
+conhecido <- calcular_indices(v, ideologia)
+auditoria <- data.frame(uf = "PR", cargo = "presidente", QT_TOTAL_VOTOS_VALIDOS = 40,
+                       diferenca = -5)
+verificado <- aplicar_auditoria(conhecido, auditoria)
+stopifnot(is.na(verificado$nota), !verificado$integro,
+          verificado$votos_validos == 40, verificado$cobertura == 15 / 40)
 cat("OK: turno, exterior, duplicatas, pesos e ausencia de classificacao tratados corretamente.\n")
