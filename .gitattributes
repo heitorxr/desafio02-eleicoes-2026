@@ -1,0 +1,7 @@
+*.R text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.html text eol=lf
+dados/entrada/*.csv text eol=lf
+dados/referencia/*.csv text eol=lf
+dados/brutos/* -text
