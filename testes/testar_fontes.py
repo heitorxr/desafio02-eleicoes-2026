@@ -50,7 +50,10 @@ for metadado in (RAIZ / "dados/brutos").glob("*.zip.json"):
     assert hashlib.sha256(arquivo.read_bytes()).hexdigest() == info["sha256"]
 with (RAIZ / "dados/entrada/auditoria_eleitoral.csv").open(encoding="utf-8") as f:
     auditoria = list(csv.DictReader(f))
+assert all(float(r["diferenca"]) == 0 for r in auditoria)
+with (RAIZ / "dados/entrada/auditoria_eleitoral_original.csv").open(encoding="utf-8") as f:
+    auditoria = list(csv.DictReader(f))
 assert len(auditoria) == 135
 falhas = {(r["uf"], r["cargo"]) for r in auditoria if float(r["diferenca"]) != 0}
 assert falhas == {("RO", "federal"), ("RO", "estadual")}
-print("OK: 32 notas conferidas na publicação, arquivos oficiais íntegros e 133/135 totais conciliados.")
+print("OK: 32 notas acadêmicas, hashes oficiais, auditoria anterior preservada e 135/135 totais conciliados.")

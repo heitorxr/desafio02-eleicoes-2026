@@ -35,7 +35,6 @@
 "PI","estadual","AVANTE",3859
 "PR","estadual","AVANTE",85377
 "RJ","estadual","AVANTE",120132
-"RO","estadual","AVANTE",607
 "SC","estadual","AVANTE",2654
 "SE","estadual","AVANTE",49706
 "SP","estadual","AVANTE",59751
@@ -55,7 +54,6 @@
 "PI","federal","AVANTE",1354
 "RJ","federal","AVANTE",159772
 "RN","federal","AVANTE",7797
-"RO","federal","AVANTE",597
 "RR","federal","AVANTE",1531
 "RS","federal","AVANTE",25400
 "SC","federal","AVANTE",5955
@@ -169,7 +167,6 @@
 "PI","federal","DC",0
 "RJ","federal","DC",48201
 "RN","federal","DC",559
-"RO","federal","DC",32
 "RR","federal","DC",93
 "RS","federal","DC",4396
 "SC","federal","DC",4712
@@ -303,7 +300,6 @@
 "PR","estadual","MDB",268503
 "RJ","estadual","MDB",299878
 "RN","estadual","MDB",139059
-"RO","estadual","MDB",591
 "RR","estadual","MDB",14511
 "RS","estadual","MDB",589480
 "SC","estadual","MDB",377869
@@ -326,7 +322,6 @@
 "PI","federal","MDB",360242
 "PR","federal","MDB",244640
 "RJ","federal","MDB",315595
-"RO","federal","MDB",462
 "RR","federal","MDB",5313
 "RS","federal","MDB",471749
 "SC","federal","MDB",384396
@@ -388,7 +383,6 @@
 "PR","federal","MISSAO",75584
 "RJ","federal","MISSAO",75096
 "RN","federal","MISSAO",8015
-"RO","federal","MISSAO",410
 "RR","federal","MISSAO",840
 "RS","federal","MISSAO",76310
 "SC","federal","MISSAO",49229
@@ -445,7 +439,6 @@
 "PE","estadual","MOBILIZA",0
 "PR","estadual","MOBILIZA",5985
 "RJ","estadual","MOBILIZA",42062
-"RO","estadual","MOBILIZA",358
 "SP","estadual","MOBILIZA",22310
 "AM","federal","MOBILIZA",604
 "CE","federal","MOBILIZA",2713
@@ -457,7 +450,6 @@
 "PI","federal","MOBILIZA",0
 "RJ","federal","MOBILIZA",14561
 "RN","federal","MOBILIZA",1312
-"RO","federal","MOBILIZA",0
 "AM","governador","MOBILIZA",36176
 "MT","governador","MOBILIZA",2694
 "PR","governador","MOBILIZA",4144
@@ -480,7 +472,6 @@
 "PE","estadual","NOVO",119081
 "PR","estadual","NOVO",407190
 "RJ","estadual","NOVO",205035
-"RO","estadual","NOVO",728
 "RR","estadual","NOVO",712
 "RS","estadual","NOVO",192981
 "SC","estadual","NOVO",187010
@@ -506,7 +497,6 @@
 "PR","federal","NOVO",941131
 "RJ","federal","NOVO",171840
 "RN","federal","NOVO",5558
-"RO","federal","NOVO",609
 "RR","federal","NOVO",2145
 "RS","federal","NOVO",270442
 "SC","federal","NOVO",302952
@@ -614,7 +604,6 @@
 "PR","estadual","PCDOB",11022
 "RJ","estadual","PCDOB",209141
 "RN","estadual","PCDOB",4619
-"RO","estadual","PCDOB",46
 "RR","estadual","PCDOB",11
 "RS","estadual","PCDOB",72392
 "SC","estadual","PCDOB",25430
@@ -641,7 +630,6 @@
 "PR","federal","PCDOB",3790
 "RJ","federal","PCDOB",195821
 "RN","federal","PCDOB",8558
-"RO","federal","PCDOB",56
 "RR","federal","PCDOB",11
 "RS","federal","PCDOB",115943
 "SC","federal","PCDOB",115825
@@ -761,7 +749,6 @@
 "PR","federal","PDT",141934
 "RJ","federal","PDT",228883
 "RN","federal","PDT",22606
-"RO","federal","PDT",1497
 "RR","federal","PDT",6834
 "RS","federal","PDT",273539
 "SC","federal","PDT",16563
@@ -798,7 +785,6 @@
 "PR","estadual","PL",1443270
 "RJ","estadual","PL",2222189
 "RN","estadual","PL",539272
-"RO","estadual","PL",17467
 "RR","estadual","PL",64309
 "RS","estadual","PL",1195077
 "SC","estadual","PL",1528729
@@ -825,7 +811,6 @@
 "PR","federal","PL",937413
 "RJ","federal","PL",2380229
 "RN","federal","PL",772380
-"RO","federal","PL",9179
 "RR","federal","PL",49423
 "RS","federal","PL",1312915
 "SC","federal","PL",1539134
@@ -909,7 +894,6 @@
 "PE","estadual","PODE",583462
 "PR","estadual","PODE",338645
 "RJ","estadual","PODE",73369
-"RO","estadual","PODE",1872
 "RR","estadual","PODE",33725
 "RS","estadual","PODE",291542
 "SC","estadual","PODE",195710
@@ -933,7 +917,6 @@
 "PI","federal","PODE",1706
 "PR","federal","PODE",344967
 "RJ","federal","PODE",111166
-"RO","federal","PODE",1335
 "RR","federal","PODE",51602
 "RS","federal","PODE",428578
 "SC","federal","PODE",218678
@@ -967,7 +950,6 @@
 "PR","estadual","PP",516420
 "RJ","estadual","PP",488908
 "RN","estadual","PP",255475
-"RO","estadual","PP",6178
 "RR","estadual","PP",18040
 "RS","estadual","PP",710454
 "SC","estadual","PP",209130
@@ -994,7 +976,6 @@
 "PR","federal","PP",600986
 "RJ","federal","PP",687160
 "RN","federal","PP",263430
-"RO","federal","PP",1920
 "RR","federal","PP",660
 "RS","federal","PP",710116
 "SC","federal","PP",191874
@@ -1030,7 +1011,6 @@
 "PR","estadual","PRD",3926
 "RJ","estadual","PRD",98244
 "RN","estadual","PRD",3410
-"RO","estadual","PRD",1937
 "SC","estadual","PRD",13371
 "SP","estadual","PRD",169176
 "TO","estadual","PRD",44206
@@ -1052,7 +1032,6 @@
 "PR","federal","PRD",4886
 "RJ","federal","PRD",66502
 "RN","federal","PRD",2802
-"RO","federal","PRD",2349
 "RR","federal","PRD",138
 "RS","federal","PRD",2390
 "SC","federal","PRD",11526
@@ -1079,7 +1058,6 @@
 "PB","estadual","PSB",216671
 "PE","estadual","PSB",869455
 "RJ","estadual","PSB",271553
-"RO","estadual","PSB",309
 "RS","estadual","PSB",66933
 "SE","estadual","PSB",100684
 "SP","estadual","PSB",741565
@@ -1099,7 +1077,6 @@
 "PR","federal","PSB",126536
 "RJ","federal","PSB",124173
 "RN","federal","PSB",3118
-"RO","federal","PSB",207
 "RS","federal","PSB",52641
 "SC","federal","PSB",3015
 "SE","federal","PSB",193321
@@ -1135,7 +1112,6 @@
 "PI","estadual","PSD",335358
 "PR","estadual","PSD",1425754
 "RJ","estadual","PSD",1043551
-"RO","estadual","PSD",2596
 "RS","estadual","PSD",557565
 "SC","estadual","PSD",320182
 "SE","estadual","PSD",250042
@@ -1158,7 +1134,6 @@
 "PI","federal","PSD",357878
 "PR","federal","PSD",724134
 "RJ","federal","PSD",685212
-"RO","federal","PSD",2067
 "RS","federal","PSD",425147
 "SC","federal","PSD",282962
 "SE","federal","PSD",257174
@@ -1293,7 +1268,6 @@
 "PR","estadual","PSOL",75111
 "RJ","estadual","PSOL",559332
 "RN","estadual","PSOL",18079
-"RO","estadual","PSOL",205
 "RS","estadual","PSOL",323998
 "SC","estadual","PSOL",133027
 "SE","estadual","PSOL",0
@@ -1317,7 +1291,6 @@
 "PR","federal","PSOL",13089
 "RJ","federal","PSOL",637110
 "RN","federal","PSOL",1258
-"RO","federal","PSOL",257
 "RR","federal","PSOL",339
 "RS","federal","PSOL",363031
 "SC","federal","PSOL",41420
@@ -1442,7 +1415,6 @@
 "PR","estadual","PT",785357
 "RJ","estadual","PT",839964
 "RN","estadual","PT",283493
-"RO","estadual","PT",6618
 "RR","estadual","PT",7142
 "RS","estadual","PT",918251
 "SC","estadual","PT",477829
@@ -1469,7 +1441,6 @@
 "PR","federal","PT",934562
 "RJ","federal","PT",1068309
 "RN","federal","PT",398734
-"RO","federal","PT",4850
 "RR","federal","PT",16339
 "RS","federal","PT",931259
 "SC","federal","PT",574630
@@ -1552,7 +1523,6 @@
 "PR","estadual","PV",38359
 "RJ","estadual","PV",36612
 "RN","estadual","PV",214213
-"RO","estadual","PV",135
 "RR","estadual","PV",1043
 "RS","estadual","PV",3081
 "SC","estadual","PV",290
@@ -1579,7 +1549,6 @@
 "PR","federal","PV",127030
 "RJ","federal","PV",96912
 "RN","federal","PV",228498
-"RO","federal","PV",126
 "RR","federal","PV",270
 "RS","federal","PV",16234
 "SC","federal","PV",1503
@@ -1607,7 +1576,6 @@
 "PR","estadual","REDE",9535
 "RJ","estadual","REDE",9076
 "RN","estadual","REDE",2893
-"RO","estadual","REDE",69
 "RS","estadual","REDE",1272
 "SC","estadual","REDE",925
 "SE","estadual","REDE",0
@@ -1631,7 +1599,6 @@
 "PR","federal","REDE",2328
 "RJ","federal","REDE",19208
 "RN","federal","REDE",387
-"RO","federal","REDE",92
 "RR","federal","REDE",29
 "RS","federal","REDE",5780
 "SC","federal","REDE",745
@@ -1661,7 +1628,6 @@
 "PE","estadual","REPUBLICANOS",166433
 "PR","estadual","REPUBLICANOS",351856
 "RJ","estadual","REPUBLICANOS",324482
-"RO","estadual","REPUBLICANOS",3687
 "RR","estadual","REPUBLICANOS",44095
 "RS","estadual","REPUBLICANOS",449315
 "SC","estadual","REPUBLICANOS",331221
@@ -1685,7 +1651,6 @@
 "PI","federal","REPUBLICANOS",205657
 "PR","federal","REPUBLICANOS",370028
 "RJ","federal","REPUBLICANOS",297377
-"RO","federal","REPUBLICANOS",1568
 "RR","federal","REPUBLICANOS",90071
 "RS","federal","REPUBLICANOS",385105
 "SC","federal","REPUBLICANOS",340571
@@ -1723,7 +1688,6 @@
 "PR","estadual","SOLIDARIEDADE",13403
 "RJ","estadual","SOLIDARIEDADE",225500
 "RN","estadual","SOLIDARIEDADE",608
-"RO","estadual","SOLIDARIEDADE",286
 "SC","estadual","SOLIDARIEDADE",935
 "SP","estadual","SOLIDARIEDADE",96050
 "TO","estadual","SOLIDARIEDADE",18147
@@ -1745,7 +1709,6 @@
 "PR","federal","SOLIDARIEDADE",13193
 "RJ","federal","SOLIDARIEDADE",226778
 "RN","federal","SOLIDARIEDADE",5480
-"RO","federal","SOLIDARIEDADE",148
 "RR","federal","SOLIDARIEDADE",348
 "RS","federal","SOLIDARIEDADE",3933
 "SC","federal","SOLIDARIEDADE",808
@@ -1774,7 +1737,6 @@
 "PR","estadual","UNIAO",105512
 "RJ","estadual","UNIAO",496623
 "RN","estadual","UNIAO",190012
-"RO","estadual","UNIAO",1731
 "RR","estadual","UNIAO",85217
 "RS","estadual","UNIAO",167614
 "SC","estadual","UNIAO",259409
@@ -1801,7 +1763,6 @@
 "PR","federal","UNIAO",473348
 "RJ","federal","UNIAO",380456
 "RN","federal","UNIAO",224457
-"RO","federal","UNIAO",1160
 "RR","federal","UNIAO",69943
 "RS","federal","UNIAO",64833
 "SC","federal","UNIAO",134770
@@ -1918,3 +1879,42 @@
 "RS","senador","UP",17850
 "SC","senador","UP",24940
 "SP","senador","UP",136461
+"RO","estadual","AVANTE",75313
+"RO","estadual","MDB",16395
+"RO","estadual","MOBILIZA",23619
+"RO","estadual","NOVO",68450
+"RO","estadual","PCDOB",333
+"RO","estadual","PL",233107
+"RO","estadual","PODE",59592
+"RO","estadual","PP",50989
+"RO","estadual","PRD",101741
+"RO","estadual","PSB",812
+"RO","estadual","PSD",117553
+"RO","estadual","PSOL",989
+"RO","estadual","PT",57446
+"RO","estadual","PV",1995
+"RO","estadual","REDE",69
+"RO","estadual","REPUBLICANOS",87853
+"RO","estadual","SOLIDARIEDADE",9584
+"RO","estadual","UNIAO",36181
+"RO","federal","AVANTE",6012
+"RO","federal","DC",1040
+"RO","federal","MDB",15964
+"RO","federal","MISSAO",4263
+"RO","federal","MOBILIZA",0
+"RO","federal","NOVO",8713
+"RO","federal","PCDOB",56
+"RO","federal","PDT",12114
+"RO","federal","PL",301764
+"RO","federal","PODE",150220
+"RO","federal","PP",24469
+"RO","federal","PRD",31283
+"RO","federal","PSB",1670
+"RO","federal","PSD",100462
+"RO","federal","PSOL",1677
+"RO","federal","PT",73329
+"RO","federal","PV",815
+"RO","federal","REDE",92
+"RO","federal","REPUBLICANOS",69542
+"RO","federal","SOLIDARIEDADE",8720
+"RO","federal","UNIAO",120734

@@ -1,0 +1,12 @@
+{
+  "url": "https://cdn.tse.jus.br/estatistica/sead/odsele/votacao_secao/votacao_secao_2026_RO.zip",
+  "coleta_utc": "2026-10-16T19:08:21.917081+00:00",
+  "last_modified": "Tue, 06 Oct 2026 19:22:44 GMT",
+  "etag": "\"af1d0e-65d30ec4de257\"",
+  "arquivos": [
+    "votacao_secao_2026_RO.csv",
+    "leiame.pdf"
+  ],
+  "sha256": "9e881b2fad94ceafb76a6621b18f3831186920254ba46ecec79980d9ce09d283",
+  "bytes": 11476238
+}

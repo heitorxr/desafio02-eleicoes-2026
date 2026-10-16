@@ -1,0 +1,27 @@
+[
+  {
+    "cargo": "estadual",
+    "destinacao": "Anulado sub judice",
+    "votos": 2030
+  },
+  {
+    "cargo": "estadual",
+    "destinacao": "Nulo técnico",
+    "votos": 58
+  },
+  {
+    "cargo": "federal",
+    "destinacao": "Anulado",
+    "votos": 1901
+  },
+  {
+    "cargo": "federal",
+    "destinacao": "Anulado sub judice",
+    "votos": 292
+  },
+  {
+    "cargo": "federal",
+    "destinacao": "Nulo técnico",
+    "votos": 243
+  }
+]

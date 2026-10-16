@@ -101,6 +101,26 @@ preparar_votos <- function(raiz) {
   stopifnot(nrow(auditoria) == length(ufs_brasil) * length(unique(codigos_cargos)),
             !anyNA(auditoria$diferenca))
   auditoria$integro <- auditoria$diferenca == 0
+  write.csv(votos, file.path(entrada, "votos_partido_uf_original.csv"), row.names = FALSE, fileEncoding = "UTF-8")
+  write.csv(auditoria, file.path(entrada, "auditoria_eleitoral_original.csv"), row.names = FALSE, fileEncoding = "UTF-8")
+  recuperacao <- file.path(entrada, "ro_votos_reconstruidos.csv")
+  if (file.exists(recuperacao)) {
+    ro <- read.csv(recuperacao, fileEncoding = "UTF-8")
+    ro$sigla <- normalizar_sigla(ro$sigla)
+    stopifnot(all(ro$uf == "RO"), setequal(ro$cargo, c("federal", "estadual")),
+              !anyDuplicated(ro[c("uf", "cargo", "sigla")]),
+              all(is.finite(ro$votos)), all(ro$votos >= 0),
+              all(ro$votos == ro$nominais_validos + ro$legenda_valida))
+    conferir <- merge(aggregate(ro["votos"], ro[c("uf", "cargo")], sum), totais,
+                      by = c("uf", "cargo"))
+    stopifnot(nrow(conferir) == 2L, all(conferir$votos == conferir$QT_TOTAL_VOTOS_VALIDOS))
+    substituir <- votos$uf == "RO" & votos$cargo %in% c("federal", "estadual")
+    votos <- rbind(votos[!substituir, ], ro[names(votos)])
+    auditoria <- merge(aggregate(votos["votos"], votos[c("uf", "cargo")], sum), totais,
+                      by = c("uf", "cargo"), all = TRUE)
+    auditoria$diferenca <- auditoria$votos - auditoria$QT_TOTAL_VOTOS_VALIDOS
+    auditoria$integro <- auditoria$diferenca == 0
+  }
   write.csv(votos, file.path(entrada, "votos_partido_uf.csv"), row.names = FALSE, fileEncoding = "UTF-8")
   write.csv(totais, file.path(entrada, "totais_uf_cargo.csv"), row.names = FALSE, fileEncoding = "UTF-8")
   write.csv(auditoria, file.path(entrada, "auditoria_eleitoral.csv"), row.names = FALSE, fileEncoding = "UTF-8")
