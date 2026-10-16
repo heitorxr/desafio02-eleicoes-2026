@@ -43,14 +43,15 @@ desenhar_velocimetro <- function(nota, titulo = "", subtitulo = "",
                                 col = "#263238", cex = 1, ...) {
   ponteiro <- coordenadas_ponteiro(nota, raio = .78)
   graphics::plot.new()
-  graphics::plot.window(c(-1.22, 1.22), c(-.30, 1.34), asp = 1)
+  graphics::plot.window(c(-1.22, 1.22), c(-.30, 1.63), asp = 1)
   intervalos <- seq(0, 10, length.out = 121)
   for (j in seq_len(length(intervalos) - 1L)) {
     limites <- angulo_ponteiro(intervalos[c(j, j + 1L)])
     fora <- ponto_complexo(limites)
     dentro <- ponto_complexo(rev(limites), .84)
+    cor <- cor_politica(mean(intervalos[c(j, j + 1L)]))
     graphics::polygon(Re(c(fora, dentro)), Im(c(fora, dentro)),
-                      col = cor_politica(mean(intervalos[c(j, j + 1L)])), border = NA)
+                      col = cor, border = cor, lwd = .3)
   }
   marcas <- ponto_complexo(angulo_ponteiro(seq(0, 10, 2)), 1.12)
   graphics::text(Re(marcas), Im(marcas), labels = seq(0, 10, 2), col = col, cex = .8 * cex)
@@ -59,10 +60,11 @@ desenhar_velocimetro <- function(nota, titulo = "", subtitulo = "",
   } else {
     graphics::segments(0, 0, ponteiro$x, ponteiro$y, col = col, lwd = 2.5, ...)
     graphics::points(0, 0, pch = 21, bg = col, col = col, cex = .9 * cex)
-    graphics::text(0, -.18, format(nota, trim = TRUE), col = col, cex = cex)
+    graphics::text(0, -.18, formatC(nota, digits = 1, format = "f", decimal.mark = ","),
+                   col = col, cex = cex)
   }
-  graphics::text(0, 1.29, titulo, col = col, font = 2, cex = cex)
-  graphics::text(0, 1.16, subtitulo, col = col, cex = .7 * cex)
+  graphics::text(0, 1.50, titulo, col = col, font = 2, cex = cex)
+  graphics::text(0, 1.29, subtitulo, col = col, cex = .7 * cex)
   invisible(ponteiro)
 }
 
