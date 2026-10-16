@@ -25,7 +25,9 @@ selecionar_primeiro_turno <- function(x) {
 
 somar_votos_partidos <- function(dados) {
   x <- selecionar_primeiro_turno(dados)
-  chave <- x[c("SG_UF", "CD_MUNICIPIO", "NR_ZONA", "CD_CARGO", "NR_PARTIDO", "ST_VOTO_EM_TRANSITO")]
+  # Um partido pode ter registros de agremiacoes distintas na mesma zona.
+  chave <- x[c("SG_UF", "CD_MUNICIPIO", "NR_ZONA", "CD_CARGO", "NR_PARTIDO",
+               "ST_VOTO_EM_TRANSITO", "TP_AGREMIACAO", "NR_FEDERACAO", "SQ_COLIGACAO")]
   stopifnot(!anyDuplicated(chave))
   # Total de legenda ja inclui votos nominais convertidos: nao somar essa parcela novamente.
   x$votos <- as.numeric(x$QT_VOTOS_NOMINAIS_VALIDOS) + as.numeric(x$QT_TOTAL_VOTOS_LEG_VALIDOS)
@@ -67,7 +69,8 @@ preparar_votos <- function(raiz) {
   # BRASIL contem todos os cargos. Os arquivos BR e por UF sao subconjuntos e NAO sao somados juntos.
   partidos <- ler_csv_zip(file.path(brutos, "votacao_partido_munzona_2026.zip"),
     "votacao_partido_munzona_2026_BRASIL.csv",
-    c(comuns, "NR_PARTIDO", "SG_PARTIDO", "QT_VOTOS_NOMINAIS_VALIDOS", "QT_TOTAL_VOTOS_LEG_VALIDOS"))
+    c(comuns, "NR_PARTIDO", "SG_PARTIDO", "TP_AGREMIACAO", "NR_FEDERACAO", "SQ_COLIGACAO",
+      "QT_VOTOS_NOMINAIS_VALIDOS", "QT_TOTAL_VOTOS_LEG_VALIDOS"))
   votos <- somar_votos_partidos(partidos)
   detalhe <- ler_csv_zip(file.path(brutos, "detalhe_votacao_munzona_2026.zip"),
     "detalhe_votacao_munzona_2026_BRASIL.csv",
