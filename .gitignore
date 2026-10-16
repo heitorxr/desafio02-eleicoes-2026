@@ -1,0 +1,6 @@
+.biblioteca/
+.Rhistory
+.RData
+.Rproj.user/
+__pycache__/
+dados/brutos/*.zip
