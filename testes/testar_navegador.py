@@ -38,14 +38,13 @@ with sync_playwright() as p:
     with page.expect_download() as download:
         page.locator("#baixar").click()
     assert Path(download.value.path()).read_bytes() == (RAIZ / "resultados/indices_uf_cargo.csv").read_bytes()
-    for aba in ("leitura", "contas", "fontes", "explorar"):
+    for aba in ("leitura", "fontes", "explorar"):
         page.locator(f"#aba-{aba}").click()
         assert page.locator(f"#{aba}").is_visible()
         assert page.locator('[role="tabpanel"]:visible').count() == 1
-    page.locator("#aba-contas").click()
-    page.screenshot(path=str(SCRATCH / "painel_contas.png"), full_page=True)
+    assert page.locator("#aba-contas").count() == 0
     page.set_viewport_size({"width": 390, "height": 844})
-    for aba in ("explorar", "leitura", "contas", "fontes"):
+    for aba in ("explorar", "leitura", "fontes"):
         page.locator(f"#aba-{aba}").click()
         assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth + 1"), f"Transbordamento: {aba}"
     page.locator("#aba-explorar").click()
@@ -53,5 +52,5 @@ with sync_playwright() as p:
     assert not erros, erros
     context.close()
     browser.close()
-print("OK: 27 seleções reais, quatro abas, CSV, ausências e layout móvel; nenhum erro JavaScript.")
+print("OK: 27 seleções reais, três abas, CSV, ausências e layout móvel; nenhum erro JavaScript.")
 print(f"Capturas verificáveis: {SCRATCH}")

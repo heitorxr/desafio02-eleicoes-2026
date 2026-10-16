@@ -80,15 +80,16 @@ desenhar_contas <- function(nota) {
   invisible(data.frame(nota = nota, raio = .9, theta = p$theta, x = p$x, y = p$y))
 }
 
-legenda_pdf <- function(indices) {
+legenda_pdf <- function(indices, sobrepor = FALSE) {
   preparar_pagina()
+  if (sobrepor) par(new = TRUE)
   plot.new()
   plot.window(c(0, 1), c(0, 1))
   linhas <- c("FACES DO VOTO", "Votos de 2026 × posições partidárias de 2022", "",
     "Cor da face       Presidência", "Largura dos olhos Governo estadual",
-    "Distância dos olhos Senado", "Comprimento do nariz Deputados federais",
-    "Largura da boca    Estaduais / distritais", "",
-    "Mais à direita = traço mais largo ou longo.", "A expressão permanece neutra; não há bom ou ruim.", "",
+    "Largura do sorriso Senado", "Comprimento do nariz Deputados federais",
+    "Comprimento das sobrancelhas Estaduais / distritais", "",
+    "Mais à direita = traço mais largo ou longo.", "Todos os sorrisos mantêm a orientação, sem juízo de valor.", "",
     "Índice = soma(votos × nota) / votos classificados", "Notas ausentes não recebem zero nem cinco.",
     "? indica atributo indisponível.", "",
     paste0(sum(indices$integro), " de ", nrow(indices), " totais UF/cargo conciliados."),
@@ -124,9 +125,12 @@ gerar_figuras <- function(raiz, indices, grade) {
   par(fig = c(0, .55, 0, 1))
   desenhar_cartograma(indices, grade)
   par(fig = c(.56, 1, 0, 1), new = TRUE)
-  legenda_pdf(indices)
+  legenda_pdf(indices, sobrepor = TRUE)
   par(fig = c(0, 1, 0, 1), new = FALSE)
-  desenhar_contas(nota_exemplo)
+  par(oma = c(0, 0, 3, 0))
+  painel_velocimetros(indices, "PR")
+  mtext("Paraná / PR — índices por cargo", side = 3, outer = TRUE, line = 1,
+        cex = 1.5, font = 2)
   dev.off()
   invisible(centros)
 }

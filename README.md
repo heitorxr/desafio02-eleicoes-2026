@@ -8,8 +8,9 @@ Projeto da disciplina Visualização de Dados Aplicada, UFPR. Um cartograma com 
 - Representar as 27 unidades da Federação em disposição reconhecível como Brasil.
 - Faces com linguagem de emoji; vermelho para esquerda, verde para direita na dimensão presidencial, sempre com escala numérica.
 - O professor autorizou ggplot posteriormente ao PDF; priorizar funções geométricas compreensíveis em R.
-- Usar números complexos na geometria dos velocímetros e documentar as contas posteriormente.
+- Usar números complexos na geometria dos velocímetros, sem explicação matemática no painel ou PDF principal. A explicação fica no apoio técnico para os colegas apresentarem no vídeo.
 - Entregar programação e notas breves para os colegas prepararem um vídeo de aproximadamente cinco minutos, não produzir o vídeo agora.
+- Cada cargo controla um traço: Presidente = cor; Senador = largura do sorriso; Governador = largura dos olhos; Federal = comprimento do nariz; Estadual/distrital = comprimento das sobrancelhas. Altura e orientação do sorriso são constantes.
 
 ## Cuidados metodológicos
 

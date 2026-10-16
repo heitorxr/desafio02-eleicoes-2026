@@ -63,7 +63,8 @@ provar_desenhos <- function() {
         if (is.na(n)) {
           stopifnot(all(is.na(estado$notas)), is.na(estado$largura_boca))
         } else {
-          igual(estado$boca$y, c(-.40, -.40))
+          stopifnot(length(estado$boca$y) > 2L)
+          igual(range(estado$boca$y), c(-.40, -.30))
           stopifnot(all(is.finite(unlist(estado))))
         }
       }
@@ -82,10 +83,10 @@ provar_desenhos <- function() {
       for (cargo in names(base)[-1]) {
         alterada <- base; alterada[cargo] <- 10
         estado <- desenhar_face(notas = alterada)
-        campo <- c(governador = "largura_olho", senador = "distancia_olhos",
-                   federal = "comprimento_nariz", estadual = "largura_boca")[[cargo]]
+        campo <- c(governador = "largura_olho", senador = "largura_boca",
+                   federal = "comprimento_nariz", estadual = "comprimento_sobrancelha")[[cargo]]
         stopifnot(estado[[campo]] > inicial[[campo]])
-        outros <- setdiff(unname(c("largura_olho", "distancia_olhos", "comprimento_nariz", "largura_boca")), campo)
+        outros <- setdiff(unname(c("largura_olho", "largura_boca", "comprimento_nariz", "comprimento_sobrancelha")), campo)
         for (outro in outros) igual(estado[[outro]], inicial[[outro]])
       }
       rejeita(desenhar_face(notas = c(presidente = 5)))

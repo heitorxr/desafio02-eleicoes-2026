@@ -1,5 +1,7 @@
 # Guia do código — Faces do voto
 
+**Apoio técnico para os colegas do vídeo.** A explicação de números complexos não aparece no painel nem no PDF principal.
+
 Apoio ao projeto de Visualização de Dados Aplicada/UFPR. O recorte combina **votos do primeiro turno de 2026 × posições nacionais dos partidos medidas em 2022**. Estatística e desenhos usam R base; Python serve à coleta e ao empacotamento do painel, não ao cálculo dos índices.
 
 ## 1. Onde estão as operações
@@ -75,11 +77,11 @@ Saída arredondada: `theta = 1.0368467`, `x = 0.4580434`, `y = 0.7747233`, `raio
 |---|---|
 | Presidência | Cor: vermelho em 0/esquerda, tom claro em 5, verde em 10/direita. |
 | Governo estadual | Largura dos olhos. |
-| Senado | Distância dos olhos ao eixo central. |
+| Senado | Largura do sorriso. |
 | Deputados federais | Comprimento do nariz. |
-| Estaduais/distritais | Largura da boca, sempre reta. |
+| Estaduais/distritais | Comprimento das sobrancelhas. |
 
-As dimensões aumentam com a nota; a expressão permanece neutra. Traços indisponíveis recebem `?`; Presidência ausente usa cinza. Se faltar governador ou senador, ambos os olhos são omitidos porque dependem das duas notas. O cartograma reserva espaço igual às 27 UFs: não representa áreas ou distâncias reais. Para comparar valores, consultar também os velocímetros e a cobertura.
+As dimensões aumentam com a nota; os sorrisos mantêm altura e orientação constantes. O Senado controla a largura do sorriso, e cada outro cargo controla um traço diferente. Traços indisponíveis recebem `?`; Presidência ausente usa cinza. Cada ausência omite apenas seu próprio traço. O cartograma reserva espaço igual às 27 UFs: não representa áreas ou distâncias reais. Para comparar valores, consultar também os velocímetros e a cobertura.
 
 A média não identifica a opinião individual de eleitores ou candidatos e não transforma uma posição partidária medida em 2022 em medição de 2026. Uma média perto de cinco tampouco demonstra consenso: posições diferentes podem se compensar.
 

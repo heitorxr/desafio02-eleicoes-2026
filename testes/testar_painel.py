@@ -28,7 +28,9 @@ class Pagina(HTMLParser):
         if tag == "script": self.coletando = False
 
 pagina = Pagina()
-pagina.feed((RAIZ / "resultados/painel.html").read_text(encoding="utf-8"))
+html = (RAIZ / "resultados/painel.html").read_text(encoding="utf-8")
+assert 'id="aba-contas"' not in html, "Explicação dos complexos deve ficar apenas no apoio ao vídeo"
+pagina.feed(html)
 dados = json.loads("".join(pagina.dados))
 assert not pagina.externos, pagina.externos
 assert len(dados["estados"]) == 27
