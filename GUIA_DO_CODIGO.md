@@ -83,4 +83,4 @@ As dimensões aumentam com a nota; a expressão permanece neutra. Traços indisp
 
 A média não identifica a opinião individual de eleitores ou candidatos e não transforma uma posição partidária medida em 2022 em medição de 2026. Uma média perto de cinco tampouco demonstra consenso: posições diferentes podem se compensar.
 
-**Referências locais:** `README.md` (fonte TSE), `dados/referencia/README_ideologia.md` (Bolognesi, Ribeiro, Codato e Silva, DOI `10.1590/1807-0191202531120`, Tabela 1/2022), `dados/referencia/README_layout.md` (grade `br_states_grid1`, geofacet) e `notas_geometria.md` (fórmulas). Atenção: o item 5 do contrato em `README_ideologia.md` descreve a fração **sem** nota; isso é a parcela não coberta, não a cobertura implementada no código.
+**Referências locais:** `README.md` (fonte TSE), `dados/referencia/README_ideologia.md` (Bolognesi, Ribeiro, Codato e Silva, DOI `10.1590/1807-0191202531120`, Tabela 1/2022), `dados/referencia/README_layout.md` (grade `br_states_grid1`, geofacet) e `notas_geometria.md` (fórmulas).

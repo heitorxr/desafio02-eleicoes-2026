@@ -21,7 +21,7 @@ O autor pediu preservar tudo preventivamente para eventual esgotamento da cota d
 - `resultados/cartograma_brasil.png` e `.svg`; `resultados/detalhes/*.svg`; `resultados/contas_complexas.svg`; `resultados/Figuras_desafio02.pdf` (material de apoio, não PDF final de entrega).
 - `resultados/indices_uf_cargo.csv`: 135 registros reais, cobertura e duas notas indisponíveis preservadas.
 - `scripts/montar_painel.py` e `interface/painel.html`: empacotamento e interface; não calculam os índices.
-- `GUIA_DO_CODIGO.md` e `ROTEIRO_VIDEO.md`: produzidos por delegação; conferir conteúdo antes de apresentar como revisão final aprovada.
+- `GUIA_DO_CODIGO.md` e `ROTEIRO_VIDEO.md`: delegação concluída e documentos lidos pelo agente principal. Corrigida a definição de cobertura no item 5 do README da referência acadêmica para coincidir com o código; nenhum dado ou gráfico foi alterado nessa correção documental.
 
 ## Verificações efetivamente realizadas
 
@@ -34,7 +34,7 @@ O autor pediu preservar tudo preventivamente para eventual esgotamento da cota d
 
 ## Pendências reais para retomada
 
-1. Revisar os dois documentos da delegação e receber seu resultado final, se ainda não entregue ao contexto.
+1. Guia e roteiro recebidos e lidos; duração planejada do roteiro conferida por cálculo. Falta a revisão final conjunta após as verificações abaixo.
 2. Executar reprodução em clone limpo, copiando os ZIPs congelados ignorados pelo Git; comparar índices e figuras. Ainda não realizado.
 3. Conferir páginas do PDF de apoio visualmente e verificar contagem; ainda não auditado por ferramenta de PDF nesta etapa.
 4. Consolidar referências públicas e fonte específica dos dois votos ao Senado. A pesquisa encontrou uma nota oficial do TRE-SP, mas extração direta retornou HTTP 403; não alegar que seu texto integral foi lido.

@@ -39,7 +39,7 @@ Também **não constam como linhas na tabela-fonte PRD e MOBILIZA**. Manter essa
 2. Cruzar os votos pela identidade textual da sigla, conservando uma trilha de aliases, sem números de urna e sem inventar correspondências históricas.
 3. Preservar todos os votos no universo da apuração, inclusive partidos sem nota; não descartar registros por junção interna.
 4. Em cada UF/cargo, calcular a média ideológica apenas sobre votos com nota: `sum(votos * nota, na.rm=TRUE) / sum(votos dos partidos com nota)`. Se esse denominador for zero, resultado = NA.
-5. Mostrar a cobertura separadamente: `votos dos partidos sem nota / votos totais do universo escolhido`. Informar explicitamente se o universo inclui votos nominais e de legenda; não chamar exclusão de nota de voto inválido. Não misturar cargos ou unidades geográficas no denominador.
+5. Mostrar a cobertura separadamente: `votos dos partidos com nota / total oficial de votos válidos da mesma UF e cargo`, conforme `aplicar_auditoria()`. A parcela sem nota não é a cobertura. Informar explicitamente se o universo inclui votos nominais e de legenda; não chamar exclusão de nota de voto inválido. Não misturar cargos ou unidades geográficas no denominador. Se os totais eleitorais não conciliarem, manter o índice indisponível e identificar o problema de fonte.
 6. A interpretação é de **posição nacional atribuída ao partido por especialistas**, não posição individual de candidato, eleitor ou diretório estadual. A defasagem até 2026 e as lacunas devem acompanhar a visualização.[1]
 
 A pesquisa de ideologia não leu nem agregou os arquivos eleitorais de 2026. Portanto, **nenhuma porcentagem efetiva de cobertura de votos foi estimada neste arquivo**; isso depende do cruzamento pelo processamento principal.
