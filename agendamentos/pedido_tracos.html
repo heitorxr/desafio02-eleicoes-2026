@@ -1,0 +1,33 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><style>
+.box{padding:12px 0;color:var(--foreground);max-width:620px}.muted{color:var(--muted-foreground);font-size:13px}button{color:var(--foreground);background:var(--card);border:1px solid var(--border);border-radius:5px;padding:6px 12px;cursor:pointer}
+</style></head><body><div class="box"><strong>Pedido de atualização nesta conversa</strong><p id="estado" class="muted"></p><p class="muted">16/10/2026 · 19h51 (Brasília). Mantenha esta conversa aberta. Fechar ou sair dela pode interromper o temporizador.</p><button id="cancelar">Cancelar envio</button></div>
+<script>
+'use strict';
+const vencimento=Date.parse('2026-10-16T19:51:43.769908-03:00');
+const chave='hermes-desafio02-pedido-tracos-20261016';
+const pedido='Atualização agendada por mim para esta conversa: no dashboard D:/heito/Documentos/Desafio02_Eleicoes_2026, faça a ALTURA das sobrancelhas variar com o índice de deputado estadual/distrital, em vez do comprimento. Mude a representação do nariz de deputado federal para que as diferenças sejam pronunciadas e fáceis de interpretar. Preserve os demais cargos, a escala política e os dados já auditados (135/135, Rondônia recuperada). Atualize legenda abaixo do mapa, demais legendas e guias, regenere o painel, teste e salve em Git. Complexos continuam somente no código/apoio ao vídeo. Não faça novas pesquisas de dados. Atualize também o estado deste temporizador em agendamentos/pedido_tracos.html ao concluir.';
+let status='pendente',timer;
+try{status=localStorage.getItem(chave)||status}catch(e){}
+function salvar(s){status=s;try{localStorage.setItem(chave,s)}catch(e){}}
+function mostrar(t){document.getElementById('estado').textContent=t}
+function enviar(){
+ if(status!=='pendente')return;
+ if(!window.hermes||typeof window.hermes.send!=='function'){
+  mostrar('O envio automático não está disponível nesta visualização. Abra este quadro dentro da conversa do Hermes.');return;
+ }
+ salvar('enviando');
+ try{
+  Promise.resolve(window.hermes.send(pedido)).then(()=>{salvar('enviado');mostrar('Pedido encaminhado à conversa.');document.getElementById('cancelar').hidden=true}).catch(()=>{salvar('pendente');mostrar('O envio falhou. Reabra este quadro para tentar novamente.')});
+ }catch(e){salvar('pendente');mostrar('O envio falhou. Reabra este quadro para tentar novamente.')}
+}
+function atualizar(){
+ if(status==='cancelado'){mostrar('Envio cancelado.');return}
+ if(status==='enviado'||status==='enviando'){mostrar('Pedido já encaminhado; não será reenviado.');return}
+ const restante=vencimento-Date.now();
+ if(restante<=0){enviar();return}
+ const minutos=Math.ceil(restante/60000);mostrar('Envio automático em aproximadamente '+minutos+' minutos.');
+ timer=setTimeout(atualizar,Math.min(restante,30000));
+}
+document.getElementById('cancelar').onclick=()=>{clearTimeout(timer);salvar('cancelado');atualizar()};
+atualizar();
+</script></body></html>
