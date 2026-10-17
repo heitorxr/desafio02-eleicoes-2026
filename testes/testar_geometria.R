@@ -89,9 +89,12 @@ provar_desenhos <- function() {
                    federal = "largura_nariz", estadual = "altura_sobrancelha")[[cargo]]
         stopifnot(estado[[campo]] > inicial[[campo]])
         igual(estado$comprimento_sobrancelha, inicial$comprimento_sobrancelha)
-        stopifnot(length(estado$nariz$x) > 30L)
+        stopifnot(length(estado$nariz$x) == 3L)
         igual(min(estado$nariz$x), -max(estado$nariz$x))
-        if (cargo == "federal") stopifnot(diff(range(estado$nariz$x)) > diff(range(inicial$nariz$x)))
+        if (cargo == "federal") {
+          stopifnot(diff(range(estado$nariz$x)) > diff(range(inicial$nariz$x)),
+                    diff(range(estado$nariz$y)) > diff(range(inicial$nariz$y)))
+        } else igual(estado$comprimento_nariz, inicial$comprimento_nariz)
         outros <- setdiff(unname(c("abertura_olho", "abertura_boca", "largura_nariz", "altura_sobrancelha")), campo)
         for (outro in outros) igual(estado[[outro]], inicial[[outro]])
       }

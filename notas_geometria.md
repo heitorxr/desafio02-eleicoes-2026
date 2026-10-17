@@ -21,10 +21,10 @@ Para cada nota normalizada `t`, as dimensões abaixo são frações do raio:
 | presidente | preenchimento da face | interpolação RGB |
 | governador | semiabertura vertical dos olhos | `0.02 + 0.25*t` |
 | senador | abertura vertical do sorriso | `0.01 + 0.22*t` |
-| federal | largura do nariz arredondado central | `0.12 + 0.58*t` |
+| federal | largura e altura do nariz triangular | `0.06 + 0.64*t`; `0.08 + 0.26*t` |
 | estadual | altura das sobrancelhas | `0.58 + 0.25*t` |
 
-Olhos e sorriso preservam as fórmulas anteriores; sobrancelhas têm comprimento fixo 0,36 e altura variável. O nariz central usa `x = largura_nariz/2 * sin(theta)*(1-0.35*cos(theta))` e `y = -0.08 + 0.12*cos(theta)`, para theta entre 0 e 2*pi. A base arredondada é mais larga que o topo, com altura fixa 0,24 e preenchimento claro. A largura cresce com a nota, sem projeção lateral. Coordenadas são multiplicadas pelo raio e transladadas ao centro da face. Cada ausência omite somente seu traço; não há inferência de personalidade ou aprovação política.
+Olhos e sorriso mantêm suas fórmulas; sobrancelhas têm comprimento fixo 0,36 e altura variável. O nariz é o triângulo de vértices `(0,0.14)`, `(-largura/2,0.14-altura)` e `(largura/2,0.14-altura)`. A base foi ampliada em relação ao primeiro triângulo; largura e altura aumentam juntas com a nota, com preenchimento claro e contorno reforçado. Coordenadas são multiplicadas pelo raio e transladadas ao centro da face. Cada ausência omite somente seu traço; não há inferência de personalidade ou aprovação política.
 
 ## Integração
 

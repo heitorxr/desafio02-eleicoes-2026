@@ -78,10 +78,10 @@ Saída arredondada: `theta = 1.0368467`, `x = 0.4580434`, `y = 0.7747233`, `raio
 | Presidência | Cor: vermelho em 0/esquerda, tom claro em 5, verde em 10/direita. |
 | Governo estadual | Abertura dos olhos: mais fechados ou mais abertos. |
 | Senado | Abertura do sorriso: boca mais fechada ou mais aberta. |
-| Deputados federais | Largura do nariz central arredondado. |
+| Deputados federais | Tamanho do nariz triangular: largura e altura variam juntas. |
 | Estaduais/distritais | Altura das sobrancelhas; comprimento fixo. |
 
-Notas maiores abrem mais olhos e boca, alargam o nariz central e elevam as sobrancelhas. O nariz é arredondado, simétrico e preenchido, com altura fixa. O comprimento das sobrancelhas não muda. A escala absoluta 0–10 é preservada; cada UF tem espaço igual e os velocímetros mostram valores e cobertura.
+Notas maiores abrem mais olhos e boca, aumentam largura e altura do nariz triangular e elevam as sobrancelhas. A base foi ampliada e o contorno reforçado para facilitar comparação. O comprimento das sobrancelhas não muda. A escala absoluta 0–10 é preservada; cada UF tem espaço igual e os velocímetros mostram valores e cobertura.
 
 A média não identifica a opinião individual de eleitores ou candidatos e não transforma uma posição partidária medida em 2022 em medição de 2026. Uma média perto de cinco tampouco demonstra consenso: posições diferentes podem se compensar.
 

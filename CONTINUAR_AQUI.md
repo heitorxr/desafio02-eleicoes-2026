@@ -1,5 +1,7 @@
 # Checkpoint para retomada — 16/10/2026
 
+Estado mais recente: a pedido do autor, nariz TRIANGULAR restaurado, com base ampliada (`0.06 + 0.64*t`) e altura também variável (`0.08 + 0.26*t`), preenchimento claro e contorno reforçado. Sobrancelhas continuam variando na altura. Dados preservados.
+
 Correção mais recente: nariz substituído por forma CENTRAL, simétrica e arredondada, com preenchimento claro e largura variável (`0.12 + 0.58*t`), altura fixa 0,24. A projeção lateral foi removida. Sobrancelhas continuam variando em altura. Dados não alterados.
 
 Última correção aplicada imediatamente: Estadual/distrital controla ALTURA das sobrancelhas (comprimento fixo 0,36); Federal controla extensão HORIZONTAL do nariz (`0.04 + 0.62*t`), com ponta marcada. Dados e índices comprovadamente inalterados. Figuras/legendas regeneradas e testes R, painel, PDF e navegador aprovados; inspeção visual feita. Temporizador da conversa cancelado por antecipação do pedido; cron separado permanece pausado.

@@ -83,8 +83,8 @@ desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
   largura_olho <- .23
   abertura_olho <- .02 + .25 * t["governador"]
   distancia_olhos <- .34
-  comprimento_nariz <- .24
-  largura_nariz <- .12 + .58 * t["federal"]
+  comprimento_nariz <- .08 + .26 * t["federal"]
+  largura_nariz <- .06 + .64 * t["federal"]
   largura_boca <- .76
   abertura_boca <- .01 + .22 * t["senador"]
   comprimento_sobrancelha <- .36
@@ -107,13 +107,12 @@ desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
                         col = col, border = NA)
     }
   }
-  # Nariz central arredondado: base mais larga, contorno simétrico e preenchimento claro.
-  theta_nariz <- seq(0, 2 * pi, length.out = 81)
-  nariz <- list(x = x + raio * largura_nariz / 2 * sin(theta_nariz) * (1 - .35 * cos(theta_nariz)),
-                y = y + raio * (-.08 + comprimento_nariz / 2 * cos(theta_nariz)))
+  # Triângulo central com base ampliada: largura e altura crescem com a mesma nota.
+  nariz <- list(x = x + raio * c(0, -largura_nariz / 2, largura_nariz / 2),
+                y = y + raio * c(.14, .14 - comprimento_nariz, .14 - comprimento_nariz))
   if (is.na(largura_nariz)) graphics::text(x, y - .08 * raio, "?", cex = .7 * cex, col = col)
   else {
-    graphics::polygon(nariz$x, nariz$y, col = "#F7F4EC", border = col, lwd = 1.8)
+    graphics::polygon(nariz$x, nariz$y, col = "#F7F4EC", border = col, lwd = 2.2)
   }
   if (is.na(altura_sobrancelha)) {
     graphics::text(x, y + .67 * raio, "?", cex = .7 * cex, col = col)
