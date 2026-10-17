@@ -83,7 +83,8 @@ desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
   largura_olho <- .23
   abertura_olho <- .02 + .25 * t["governador"]
   distancia_olhos <- .34
-  comprimento_nariz <- .04 + .62 * t["federal"]
+  comprimento_nariz <- .24
+  largura_nariz <- .12 + .58 * t["federal"]
   largura_boca <- .76
   abertura_boca <- .01 + .22 * t["senador"]
   comprimento_sobrancelha <- .36
@@ -106,13 +107,13 @@ desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
                         col = col, border = NA)
     }
   }
-  # Projeção horizontal: comprimento diretamente visível, com ponta marcada.
-  nariz <- list(x = x + raio * c(0, 0, comprimento_nariz),
-                y = y + raio * c(.12, -.10, -.10))
-  if (is.na(comprimento_nariz)) graphics::text(x, y - .08 * raio, "?", cex = .7 * cex, col = col)
+  # Nariz central arredondado: base mais larga, contorno simétrico e preenchimento claro.
+  theta_nariz <- seq(0, 2 * pi, length.out = 81)
+  nariz <- list(x = x + raio * largura_nariz / 2 * sin(theta_nariz) * (1 - .35 * cos(theta_nariz)),
+                y = y + raio * (-.08 + comprimento_nariz / 2 * cos(theta_nariz)))
+  if (is.na(largura_nariz)) graphics::text(x, y - .08 * raio, "?", cex = .7 * cex, col = col)
   else {
-    graphics::lines(nariz$x, nariz$y, col = col, lwd = 2.8, lend = "round")
-    graphics::points(nariz$x[3], nariz$y[3], pch = 16, col = col, cex = .35 * cex)
+    graphics::polygon(nariz$x, nariz$y, col = "#F7F4EC", border = col, lwd = 1.8)
   }
   if (is.na(altura_sobrancelha)) {
     graphics::text(x, y + .67 * raio, "?", cex = .7 * cex, col = col)
@@ -132,7 +133,8 @@ desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
   else graphics::polygon(boca$x, boca$y, col = col, border = col, lwd = 1.6)
   invisible(list(notas = t, largura_olho = largura_olho, abertura_olho = abertura_olho,
                  abertura_boca = abertura_boca, distancia_olhos = distancia_olhos,
-                 comprimento_nariz = comprimento_nariz, largura_boca = largura_boca,
+                 comprimento_nariz = comprimento_nariz, largura_nariz = largura_nariz,
+                 largura_boca = largura_boca,
                  comprimento_sobrancelha = comprimento_sobrancelha,
                  altura_sobrancelha = altura_sobrancelha, nariz = nariz, boca = boca))
 }

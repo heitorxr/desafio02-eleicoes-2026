@@ -42,7 +42,7 @@ Material para os colegas prepararem a apresentação de Visualização de Dados 
 **Tela:** aba Como Ler e retorno a um detalhe de UF, mantendo a legenda visível.
 
 **Fala-base:**
-> A cor representa a Presidência, do vermelho ao verde. A abertura dos olhos representa o governo estadual; a abertura do sorriso, o Senado; o comprimento horizontal do nariz, deputados federais; e a altura das sobrancelhas, estaduais ou distritais. Notas maiores abrem olhos e boca, alongam o nariz e elevam as sobrancelhas. O nariz tem ponta marcada e as sobrancelhas mantêm o comprimento. Isso não indica aprovação ou personalidade. A legenda fica abaixo do mapa; os velocímetros mostram números e cobertura. A escala original e o espaço igual por UF foram preservados.
+> A cor representa a Presidência, do vermelho ao verde. A abertura dos olhos representa o governo estadual; a abertura do sorriso, o Senado; a largura do nariz central arredondado, deputados federais; e a altura das sobrancelhas, estaduais ou distritais. Notas maiores abrem olhos e boca, alargam o nariz e elevam as sobrancelhas. Isso não indica aprovação ou personalidade. A legenda fica abaixo do mapa; a escala original e o espaço igual por UF foram preservados.
 
 **Pausa visual:** apontar os cinco canais em uma única face, sem tentar deduzir valores exatos pela aparência.
 

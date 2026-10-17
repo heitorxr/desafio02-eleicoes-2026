@@ -59,7 +59,7 @@ provar_desenhos <- function() {
         graphics::plot.window(c(-1.2, 1.2), c(-1.2, 1.2), asp = 1)
         notas <- setNames(rep(n, 5), c("presidente", "governador", "senador", "federal", "estadual"))
         estado <- desenhar_face(notas = notas)
-        stopifnot(all(c("abertura_olho", "abertura_boca", "comprimento_nariz",
+        stopifnot(all(c("abertura_olho", "abertura_boca", "largura_nariz",
                         "altura_sobrancelha") %in% names(estado)))
         igual(unname(estado$notas), rep(n / 10, 5))
         if (is.na(n)) {
@@ -86,13 +86,13 @@ provar_desenhos <- function() {
         alterada <- base; alterada[cargo] <- 10
         estado <- desenhar_face(notas = alterada)
         campo <- c(governador = "abertura_olho", senador = "abertura_boca",
-                   federal = "comprimento_nariz", estadual = "altura_sobrancelha")[[cargo]]
+                   federal = "largura_nariz", estadual = "altura_sobrancelha")[[cargo]]
         stopifnot(estado[[campo]] > inicial[[campo]])
         igual(estado$comprimento_sobrancelha, inicial$comprimento_sobrancelha)
-        stopifnot(length(estado$nariz$x) == 3L)
-        igual(estado$nariz$x[3] - estado$nariz$x[2], estado$comprimento_nariz)
-        igual(estado$nariz$y[3], estado$nariz$y[2])
-        outros <- setdiff(unname(c("abertura_olho", "abertura_boca", "comprimento_nariz", "altura_sobrancelha")), campo)
+        stopifnot(length(estado$nariz$x) > 30L)
+        igual(min(estado$nariz$x), -max(estado$nariz$x))
+        if (cargo == "federal") stopifnot(diff(range(estado$nariz$x)) > diff(range(inicial$nariz$x)))
+        outros <- setdiff(unname(c("abertura_olho", "abertura_boca", "largura_nariz", "altura_sobrancelha")), campo)
         for (outro in outros) igual(estado[[outro]], inicial[[outro]])
       }
       rejeita(desenhar_face(notas = c(presidente = 5)))
