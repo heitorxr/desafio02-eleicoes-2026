@@ -21,10 +21,10 @@ Para cada nota normalizada `t`, as dimensões abaixo são frações do raio:
 | presidente | preenchimento da face | interpolação RGB |
 | governador | semiabertura vertical dos olhos | `0.02 + 0.25*t` |
 | senador | abertura vertical do sorriso | `0.01 + 0.22*t` |
-| federal | comprimento do nariz original | `0.13 + 0.18*t`; largura fixa `0.09` |
+| federal | largura e arredondamento da ponta, mesmo traçado aberto | largura `0.04 + 0.30*t`; raio vertical `0.005 + 0.125*t`; altura fixa `0.23` |
 | estadual | altura das sobrancelhas | `0.58 + 0.25*t` |
 
-Olhos e sorriso mantêm suas fórmulas; sobrancelhas têm comprimento fixo 0,36 e altura variável. Somente o nariz retorna à geometria do commit `6872ba2`, anterior ao primeiro triângulo: linha aberta passando por `(0,0.06)`, `(-0.045,0.06-comprimento)` e `(0.045,0.06-comprimento)`, sem preenchimento e sem reforço do contorno. Coordenadas são escaladas e transladadas; ausências não recebem valor inventado. Não restaurar os demais traços daquele commit.
+Olhos, sorriso e sobrancelhas permanecem como estavam. O nariz mantém a ideia de traço aberto anterior ao triângulo, mas usa uma única família suave para todas as UFs: ponte Bézier cúbica ligada tangencialmente à metade inferior de uma elipse. Início `(0,0.06)` e altura `0.23` são fixos. Com `rx = largura/2`, `ry = curvatura_nariz` e `cy = 0.06 - 0.23 + ry`, a ponte tem controles `(0,0.06)`, `(0,0)`, `(-rx,cy+0.04)`, `(-rx,cy)`; a ponta usa `(rx*cos(theta),cy+ry*sin(theta))`, de pi a 2*pi. Apenas a nota federal controla `rx` e `ry`: a largura e a razão `ry/rx` aumentam com a nota, produzindo ponta fina à esquerda e arredondada à direita. Sem preenchimento; cor e espessura constantes. Coordenadas são escaladas e transladadas; ausências recebem `?`, nunca uma nota inventada.
 
 ## Integração
 

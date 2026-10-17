@@ -59,7 +59,7 @@ provar_desenhos <- function() {
         graphics::plot.window(c(-1.2, 1.2), c(-1.2, 1.2), asp = 1)
         notas <- setNames(rep(n, 5), c("presidente", "governador", "senador", "federal", "estadual"))
         estado <- desenhar_face(notas = notas)
-        stopifnot(all(c("abertura_olho", "abertura_boca", "comprimento_nariz",
+        stopifnot(all(c("abertura_olho", "abertura_boca", "curvatura_nariz",
                         "altura_sobrancelha") %in% names(estado)))
         igual(unname(estado$notas), rep(n / 10, 5))
         if (is.na(n)) {
@@ -82,24 +82,44 @@ provar_desenhos <- function() {
       ampliado <- desenhar_face(x = 2, y = -3, raio = 2, notas = base)
       igual(ampliado$boca$x, 2 + 2 * inicial$boca$x)
       igual(ampliado$boca$y, -3 + 2 * inicial$boca$y)
+      igual(ampliado$nariz$x, 2 + 2 * inicial$nariz$x)
+      igual(ampliado$nariz$y, -3 + 2 * inicial$nariz$y)
+      # Uma mesma família de traços: só largura e arredondamento dependem do federal.
+      anterior <- NULL
+      for (nota_federal in seq(0, 10, by = .5)) {
+        mesmas <- base; mesmas["federal"] <- nota_federal
+        perfil <- desenhar_face(notas = mesmas)
+        stopifnot(is.numeric(perfil$curvatura_nariz), length(perfil$curvatura_nariz) == 1L,
+                  is.finite(perfil$curvatura_nariz), length(perfil$nariz$x) > 30L)
+        igual(perfil$comprimento_nariz, inicial$comprimento_nariz)
+        igual(diff(range(perfil$nariz$y)), perfil$comprimento_nariz)
+        igual(perfil$nariz$x[1], 0)
+        igual(perfil$nariz$y[1], .06)
+        if (!is.null(anterior)) {
+          stopifnot(perfil$curvatura_nariz > anterior$curvatura_nariz,
+                    perfil$curvatura_nariz / perfil$largura_nariz >
+                      anterior$curvatura_nariz / anterior$largura_nariz,
+                    diff(range(perfil$nariz$x)) > diff(range(anterior$nariz$x)))
+        }
+        for (outro in c("abertura_olho", "abertura_boca", "altura_sobrancelha", "boca"))
+          igual(perfil[[outro]], inicial[[outro]])
+        anterior <- perfil
+      }
       for (cargo in names(base)[-1]) {
         alterada <- base; alterada[cargo] <- 10
         estado <- desenhar_face(notas = alterada)
         campo <- c(governador = "abertura_olho", senador = "abertura_boca",
-                   federal = "comprimento_nariz", estadual = "altura_sobrancelha")[[cargo]]
+                   federal = "curvatura_nariz", estadual = "altura_sobrancelha")[[cargo]]
         stopifnot(estado[[campo]] > inicial[[campo]])
         igual(estado$comprimento_sobrancelha, inicial$comprimento_sobrancelha)
-        # Geometria exata anterior ao primeiro nariz triangular (6872ba2).
-        stopifnot(length(estado$nariz$x) == 3L)
-        igual(estado$nariz$x, c(0, -.045, .045))
-        igual(unname(estado$nariz$y), c(.06, .06 - unname(estado$comprimento_nariz),
-                                             .06 - unname(estado$comprimento_nariz)))
+        stopifnot(length(estado$nariz$x) > 30L)
+        igual(estado$comprimento_nariz, inicial$comprimento_nariz)
         igual(min(estado$nariz$x), -max(estado$nariz$x))
         if (cargo == "federal") {
-          igual(estado$nariz$x, inicial$nariz$x)
-          stopifnot(diff(range(estado$nariz$y)) > diff(range(inicial$nariz$y)))
-        } else igual(estado$comprimento_nariz, inicial$comprimento_nariz)
-        outros <- setdiff(unname(c("abertura_olho", "abertura_boca", "comprimento_nariz", "altura_sobrancelha")), campo)
+          stopifnot(diff(range(estado$nariz$x)) > diff(range(inicial$nariz$x)))
+          igual(diff(range(estado$nariz$y)), diff(range(inicial$nariz$y)))
+        } else igual(estado$nariz, inicial$nariz)
+        outros <- setdiff(unname(c("abertura_olho", "abertura_boca", "curvatura_nariz", "altura_sobrancelha")), campo)
         for (outro in outros) igual(estado[[outro]], inicial[[outro]])
       }
       rejeita(desenhar_face(notas = c(presidente = 5)))

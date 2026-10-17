@@ -83,8 +83,9 @@ desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
   largura_olho <- .23
   abertura_olho <- .02 + .25 * t["governador"]
   distancia_olhos <- .34
-  comprimento_nariz <- .13 + .18 * t["federal"]
-  largura_nariz <- .09
+  comprimento_nariz <- .23
+  largura_nariz <- .04 + .30 * t["federal"]
+  curvatura_nariz <- .005 + .125 * t["federal"]
   largura_boca <- .76
   abertura_boca <- .01 + .22 * t["senador"]
   comprimento_sobrancelha <- .36
@@ -107,11 +108,20 @@ desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
                         col = col, border = NA)
     }
   }
-  # Somente o nariz retorna ao traçado original anterior ao triângulo (6872ba2).
-  nariz <- list(x = x + raio * c(0, -.045, .045),
-                y = y + raio * c(.06, .06 - comprimento_nariz, .06 - comprimento_nariz))
-  if (is.na(comprimento_nariz)) graphics::text(x, y - .08 * raio, "?", cex = .7 * cex, col = col)
-  else graphics::lines(nariz$x, nariz$y, col = col)
+  # Uma só família de traços abertos: fino à esquerda, ponta arredondada à direita.
+  # Altura e início fixos; somente a nota federal altera largura e raio da ponta.
+  raio_x <- largura_nariz / 2
+  centro_y <- .06 - comprimento_nariz + curvatura_nariz
+  s <- seq(0, 1, length.out = 21)
+  ponte <- outer((1 - s)^3, c(0, .06)) +
+    outer(3 * (1 - s)^2 * s, c(0, 0)) +
+    outer(3 * (1 - s) * s^2, c(-raio_x, centro_y + .04)) +
+    outer(s^3, c(-raio_x, centro_y))
+  theta_nariz <- seq(pi, 2 * pi, length.out = 61)
+  nariz <- list(x = x + raio * c(ponte[, 1], raio_x * cos(theta_nariz)),
+                y = y + raio * c(ponte[, 2], centro_y + curvatura_nariz * sin(theta_nariz)))
+  if (is.na(curvatura_nariz)) graphics::text(x, y - .08 * raio, "?", cex = .7 * cex, col = col)
+  else graphics::lines(nariz$x, nariz$y, col = col, lwd = 1.6, lend = "round", ljoin = "round")
   if (is.na(altura_sobrancelha)) {
     graphics::text(x, y + .67 * raio, "?", cex = .7 * cex, col = col)
   } else {
@@ -131,6 +141,7 @@ desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
   invisible(list(notas = t, largura_olho = largura_olho, abertura_olho = abertura_olho,
                  abertura_boca = abertura_boca, distancia_olhos = distancia_olhos,
                  comprimento_nariz = comprimento_nariz, largura_nariz = largura_nariz,
+                 curvatura_nariz = curvatura_nariz,
                  largura_boca = largura_boca,
                  comprimento_sobrancelha = comprimento_sobrancelha,
                  altura_sobrancelha = altura_sobrancelha, nariz = nariz, boca = boca))
