@@ -1,5 +1,7 @@
 # Checkpoint para retomada — 16/10/2026
 
+ESTADO VIGENTE: somente o nariz foi restaurado ao traçado original do commit `6872ba2`, imediatamente anterior ao primeiro triângulo. Comprimento `0.13 + 0.18*t`, linha aberta sem preenchimento. Olhos, boca, cor, altura das sobrancelhas e dados atuais preservados. Não restaurar todo o commit antigo. Os estilos de nariz descritos abaixo são históricos e foram substituídos.
+
 Último refinamento estético: nariz ainda triangular e com variação de largura/altura preservada, mas cantos suavizados por curvas quadráticas, preenchimento bege quente e contorno mais fino. Não alterar sobrancelhas ou dados. Esta descrição substitui os estilos históricos abaixo.
 
 Estado mais recente: a pedido do autor, nariz TRIANGULAR restaurado, com base ampliada (`0.06 + 0.64*t`) e altura também variável (`0.08 + 0.26*t`), preenchimento claro e contorno reforçado. Sobrancelhas continuam variando na altura. Dados preservados.

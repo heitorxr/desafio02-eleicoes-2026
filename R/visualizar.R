@@ -87,9 +87,9 @@ legenda_pdf <- function(indices, sobrepor = FALSE) {
   plot.window(c(0, 1), c(0, 1))
   linhas <- c("FACES DO VOTO", "Votos de 2026 × posições partidárias de 2022", "",
     "Cor da face       Presidência", "Abertura dos olhos Governo estadual",
-    "Abertura do sorriso Senado", "Tamanho do nariz triangular Deputados federais",
+    "Abertura do sorriso Senado", "Comprimento do nariz Deputados federais",
     "Altura das sobrancelhas Estaduais / distritais", "",
-    "Nota maior = mais abertura, nariz maior e sobrancelhas altas.", "Os traços não indicam aprovação ou personalidade.", "",
+    "Nota maior = mais abertura, nariz longo e sobrancelhas altas.", "Os traços não indicam aprovação ou personalidade.", "",
     "Índice = soma(votos × nota) / votos classificados", "Notas ausentes não recebem zero nem cinco.",
     "? indica atributo indisponível.", "",
     paste0(sum(indices$integro), " de ", nrow(indices), " totais UF/cargo conciliados."),
