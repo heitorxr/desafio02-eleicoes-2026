@@ -1,5 +1,7 @@
 # Checkpoint para retomada — 16/10/2026
 
+Último refinamento estético: nariz ainda triangular e com variação de largura/altura preservada, mas cantos suavizados por curvas quadráticas, preenchimento bege quente e contorno mais fino. Não alterar sobrancelhas ou dados. Esta descrição substitui os estilos históricos abaixo.
+
 Estado mais recente: a pedido do autor, nariz TRIANGULAR restaurado, com base ampliada (`0.06 + 0.64*t`) e altura também variável (`0.08 + 0.26*t`), preenchimento claro e contorno reforçado. Sobrancelhas continuam variando na altura. Dados preservados.
 
 Correção mais recente: nariz substituído por forma CENTRAL, simétrica e arredondada, com preenchimento claro e largura variável (`0.12 + 0.58*t`), altura fixa 0,24. A projeção lateral foi removida. Sobrancelhas continuam variando em altura. Dados não alterados.

@@ -107,12 +107,22 @@ desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
                         col = col, border = NA)
     }
   }
-  # Triângulo central com base ampliada: largura e altura crescem com a mesma nota.
-  nariz <- list(x = x + raio * c(0, -largura_nariz / 2, largura_nariz / 2),
-                y = y + raio * c(.14, .14 - comprimento_nariz, .14 - comprimento_nariz))
+  # Mesma silhueta triangular, com cantos suavizados por curvas quadráticas.
+  vertices <- cbind(c(0, -largura_nariz / 2, largura_nariz / 2),
+                    c(.14, .14 - comprimento_nariz, .14 - comprimento_nariz))
+  s <- seq(0, 1, length.out = 9)
+  curvas <- lapply(1:3, function(j) {
+    v <- vertices[j, ]
+    antes <- .85 * v + .15 * vertices[if (j == 1) 3 else j - 1, ]
+    depois <- .85 * v + .15 * vertices[if (j == 3) 1 else j + 1, ]
+    outer((1 - s)^2, antes) + outer(2 * s * (1 - s), v) + outer(s^2, depois)
+  })
+  contorno_nariz <- do.call(rbind, curvas)
+  nariz <- list(x = x + raio * contorno_nariz[, 1],
+                y = y + raio * contorno_nariz[, 2])
   if (is.na(largura_nariz)) graphics::text(x, y - .08 * raio, "?", cex = .7 * cex, col = col)
   else {
-    graphics::polygon(nariz$x, nariz$y, col = "#F7F4EC", border = col, lwd = 2.2)
+    graphics::polygon(nariz$x, nariz$y, col = "#EAC9A8", border = col, lwd = 1.4, ljoin = "round")
   }
   if (is.na(altura_sobrancelha)) {
     graphics::text(x, y + .67 * raio, "?", cex = .7 * cex, col = col)

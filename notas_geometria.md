@@ -24,7 +24,7 @@ Para cada nota normalizada `t`, as dimensões abaixo são frações do raio:
 | federal | largura e altura do nariz triangular | `0.06 + 0.64*t`; `0.08 + 0.26*t` |
 | estadual | altura das sobrancelhas | `0.58 + 0.25*t` |
 
-Olhos e sorriso mantêm suas fórmulas; sobrancelhas têm comprimento fixo 0,36 e altura variável. O nariz é o triângulo de vértices `(0,0.14)`, `(-largura/2,0.14-altura)` e `(largura/2,0.14-altura)`. A base foi ampliada em relação ao primeiro triângulo; largura e altura aumentam juntas com a nota, com preenchimento claro e contorno reforçado. Coordenadas são multiplicadas pelo raio e transladadas ao centro da face. Cada ausência omite somente seu traço; não há inferência de personalidade ou aprovação política.
+Olhos e sorriso mantêm suas fórmulas; sobrancelhas têm comprimento fixo 0,36 e altura variável. O triângulo de controle do nariz tem vértices `(0,0.14)`, `(-largura/2,0.14-altura)` e `(largura/2,0.14-altura)`. Os cantos são arredondados com curvas quadráticas: início/fim a 15% das arestas vizinhas, usando o vértice como controle. As dimensões continuam aumentando juntas com a nota; a suavização é igual em todas as UFs. Preenchimento bege quente e contorno fino não codificam valores adicionais. Coordenadas são escaladas e transladadas; ausências não recebem valor inventado.
 
 ## Integração
 
