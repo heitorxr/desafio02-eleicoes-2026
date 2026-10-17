@@ -83,11 +83,11 @@ desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
   largura_olho <- .23
   abertura_olho <- .02 + .25 * t["governador"]
   distancia_olhos <- .34
-  comprimento_nariz <- .08 + .28 * t["federal"]
-  largura_nariz <- .04 + .16 * t["federal"]
+  comprimento_nariz <- .04 + .62 * t["federal"]
   largura_boca <- .76
   abertura_boca <- .01 + .22 * t["senador"]
-  comprimento_sobrancelha <- .10 + .50 * t["estadual"]
+  comprimento_sobrancelha <- .36
+  altura_sobrancelha <- .58 + .25 * t["estadual"]
   contorno <- ponto_complexo(seq(0, 2 * pi, length.out = 121), raio, x + 1i * y)
   graphics::polygon(Re(contorno), Im(contorno), col = cor_politica(notas["presidente"]),
                     border = col, lwd = 1.5, ...)
@@ -106,16 +106,20 @@ desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
                         col = col, border = NA)
     }
   }
+  # Projeção horizontal: comprimento diretamente visível, com ponta marcada.
+  nariz <- list(x = x + raio * c(0, 0, comprimento_nariz),
+                y = y + raio * c(.12, -.10, -.10))
   if (is.na(comprimento_nariz)) graphics::text(x, y - .08 * raio, "?", cex = .7 * cex, col = col)
-  else graphics::polygon(x + raio * c(0, -largura_nariz/2, largura_nariz/2),
-                         y + raio * c(.14, .14 - comprimento_nariz, .14 - comprimento_nariz),
-                         col = "#FFFFFF60", border = col, lwd = 1.8)
-  if (is.na(comprimento_sobrancelha)) {
+  else {
+    graphics::lines(nariz$x, nariz$y, col = col, lwd = 2.8, lend = "round")
+    graphics::points(nariz$x[3], nariz$y[3], pch = 16, col = col, cex = .35 * cex)
+  }
+  if (is.na(altura_sobrancelha)) {
     graphics::text(x, y + .67 * raio, "?", cex = .7 * cex, col = col)
   } else {
     for (lado in c(-1, 1)) graphics::segments(
-      x + raio * (lado * distancia_olhos - comprimento_sobrancelha / 2), y + .67 * raio,
-      x + raio * (lado * distancia_olhos + comprimento_sobrancelha / 2), y + .67 * raio,
+      x + raio * (lado * distancia_olhos - comprimento_sobrancelha / 2), y + altura_sobrancelha * raio,
+      x + raio * (lado * distancia_olhos + comprimento_sobrancelha / 2), y + altura_sobrancelha * raio,
       col = col, lwd = 2.8)
   }
   u <- seq(-1, 1, length.out = 61)
@@ -129,5 +133,6 @@ desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
   invisible(list(notas = t, largura_olho = largura_olho, abertura_olho = abertura_olho,
                  abertura_boca = abertura_boca, distancia_olhos = distancia_olhos,
                  comprimento_nariz = comprimento_nariz, largura_boca = largura_boca,
-                 comprimento_sobrancelha = comprimento_sobrancelha, boca = boca))
+                 comprimento_sobrancelha = comprimento_sobrancelha,
+                 altura_sobrancelha = altura_sobrancelha, nariz = nariz, boca = boca))
 }

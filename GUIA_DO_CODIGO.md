@@ -78,10 +78,10 @@ Saída arredondada: `theta = 1.0368467`, `x = 0.4580434`, `y = 0.7747233`, `raio
 | Presidência | Cor: vermelho em 0/esquerda, tom claro em 5, verde em 10/direita. |
 | Governo estadual | Abertura dos olhos: mais fechados ou mais abertos. |
 | Senado | Abertura do sorriso: boca mais fechada ou mais aberta. |
-| Deputados federais | Tamanho do nariz: comprimento e largura. |
-| Estaduais/distritais | Comprimento das sobrancelhas. |
+| Deputados federais | Comprimento horizontal do nariz, com ponta marcada. |
+| Estaduais/distritais | Altura das sobrancelhas; comprimento fixo. |
 
-As notas maiores abrem mais olhos e boca e aumentam nariz e sobrancelhas. Não há inversão do sorriso para tristeza. Traços mais pronunciados e faces maiores favorecem leitura; a escala 0–10 é preservada, sem transformar o menor valor observado em zero. Ausências futuras continuam recebendo `?`, nunca nota inventada. O cartograma reserva espaço igual às 27 UFs; os velocímetros mostram valores precisos e cobertura.
+Notas maiores abrem mais olhos e boca, alongam horizontalmente o nariz e elevam as sobrancelhas. A projeção do nariz tem amplitude ampliada e ponta marcada; o comprimento das sobrancelhas não muda. A escala absoluta 0–10 é preservada e não há inversão do sorriso para tristeza. Ausências futuras recebem `?`, nunca nota inventada. Cada UF tem espaço igual; os velocímetros mostram valores e cobertura.
 
 A média não identifica a opinião individual de eleitores ou candidatos e não transforma uma posição partidária medida em 2022 em medição de 2026. Uma média perto de cinco tampouco demonstra consenso: posições diferentes podem se compensar.
 

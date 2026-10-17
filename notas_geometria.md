@@ -21,10 +21,10 @@ Para cada nota normalizada `t`, as dimensões abaixo são frações do raio:
 | presidente | preenchimento da face | interpolação RGB |
 | governador | semiabertura vertical dos olhos | `0.02 + 0.25*t` |
 | senador | abertura vertical do sorriso | `0.01 + 0.22*t` |
-| federal | comprimento e largura do nariz | `0.08 + 0.28*t`; `0.04 + 0.16*t` |
-| estadual | comprimento das sobrancelhas | `0.10 + 0.50*t` |
+| federal | comprimento horizontal do nariz | `0.04 + 0.62*t` |
+| estadual | altura das sobrancelhas | `0.58 + 0.25*t` |
 
-Olhos simétricos ficam a 0,34 do eixo e têm semilargura fixa 0,23; a pupila é limitada pela abertura. O sorriso tem largura fixa 0,76. Para `u` entre -1 e 1, seu limite superior é `-0.35 + 0.08*u^2` e o inferior subtrai `abertura_boca*(1-u^2)`. Assim, a abertura muda sem inverter a expressão. Sobrancelhas horizontais ficam em `y + 0.67*raio`. As coordenadas são multiplicadas pelo raio da face. Cada cargo ausente omite somente seu traço e recebe `?`; Presidente ausente usa cinza. Não há interpretação de personalidade ou aprovação política.
+Olhos simétricos ficam a 0,34 do eixo e têm semilargura fixa 0,23; a pupila acompanha a abertura. O sorriso tem largura fixa 0,76, topo `-0.35 + 0.08*u^2` e base que subtrai `abertura_boca*(1-u^2)`. Sobrancelhas têm comprimento constante 0,36 e altura variável. O nariz percorre `(0,0.12)`, `(0,-0.10)`, `(comprimento_nariz,-0.10)`, com ponta marcada: sua extensão horizontal é diretamente comparável. As coordenadas são multiplicadas pelo raio e transladadas ao centro da face. Cada ausência omite somente seu traço e recebe `?`; Presidente ausente usa cinza. Não há inferência de personalidade ou aprovação política.
 
 ## Integração
 

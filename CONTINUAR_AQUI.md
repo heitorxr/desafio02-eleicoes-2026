@@ -1,5 +1,7 @@
 # Checkpoint para retomada — 16/10/2026
 
+Última correção aplicada imediatamente: Estadual/distrital controla ALTURA das sobrancelhas (comprimento fixo 0,36); Federal controla extensão HORIZONTAL do nariz (`0.04 + 0.62*t`), com ponta marcada. Dados e índices comprovadamente inalterados. Figuras/legendas regeneradas e testes R, painel, PDF e navegador aprovados; inspeção visual feita. Temporizador da conversa cancelado por antecipação do pedido; cron separado permanece pausado.
+
 O autor pediu preservar tudo preventivamente para eventual esgotamento da cota da API. Não presumir acesso ao percentual de créditos nem esperar chegar a zero para salvar.
 
 ## Última atualização — Rondônia recuperada e traços reforçados
