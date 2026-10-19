@@ -95,6 +95,8 @@ with sync_playwright() as p:
         assert page.locator('[role="tabpanel"]:visible').count() == 1
     page.locator("#aba-fontes").click()
     linhas_partidos = page.locator("#corpo-partidos tr[data-partido]")
+    assert page.locator("#fontes > :last-child").inner_text() == "Uso de IA como apoio à programação e revisão."
+    assert "Painel e PDF de figuras são materiais de apoio" not in page.locator("body").inner_text()
     assert linhas_partidos.count() == len(dados_reais["partidos"])
     for partido in dados_reais["partidos"]:
         linha = page.locator(f'#corpo-partidos tr[data-partido="{partido["chave"]}"]')
