@@ -12,9 +12,9 @@ Projeto da disciplina Visualização de Dados Aplicada, UFPR. Um cartograma com 
 - Entregar programação e notas breves para os colegas prepararem um vídeo de aproximadamente cinco minutos, não produzir o vídeo agora.
 - Cada cargo controla um traço: Presidente = cor; Senador = abertura do sorriso; Governador = abertura dos olhos; Federal = formato do nariz (mesmo traçado aberto, fino à esquerda e mais arredondado à direita); Estadual/distrital = altura das sobrancelhas, com comprimento fixo. Escala absoluta 0–10 preservada.
 - Os cinco títulos da legenda são clicáveis: alternam uma única área de exemplos ampliados com mínimo, mediano e máximo reais de cada cargo. Mesmas dimensões e padrão visual, usando o desenho real da face. O mapa e a escala 0–10 não mudam.
-- A explicação curta de Chernoff fica no canto inferior direito de Explorar. A aba Como ler foi removida; detalhes do cálculo foram preservados em Fontes e limites.
+- A explicação curta de Chernoff fica no canto inferior direito de Explorar. A aba Como ler foi removida; fontes e detalhes do cálculo ficam em Mais informações.
 - Um aviso de estudo acadêmico sem posicionamento político aparece no topo. As descrições seguem o padrão cargo / esquerda / direita. As sobrancelhas são demonstradas em um contorno de rosto neutro do mesmo tamanho usado na comparação da cor.
-- Partidos sem nota acadêmica podem ser consultados abaixo da tabela da UF, abrindo o campo por clique ou toque. A lista é atualizada por cargo e substitui a dica nativa de passar o cursor.
+- A aba Mais informações contém a tabela geral de notas partidárias de 2022, com busca e filtro de disponibilidade. Reúne as 32 notas publicadas e quatro siglas sem nota observadas nos índices, sem duplicar MISSÃO/MISSAO e sem transferir notas entre partidos. A lista por UF foi retirada de Explorar.
 
 ## Estado atualizado
 

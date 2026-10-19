@@ -4,6 +4,7 @@ import base64
 import csv
 import json
 import math
+import unicodedata
 
 RAIZ = Path(__file__).resolve().parents[1]
 
@@ -24,6 +25,36 @@ def numero(valor):
 
 def imagem(relativo):
     return "data:image/svg+xml;base64," + base64.b64encode((RAIZ / relativo).read_bytes()).decode("ascii")
+
+
+def chave_partido(sigla):
+    return unicodedata.normalize("NFKD", sigla).encode("ascii", "ignore").decode().strip().upper()
+
+
+def tabela_partidos(indices):
+    partidos = {}
+    for linha in ler_csv("dados/referencia/ideologia_partidos.csv"):
+        chave = chave_partido(linha["sigla"])
+        if chave in partidos:
+            raise ValueError(f"Sigla duplicada na referência: {linha['sigla']}")
+        nota = numero(linha["nota"])
+        if nota is not None and not 0 <= nota <= 10:
+            raise ValueError("Nota partidária fora da escala 0–10")
+        partidos[chave] = {"chave": chave, "sigla": linha["sigla"], "nota": nota,
+                           "ano": int(linha["ano_fonte"]) if nota is not None else None,
+                           "sigla_fonte": linha["sigla_fonte"]}
+    for linha in indices:
+        for sigla in (s.strip() for s in linha["partidos_sem_nota"].split(",")):
+            if not sigla:
+                continue
+            chave = chave_partido(sigla)
+            if chave not in partidos:
+                partidos[chave] = {"chave": chave, "sigla": sigla, "nota": None,
+                                   "ano": None, "sigla_fonte": ""}
+            elif partidos[chave]["nota"] is not None:
+                raise ValueError(f"Lacuna contradiz nota da referência: {sigla}")
+    return sorted(partidos.values(), key=lambda p: (p["nota"] is None,
+                  p["nota"] if p["nota"] is not None else math.inf, p["chave"]))
 
 
 def montar():
@@ -55,6 +86,7 @@ def montar():
                    for cargo in ("presidente", "governador", "senador", "federal", "estadual")}
     dados = {"estados": estados, "centros": centros, "mapa": imagem("resultados/cartograma_brasil.svg"),
              "comparacoes": comparacoes,
+             "partidos": tabela_partidos(indices),
              "csv": "data:text/csv;charset=utf-8;base64," + base64.b64encode(
                  (RAIZ / "resultados/indices_uf_cargo.csv").read_bytes()).decode("ascii")}
     texto = json.dumps(dados, ensure_ascii=False, allow_nan=False, separators=(",", ":")).replace("<", "\\u003c")

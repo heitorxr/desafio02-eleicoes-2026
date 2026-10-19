@@ -73,7 +73,7 @@ Na mesma faixa ampliada sob a legenda, clicar nos títulos para alternar cor, ol
 
 ## Checklist antes da gravação pelos colegas
 
-- Abrir o painel local e testar Explorar, Fontes e limites e os cinco títulos clicáveis da legenda; para explicar os complexos no vídeo, usar separadamente o guia e o diagrama técnico. Se o painel não estiver disponível, usar os SVGs indicados e os documentos locais de referência.
+- Abrir o painel local e testar Explorar, Mais informações (incluindo a tabela de notas e lacunas) e os cinco títulos clicáveis da legenda; para explicar os complexos no vídeo, usar separadamente o guia e o diagrama técnico. Se o painel não estiver disponível, usar os SVGs indicados e os documentos locais de referência.
 - Manter a escala, o exemplo PR/Presidência com raio 0,9 e a recuperação dos dois cargos legislativos de RO consistentes em todas as falas.
 - Usar `dados/referencia/README_ideologia.md` e `README_layout.md` para a referência acadêmica e a grade; o DOI do artigo é `10.1590/1807-0191202531120`. Não inventar links ou notas partidárias.
 - Informar o uso de IA como apoio à programação e revisão, conforme registrado no README.

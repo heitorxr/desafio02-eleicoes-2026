@@ -1,6 +1,6 @@
 # Checkpoint para retomada — 16/10/2026
 
-ÚLTIMA REVISÃO DA INTERFACE: aviso destacado de estudo acadêmico sem posicionamento político no topo; ressalvas locais solicitadas removidas; descrições padronizadas em cargo / esquerda / direita. Sobrancelhas dentro de contorno neutro com o mesmo enquadramento da cor (`raio=0.48`, `y=0.26`), com referência fixa. Lista de partidos sem nota por UF/cargo agora abre por clique/toque abaixo da tabela, substituindo o antigo tooltip. Dados e cartograma preservados.
+ÚLTIMA REVISÃO DA INTERFACE: aba Fontes e limites renomeada para Mais informações, com tabela geral pesquisável de notas e lacunas. São 36 siglas: 32 notas de 2022 e quatro sem nota (DEMOCRATA, MISSÃO, MOBILIZA, PRD), deduplicadas sem sucessão/imputação. A lista de partidos por UF foi removida de Explorar. Aviso de neutralidade, legenda padronizada, círculo de referência das sobrancelhas e área compartilhada de demonstrações preservados. Dados e cartograma inalterados.
 
 ESTADO ATUAL: amplitude do nariz reforçada (`largura = 0.04 + 0.72*t`, `raio vertical = 0.005 + 0.155*t`, altura fixa `0.29`). Mesmo traçado aberto e mesma escala absoluta 0–10. Nova função única `coordenadas_nariz()` usada no mapa e na faixa ampliada com mínimo/mediana/máximo federais reais. Outros traços e dados preservados. Novo teste verifica separação dos índices reais em uma miniatura de referência.
 
@@ -43,7 +43,7 @@ Faces maiores, olhos com abertura variável, sorriso com abertura variável, nar
 - `dados/referencia/ideologia_partidos.csv`: 32 notas reais da coluna 2022 da publicação, conferidas no HTML SciELO preservado; MISSÃO sem nota. Fonte e aliases em `README_ideologia.md`.
 - `R/geometria.R`: geometria complexa e desenhos em R base. Ângulo `pi * (1 - nota/10)`; coordenadas `Re(z)` e `Im(z)`; ausências não viram centro. Rótulos arredondados sem arredondar ponteiros.
 - `R/visualizar.R`: cartograma, 27 painéis de cinco velocímetros e diagrama de contas usando PR/Presidência real. Corrigido encolhimento automático de fonte do `mfrow` e espaçamento dos títulos.
-- `resultados/painel.html`: painel offline autossuficiente, com Explorar e Fontes e limites. A legenda clicável compartilha uma única área de demonstração dos cinco aspectos, e o guia de Chernoff ocupa o canto inferior direito. Explicação dos complexos fica somente no apoio técnico ao vídeo, não no painel ou PDF principal.
+- `resultados/painel.html`: painel offline autossuficiente, com Explorar e Mais informações. A legenda clicável compartilha uma única área de demonstração dos cinco aspectos, e o guia de Chernoff ocupa o canto inferior direito. Notas partidárias e lacunas estão na tabela da segunda aba. Explicação dos complexos fica somente no apoio técnico ao vídeo, não no painel ou PDF principal.
 - `resultados/cartograma_brasil.png` e `.svg`; `resultados/detalhes/*.svg`; `resultados/contas_complexas.svg`; `resultados/Figuras_desafio02.pdf` (material de apoio, não PDF final de entrega).
 - `resultados/indices_uf_cargo.csv`: 135 registros reais, todos com índice e cobertura; RO recuperado por fontes oficiais complementares.
 - `scripts/montar_painel.py` e `interface/painel.html`: empacotamento e interface; não calculam os índices.

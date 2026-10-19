@@ -39,13 +39,9 @@ with sync_playwright() as p:
     assert "Passe o cursor sobre uma linha" not in page.locator("body").inner_text()
     for descricao in legenda.locator("dd").all_text_contents():
         assert "Esquerda:" in descricao and "Direita:" in descricao
-    partidos = page.locator("#partidos-sem-nota")
-    partidos.locator("summary").click()
-    assert partidos.get_attribute("open") is not None
+    assert page.locator("#partidos-sem-nota").count() == 0
+    assert page.locator("#aba-fontes").inner_text() == "Mais informações"
     dados_reais = page.locator("#dados").evaluate("el => JSON.parse(el.textContent)")
-    for linha in dados_reais["estados"]["PR"]["indices"]:
-        texto = page.locator(f'#lista-partidos-sem-nota li[data-cargo="{linha["cargo"]}"]').inner_text()
-        assert (linha["partidos_sem_nota"] or "Nenhum") in texto
     assert page.locator("#aba-leitura").count() == 0
     assert page.locator("#guia-chernoff").is_visible()
     assert page.locator(".aspecto-titulo").count() == 5
@@ -74,9 +70,7 @@ with sync_playwright() as p:
         assert page.locator("#uf").input_value() == uf
         assert page.locator("#valores tr").count() == 5
         assert page.locator(f'.uf-hit[data-uf="{uf}"]').get_attribute("aria-pressed") == "true"
-        for linha in dados_reais["estados"][uf]["indices"]:
-            texto = page.locator(f'#lista-partidos-sem-nota li[data-cargo="{linha["cargo"]}"]').inner_text()
-            assert (linha["partidos_sem_nota"] or "Nenhum") in texto
+
     page.locator('.uf-hit[data-uf="RO"]').click()
     assert page.locator('#valores tr[data-cargo="federal"] td').nth(1).inner_text() != "—"
     assert page.locator('#valores tr[data-cargo="estadual"] td').nth(1).inner_text() != "—"
@@ -89,6 +83,27 @@ with sync_playwright() as p:
         page.locator(f"#aba-{aba}").click()
         assert page.locator(f"#{aba}").is_visible()
         assert page.locator('[role="tabpanel"]:visible').count() == 1
+    page.locator("#aba-fontes").click()
+    linhas_partidos = page.locator("#corpo-partidos tr[data-partido]")
+    assert linhas_partidos.count() == len(dados_reais["partidos"])
+    for partido in dados_reais["partidos"]:
+        linha = page.locator(f'#corpo-partidos tr[data-partido="{partido["chave"]}"]')
+        if partido["nota"] is None:
+            assert "Sem nota" in linha.inner_text() and linha.locator(".mini-escala").count() == 0
+        else:
+            assert float(linha.get_attribute("data-nota")) == partido["nota"]
+            assert f'{partido["nota"]:.2f}'.replace(".", ",") in linha.inner_text()
+    page.locator("#filtro-nota").select_option("sem")
+    assert linhas_partidos.count() == sum(p["nota"] is None for p in dados_reais["partidos"])
+    page.locator(".referencia-partidos").screenshot(path=str(SCRATCH / "tabela_sem_nota.png"))
+    page.locator("#buscar-partido").fill("missao")
+    assert linhas_partidos.count() == 1 and "MISSÃO" in linhas_partidos.inner_text()
+    page.locator("#buscar-partido").fill("zzzinexistente")
+    assert linhas_partidos.count() == 0 and page.locator("#sem-partidos").is_visible()
+    page.locator("#buscar-partido").fill("")
+    page.locator("#filtro-nota").select_option("todos")
+    page.screenshot(path=str(SCRATCH / "painel_informacoes.png"), full_page=True)
+    page.locator("#aba-explorar").click()
     assert page.locator("#aba-contas").count() == 0
     page.set_viewport_size({"width": 390, "height": 844})
     for aba in ("explorar", "fontes"):
@@ -106,15 +121,11 @@ with sync_playwright() as p:
     touch_context = browser.new_context(viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
     touch_page = touch_context.new_page()
     touch_page.goto((RAIZ / "resultados/painel.html").as_uri(), wait_until="load")
-    touch_partidos = touch_page.locator("#partidos-sem-nota")
-    touch_partidos.locator("summary").tap()
-    assert touch_partidos.get_attribute("open") is not None
-    assert touch_page.locator("#lista-partidos-sem-nota li").count() == 5
-    touch_partidos.locator("summary").tap()
-    assert touch_partidos.get_attribute("open") is None
-    touch_partidos.locator("summary").focus()
-    touch_page.keyboard.press("Enter")
-    assert touch_partidos.get_attribute("open") is not None
+    touch_page.locator("#aba-fontes").tap()
+    touch_page.locator("#buscar-partido").fill("missão")
+    assert touch_page.locator("#corpo-partidos tr[data-partido]").count() == 1
+    assert touch_page.evaluate("document.documentElement.scrollWidth <= innerWidth + 1")
+    touch_page.locator(".referencia-partidos").screenshot(path=str(SCRATCH / "tabela_partidos_mobile.png"))
     touch_context.close()
     context.close()
     browser.close()
