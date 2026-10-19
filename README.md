@@ -8,7 +8,7 @@ Projeto da disciplina Visualização de Dados Aplicada, UFPR. Um cartograma com 
 - Representar as 27 unidades da Federação em disposição reconhecível como Brasil.
 - Faces com linguagem de emoji; vermelho para esquerda, verde para direita na dimensão presidencial, sempre com escala numérica.
 - O professor autorizou ggplot posteriormente ao PDF; priorizar funções geométricas compreensíveis em R.
-- Usar números complexos na geometria dos velocímetros, sem explicação matemática no painel ou PDF principal. A explicação fica no apoio técnico para os colegas apresentarem no vídeo.
+- Usar números complexos na geometria dos velocímetros. A pedido posterior do autor, o painel ganhou a aba Matemática entre Explorar e Mais informações, com fórmulas TeX e um rosto de exemplo com cinco sliders. O PDF de figuras não foi alterado por essa revisão.
 - Entregar programação e notas breves para os colegas prepararem um vídeo de aproximadamente cinco minutos, não produzir o vídeo agora.
 - Cada cargo controla um traço: Presidente = cor; Senador = abertura do sorriso; Governador = abertura dos olhos; Federal = formato do nariz (mesmo traçado aberto, fino à esquerda e mais arredondado à direita); Estadual/distrital = altura das sobrancelhas, com comprimento fixo. Escala absoluta 0–10 preservada.
 - Os cinco títulos da legenda são clicáveis: alternam uma única área de exemplos ampliados com mínimo, mediano e máximo reais de cada cargo. Mesmas dimensões e padrão visual, usando o desenho real da face. O mapa e a escala 0–10 não mudam.
@@ -19,6 +19,14 @@ Projeto da disciplina Visualização de Dados Aplicada, UFPR. Um cartograma com 
 ## Estado atualizado
 
 Rondônia foi recuperada com votação por seção, cadastro e destinação oficial dos votos: **135/135 totais conciliados**, mantendo a auditoria original e sem alterar votos das outras UFs. Ver `AUDITORIA_RO.md`. O painel possui legenda dos cinco traços imediatamente abaixo do mapa.
+
+## Aba Matemática e empacotamento offline
+
+O exemplo interativo usa as mesmas coordenadas e os mesmos parâmetros de `R/geometria.R`, implementados no navegador em `interface/matematica.js`. Os valores dos sliders são hipotéticos e não alteram os dados eleitorais. O botão de reinício volta os cinco controles para 5.
+
+O texto está em `interface/matematica_texto.html`, com fórmulas TeX em atributos `data-tex`. O KaTeX 0.19.0 compila as fórmulas durante o empacotamento; HTML, MathML e fontes WOFF2 ficam dentro do resultado. O painel pronto continua funcionando sem conexão e sem servidor. Para regenerar, são necessários Python e Node.js; instalar a dependência uma vez com `npm ci` e executar `python scripts/montar_painel.py`.
+
+`uv run --with playwright python testes/testar_matematica.py` compara o exemplo com saídas reais do R em casos artificiais, verifica as paletas, os sliders, o teclado, o reinício e a exibição offline. É preciso ter o R instalado para esse teste. As paletas em `interface/paleta_demo.json` e `interface/paleta_faixa_demo.json` são exportadas por `testes/exportar_demo.R`; não são notas partidárias ou dados de votação.
 
 ## Cuidados metodológicos
 

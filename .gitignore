@@ -3,4 +3,5 @@
 .RData
 .Rproj.user/
 __pycache__/
+node_modules/
 dados/brutos/*.zip

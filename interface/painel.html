@@ -22,6 +22,7 @@ h2{font:normal 29px/1.2 Georgia,serif;margin:18px 0 5px}.subtitulo{font-size:13p
 .aviso-neutralidade{margin:12px 0 16px;padding:13px 16px;border:1px solid var(--linha);border-radius:3px;background:#f0f2ee}.aviso-neutralidade strong{display:block;font-size:17px;line-height:1.35}.aviso-neutralidade p{margin:5px 0 0;font-size:14px;max-width:105ch;color:var(--tinta)}.legenda-face dd strong{display:block;font-size:12px;margin-bottom:3px}.legenda-face dd span{display:block}.aspectos-comparacao .referencia-aspecto{min-height:3em}.partidos-sem-nota{font-size:13px;margin:0 0 20px;padding:0 12px;border:1px solid var(--linha);border-radius:3px}.partidos-sem-nota summary{cursor:pointer;font-weight:600;min-height:44px;padding:10px 0}.partidos-sem-nota p{margin:2px 0 12px;color:var(--suave)}.partidos-sem-nota ul{padding-left:18px;margin:8px 0 14px}.partidos-sem-nota li{margin:7px 0}summary:focus-visible{outline:3px solid var(--foco);outline-offset:3px}
 .referencia-partidos{max-width:900px;margin-bottom:42px}.partidos-filtros{display:grid;grid-template-columns:minmax(180px,1fr) minmax(160px,.6fr);gap:16px;margin:22px 0 10px}.partidos-filtros label{display:block;font-size:12px;color:var(--suave);margin-bottom:5px}.partidos-filtros input,.partidos-filtros select{width:100%;min-height:44px;padding:9px 12px;border:1px solid var(--linha);border-radius:3px;background:var(--papel);color:var(--tinta);font:inherit}.partidos-resumo{font-size:12px;color:var(--suave);min-height:1.5em;margin:8px 0 12px}.partidos-painel{border:1px solid var(--linha);border-radius:4px;overflow:hidden}.partidos-scroll{max-height:510px;overflow:auto}.tabela-partidos{font-size:14px;table-layout:fixed}.tabela-partidos caption{text-align:left;padding:12px 16px;color:var(--suave);font-size:12px;background:#f0f2ee}.tabela-partidos th{position:sticky;top:0;z-index:1;background:var(--papel);padding:12px 16px}.tabela-partidos th:first-child{width:52%}.tabela-partidos td{padding:11px 16px}.tabela-partidos tbody tr:hover{background:#f0f2ee}.sigla-partido{font-weight:600;overflow-wrap:anywhere}.sigla-fonte{display:block;font-size:11px;color:var(--suave);margin-top:2px}.nota-partido{display:flex;align-items:center;justify-content:flex-end;gap:12px;font-variant-numeric:tabular-nums}.mini-escala{display:block;flex:1;max-width:130px;height:4px;border-radius:2px;background:var(--linha);overflow:hidden}.mini-escala i{display:block;height:100%;background:var(--foco)}.valor-partido{min-width:4ch;font-weight:600}.sem-nota{display:inline-block;padding:2px 9px;border:1px solid var(--linha);border-radius:3px;font-size:12px;color:var(--suave)}.tabela-partidos .vazio-partidos{text-align:center;padding:28px 16px;color:var(--suave)}.nota-referencia{font-size:12px;color:var(--suave);line-height:1.6}input:focus-visible,.partidos-scroll:focus-visible{outline:3px solid var(--foco);outline-offset:3px}@media(max-width:600px){.partidos-filtros{grid-template-columns:1fr;gap:12px}.tabela-partidos th,.tabela-partidos td{padding-left:12px;padding-right:12px}}
 .notas-indice{font-size:13px;line-height:1.6;color:var(--suave);margin:0 0 20px;max-width:76ch}.notas-indice p{margin:0 0 10px}.notas-indice strong{font-weight:600;color:var(--tinta)}
+__MATEMATICA_CSS__
 </style>
 </head>
 <body>
@@ -31,8 +32,7 @@ h2{font:normal 29px/1.2 Georgia,serif;margin:18px 0 5px}.subtitulo{font-size:13p
 <aside class="aviso-neutralidade" id="aviso-neutralidade" aria-labelledby="titulo-neutralidade"><strong id="titulo-neutralidade">Estudo acadêmico, sem posicionamento político</strong><p>Este painel descreve dados eleitorais e classificações partidárias. Não expressa apoio ou rejeição a partidos, candidatos ou correntes políticas.</p></aside>
 <nav role="tablist" aria-label="Seções do estudo">
 <button id="aba-explorar" role="tab" aria-controls="explorar" aria-selected="true">Explorar</button>
-
-
+<button id="aba-matematica" role="tab" aria-controls="matematica" aria-selected="false">Matemática</button>
 <button id="aba-fontes" role="tab" aria-controls="fontes" aria-selected="false">Mais informações</button>
 </nav>
 </header>
@@ -59,6 +59,7 @@ h2{font:normal 29px/1.2 Georgia,serif;margin:18px 0 5px}.subtitulo{font-size:13p
 </div>
 </section>
 
+__MATEMATICA_HTML__
 <section id="fontes" class="painel texto fontes" role="tabpanel" aria-labelledby="aba-fontes" hidden>
 <section class="referencia-partidos" aria-labelledby="titulo-partidos">
 <h2 id="titulo-partidos">Notas dos partidos</h2>
@@ -148,6 +149,7 @@ document.getElementById('buscar-partido').addEventListener('input',mostrarPartid
 document.getElementById('filtro-nota').addEventListener('change',mostrarPartidos);
 mostrarPartidos();
 selecionar('PR');
+__MATEMATICA_JS__
 </script>
 </body>
 </html>

@@ -5,6 +5,9 @@ import csv
 import json
 import math
 import unicodedata
+import html
+import re
+import subprocess
 
 RAIZ = Path(__file__).resolve().parents[1]
 
@@ -57,6 +60,36 @@ def tabela_partidos(indices):
                   p["nota"] if p["nota"] is not None else math.inf, p["chave"]))
 
 
+def matematica_offline():
+    biblioteca = RAIZ / "node_modules/katex"
+    if not (biblioteca / "dist/katex.min.css").exists():
+        raise RuntimeError("Execute npm ci na raiz para instalar o KaTeX usado no empacotamento.")
+    artigo = (RAIZ / "interface/matematica_texto.html").read_text(encoding="utf-8")
+    padrao = re.compile(r'(<div class="equacao" data-tex="([^"]*)">)</div>')
+    formulas = [html.unescape(m[1]) for m in padrao.findall(artigo)]
+    if not formulas:
+        raise ValueError("Faltam as fórmulas TeX da aba de matemática.")
+    processo = subprocess.run(["node", str(RAIZ / "scripts/renderizar_formulas.cjs")],
+                              input=json.dumps(formulas), text=True, encoding="utf-8",
+                              capture_output=True, cwd=RAIZ, check=True)
+    renderizadas = iter(json.loads(processo.stdout))
+    artigo = padrao.sub(lambda m: m[1] + next(renderizadas) + "</div>", artigo)
+    css = (biblioteca / "dist/katex.min.css").read_text(encoding="utf-8")
+    def fonte_local(m):
+        caminhos = [x.strip("\"'") for x in re.findall(r"url\(([^)]+)\)", m[0])]
+        caminho = next(x for x in caminhos if x.endswith(".woff2"))
+        conteudo = base64.b64encode((biblioteca / "dist" / caminho).read_bytes()).decode("ascii")
+        return 'src:url("data:font/woff2;base64,' + conteudo + '") format("woff2");'
+    css = re.sub(r"src:[^;]+;", fonte_local, css)
+    css += (RAIZ / "interface/matematica.css").read_text(encoding="utf-8")
+    demo = (RAIZ / "interface/matematica_demo.html").read_text(encoding="utf-8")
+    demo = demo.replace("__MATEMATICA_TEXTO__", artigo)
+    licenca = (biblioteca / "LICENSE").read_text(encoding="utf-8")
+    demo += "\n<!-- KaTeX, licença MIT:\n" + licenca + "\n-->"
+    javascript = (RAIZ / "interface/matematica.js").read_text(encoding="utf-8")
+    return demo, css, javascript
+
+
 def montar():
     indices = ler_csv("resultados/indices_uf_cargo.csv")
     grade = ler_csv("dados/referencia/layout_ufs.csv")
@@ -87,10 +120,17 @@ def montar():
     dados = {"estados": estados, "centros": centros, "mapa": imagem("resultados/cartograma_brasil.svg"),
              "comparacoes": comparacoes,
              "partidos": tabela_partidos(indices),
+             "paleta_demo": json.loads((RAIZ / "interface/paleta_demo.json").read_text()),
+             "paleta_faixa_demo": json.loads((RAIZ / "interface/paleta_faixa_demo.json").read_text()),
              "csv": "data:text/csv;charset=utf-8;base64," + base64.b64encode(
                  (RAIZ / "resultados/indices_uf_cargo.csv").read_bytes()).decode("ascii")}
     texto = json.dumps(dados, ensure_ascii=False, allow_nan=False, separators=(",", ":")).replace("<", "\\u003c")
     template = (RAIZ / "interface/painel.html").read_text(encoding="utf-8")
+    demo, css, javascript = matematica_offline()
+    for marcador, conteudo in (("__MATEMATICA_HTML__", demo), ("__MATEMATICA_CSS__", css),
+                              ("__MATEMATICA_JS__", javascript)):
+        assert template.count(marcador) == 1
+        template = template.replace(marcador, conteudo)
     assert template.count("__DADOS__") == 1
     destino = RAIZ / "resultados/painel.html"
     destino.write_text(template.replace("__DADOS__", texto), encoding="utf-8")

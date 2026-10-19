@@ -1,5 +1,7 @@
 # Checkpoint para retomada — 16/10/2026
 
+REVISÃO MAIS RECENTE: nova aba Matemática entre Explorar e Mais informações, autorizada pelo usuário em substituição à restrição antiga de explicar complexos somente no vídeo. Fórmulas TeX compiladas com KaTeX no empacotamento, fontes embutidas e exemplo hipotético em SVG com cinco sliders independentes. Não confundir os sliders com dados reais nem alterar o mapa, as notas ou o PDF por causa deles. Ver README e testes/testar_matematica.py. As descrições antigas de duas abas abaixo são históricas.
+
 ÚLTIMA REVISÃO DA INTERFACE: aba Fontes e limites renomeada para Mais informações, com tabela geral pesquisável de notas e lacunas. São 36 siglas: 32 notas de 2022 e quatro sem nota (DEMOCRATA, MISSÃO, MOBILIZA, PRD), deduplicadas sem sucessão/imputação. A lista de partidos por UF foi removida de Explorar. Aviso de neutralidade, legenda padronizada, círculo de referência das sobrancelhas e área compartilhada de demonstrações preservados. Dados e cartograma inalterados.
 
 ESTADO ATUAL: amplitude do nariz reforçada (`largura = 0.04 + 0.72*t`, `raio vertical = 0.005 + 0.155*t`, altura fixa `0.29`). Mesmo traçado aberto e mesma escala absoluta 0–10. Nova função única `coordenadas_nariz()` usada no mapa e na faixa ampliada com mínimo/mediana/máximo federais reais. Outros traços e dados preservados. Novo teste verifica separação dos índices reais em uma miniatura de referência.

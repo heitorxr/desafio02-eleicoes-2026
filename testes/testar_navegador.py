@@ -89,7 +89,7 @@ with sync_playwright() as p:
     with page.expect_download() as download:
         page.locator("#baixar").click()
     assert Path(download.value.path()).read_bytes() == (RAIZ / "resultados/indices_uf_cargo.csv").read_bytes()
-    for aba in ("fontes", "explorar"):
+    for aba in ("matematica", "fontes", "explorar"):
         page.locator(f"#aba-{aba}").click()
         assert page.locator(f"#{aba}").is_visible()
         assert page.locator('[role="tabpanel"]:visible').count() == 1
@@ -121,7 +121,7 @@ with sync_playwright() as p:
     page.locator("#aba-explorar").click()
     assert page.locator("#aba-contas").count() == 0
     page.set_viewport_size({"width": 390, "height": 844})
-    for aba in ("explorar", "fontes"):
+    for aba in ("explorar", "matematica", "fontes"):
         page.locator(f"#aba-{aba}").click()
         assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth + 1"), f"Transbordamento: {aba}"
     page.locator("#aba-explorar").click()
@@ -145,5 +145,5 @@ with sync_playwright() as p:
     touch_context.close()
     context.close()
     browser.close()
-print("OK: 27 UFs, cinco demonstrações no mesmo espaço, teclado, duas abas e layout móvel; nenhum erro JavaScript.")
+print("OK: 27 UFs, cinco demonstrações no mesmo espaço, teclado, três abas e layout móvel; nenhum erro JavaScript.")
 print(f"Capturas verificáveis: {SCRATCH}")

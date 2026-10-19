@@ -73,6 +73,8 @@ Saída arredondada: `theta = 1.0368467`, `x = 0.4580434`, `y = 0.7747233`, `raio
 
 ## 4. Como ler as faces e respeitar os limites
 
+O painel agora tem três abas: Explorar, Matemática e Mais informações. A aba Matemática explica as equações do R e inclui uma demonstração com cinco sliders, sem modificar índices eleitorais. `interface/matematica.js` calcula as coordenadas no navegador; `testes/exportar_demo.R` obtém referências do renderer original, e `testar_matematica.py` compara nariz, boca, parâmetros, cores e ponteiro. O texto usa TeX em `interface/matematica_texto.html`; `scripts/renderizar_formulas.cjs` compila com KaTeX, e o empacotador incorpora o resultado e as fontes. Não há dependência de CDN no arquivo entregue. Essa aba foi solicitada depois da decisão inicial de reservar as equações ao apoio do vídeo.
+
 | Variável | Canal visual |
 |---|---|
 | Presidência | Cor: vermelho em 0/esquerda, tom claro em 5, verde em 10/direita. |

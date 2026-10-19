@@ -31,7 +31,8 @@ class Pagina(HTMLParser):
 
 pagina = Pagina()
 html = (RAIZ / "resultados/painel.html").read_text(encoding="utf-8")
-assert 'id="aba-contas"' not in html, "Explicação dos complexos deve ficar apenas no apoio ao vídeo"
+assert 'id="aba-matematica"' in html, "Falta a nova aba de matemática"
+assert 'class="katex"' in html, "As fórmulas TeX precisam chegar renderizadas e funcionar offline"
 pagina.feed(html)
 dados = json.loads("".join(pagina.dados))
 assert 'id="partidos-sem-nota"' not in html and 'id="lista-partidos-sem-nota"' not in html

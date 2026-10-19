@@ -1,0 +1,8 @@
+{
+  "name": "faces-do-voto",
+  "private": true,
+  "description": "KaTeX é usado apenas ao empacotar as fórmulas do painel offline.",
+  "devDependencies": {
+    "katex": "0.19.0"
+  }
+}
