@@ -41,6 +41,16 @@ with sync_playwright() as p:
         assert "Esquerda:" in descricao and "Direita:" in descricao
     assert page.locator("#partidos-sem-nota").count() == 0
     assert page.locator("#aba-fontes").inner_text() == "Mais informações"
+    formula = page.locator("#formula-indice")
+    assert page.locator("#nota-cobertura strong").inner_text() == "Cobertura"
+    assert formula.count() == 1, "Falta explicar o índice logo abaixo da cobertura"
+    assert formula.inner_text() == "Índice = soma de (votos × nota do partido) ÷ votos dos partidos com nota."
+    assert page.locator("#nota-cobertura").evaluate("el => el.nextElementSibling.id === 'notas-indice'")
+    ressalva = page.locator("#ressalva-ideologia")
+    assert "Ideologia é multidimensional" in ressalva.inner_text()
+    assert "economia e costumes" in ressalva.inner_text()
+    assert formula.evaluate("el => el.nextElementSibling.id === 'ressalva-ideologia'")
+    assert ressalva.bounding_box()["y"] >= formula.bounding_box()["y"] + formula.bounding_box()["height"]
     dados_reais = page.locator("#dados").evaluate("el => JSON.parse(el.textContent)")
     assert page.locator("#aba-leitura").count() == 0
     assert page.locator("#guia-chernoff").is_visible()
@@ -117,6 +127,7 @@ with sync_playwright() as p:
         assert all(abs(atual[k] - referencia_mobile[k]) < 1 for k in ("width", "height"))
         assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth + 1")
     page.screenshot(path=str(SCRATCH / "painel_mobile.png"), full_page=True)
+    page.locator("#notas-indice").screenshot(path=str(SCRATCH / "notas_indice_mobile.png"))
     assert not erros, erros
     touch_context = browser.new_context(viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
     touch_page = touch_context.new_page()
