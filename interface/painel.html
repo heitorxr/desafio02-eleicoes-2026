@@ -18,6 +18,7 @@ h2{font:normal 29px/1.2 Georgia,serif;margin:18px 0 5px}.subtitulo{font-size:13p
 @media(max-width:900px){.selecionar{flex-wrap:wrap}.selecionar label{width:100%}.selecionar select{flex:1;max-width:none;min-width:0}.setas{flex-shrink:0}.uf-hit{min-width:44px;min-height:44px}}
 .uf-hit[aria-pressed=true]{border-color:transparent;box-shadow:none;outline:2px solid var(--tinta);outline-offset:-7px}
 .legenda-face{max-width:540px;margin:12px auto 24px;padding-top:14px;border-top:1px solid var(--linha)}.legenda-face h3{font-size:16px;margin:0 0 10px}.legenda-face dl{display:grid;grid-template-columns:minmax(100px,.8fr) 1.2fr;gap:8px 14px;font-size:13px}.legenda-face dt{font-weight:600}.legenda-face dd{margin:0}.legenda-face p{font-size:12px;color:var(--suave)}.uf-hit[aria-pressed=true]{outline-offset:-2px}
+.narizes-comparacao{margin:18px 0;padding-top:12px;border-top:1px solid var(--linha)}.narizes-comparacao figcaption{font-size:13px;font-weight:600}.narizes-comparacao img{display:block;width:100%;height:auto}.narizes-comparacao p{margin:0;font-size:11px}
 </style>
 </head>
 <body>
@@ -40,7 +41,7 @@ h2{font:normal 29px/1.2 Georgia,serif;margin:18px 0 5px}.subtitulo{font-size:13p
 <dt>Abertura do sorriso</dt><dd>Senador: boca mais fechada ou mais aberta.</dd>
 <dt>Formato do nariz</dt><dd>Deputado federal: mesmo traçado aberto; esquerda = fino, direita = mais arredondado.</dd>
 <dt>Altura das sobrancelhas</dt><dd>Deputado estadual/distrital: sobrancelhas mais baixas ou mais altas, com comprimento fixo.</dd>
-</dl><p>Na escala de 0 a 10, notas maiores abrem mais olhos e boca, arredondam a ponta do nariz e elevam as sobrancelhas. Os cinco traços são independentes e não indicam aprovação ou personalidade.</p><p>Rondônia foi recuperada com votos por seção e cadastro oficial: os dois totais legislativos conferem.</p></section></div>
+</dl><figure class="narizes-comparacao"><figcaption>Narizes ampliados · exemplos reais</figcaption><img id="narizes-comparacao" alt="Comparação ampliada dos narizes correspondentes ao menor, mediano e maior índice federal observado, com UF e nota."><p>Mesmo aumento nos três exemplos. Escala absoluta 0–10, sem esticar a amostra: as notas reais são próximas.</p></figure><p>Na escala de 0 a 10, notas maiores abrem mais olhos e boca, arredondam a ponta do nariz e elevam as sobrancelhas. Os cinco traços são independentes e não indicam aprovação ou personalidade.</p><p>Rondônia foi recuperada com votos por seção e cadastro oficial: os dois totais legislativos conferem.</p></section></div>
 <div class="detalhe">
 <div class="selecionar"><label for="uf">Unidade da Federação</label><select id="uf"></select><div class="setas"><button id="anterior" aria-label="UF anterior">←</button><button id="seguinte" aria-label="Próxima UF">→</button></div></div>
 <h2 id="nome-uf"></h2><p class="subtitulo">Índices por cargo · escala comum de 0 a 10</p>
@@ -74,6 +75,7 @@ const formato=new Intl.NumberFormat('pt-BR',{minimumFractionDigits:1,maximumFrac
 const select=document.getElementById('uf');
 for(const uf of ufs){const option=document.createElement('option');option.value=uf;option.textContent=dados.estados[uf].nome+' — '+uf;select.append(option)}
 document.getElementById('mapa').src=dados.mapa;
+document.getElementById('narizes-comparacao').src=dados.narizes;
 
 for(const id of ['baixar','baixar-fontes'])document.getElementById(id).href=dados.csv;
 for(const ponto of dados.centros){const b=document.createElement('button');b.className='uf-hit';b.dataset.uf=ponto.uf;b.style.left=ponto.x+'%';b.style.top=ponto.y+'%';b.style.width=(2*ponto.raio)+'%';b.setAttribute('aria-label',dados.estados[ponto.uf].nome+' ('+ponto.uf+')');b.setAttribute('aria-pressed','false');b.title=dados.estados[ponto.uf].nome;b.addEventListener('click',()=>selecionar(ponto.uf));document.getElementById('mapa-wrap').append(b)}

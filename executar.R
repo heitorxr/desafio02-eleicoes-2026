@@ -33,5 +33,6 @@ if (acao[1] == "testar") {
   source("testes/testar_geometria.R", encoding = "UTF-8")
   source("testes/testar_visual.R", encoding = "UTF-8")
   source("testes/testar_legibilidade.R", encoding = "UTF-8")
+  source("testes/testar_legibilidade_nariz.R", encoding = "UTF-8")
   source("testes/testar_recuperacao_ro.R", encoding = "UTF-8")
 }

@@ -1,5 +1,9 @@
 # Checkpoint para retomada — 16/10/2026
 
+ESTADO ATUAL: amplitude do nariz reforçada (`largura = 0.04 + 0.72*t`, `raio vertical = 0.005 + 0.155*t`, altura fixa `0.29`). Mesmo traçado aberto e mesma escala absoluta 0–10. Nova função única `coordenadas_nariz()` usada no mapa e na faixa ampliada com mínimo/mediana/máximo federais reais. Outros traços e dados preservados. Novo teste verifica separação dos índices reais em uma miniatura de referência.
+
+## Histórico de revisões do nariz — descrições abaixo não vigentes
+
 ESTADO VIGENTE DO NARIZ: modelo único de traçado aberto inspirado no original. Altura e início fixos; nota federal controla largura e arredondamento da ponta: esquerda = fino, direita = arredondado. Ponte cúbica + meia elipse, sem preenchimento. Outros traços e dados preservados. As descrições abaixo registram estilos anteriores, não o estado vigente.
 
 ESTADO VIGENTE: somente o nariz foi restaurado ao traçado original do commit `6872ba2`, imediatamente anterior ao primeiro triângulo. Comprimento `0.13 + 0.18*t`, linha aberta sem preenchimento. Olhos, boca, cor, altura das sobrancelhas e dados atuais preservados. Não restaurar todo o commit antigo. Os estilos de nariz descritos abaixo são históricos e foram substituídos.

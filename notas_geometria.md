@@ -21,10 +21,10 @@ Para cada nota normalizada `t`, as dimensões abaixo são frações do raio:
 | presidente | preenchimento da face | interpolação RGB |
 | governador | semiabertura vertical dos olhos | `0.02 + 0.25*t` |
 | senador | abertura vertical do sorriso | `0.01 + 0.22*t` |
-| federal | largura e arredondamento da ponta, mesmo traçado aberto | largura `0.04 + 0.30*t`; raio vertical `0.005 + 0.125*t`; altura fixa `0.23` |
+| federal | largura e arredondamento da ponta, mesmo traçado aberto | largura `0.04 + 0.72*t`; raio vertical `0.005 + 0.155*t`; altura fixa `0.29` |
 | estadual | altura das sobrancelhas | `0.58 + 0.25*t` |
 
-Olhos, sorriso e sobrancelhas permanecem como estavam. O nariz mantém a ideia de traço aberto anterior ao triângulo, mas usa uma única família suave para todas as UFs: ponte Bézier cúbica ligada tangencialmente à metade inferior de uma elipse. Início `(0,0.06)` e altura `0.23` são fixos. Com `rx = largura/2`, `ry = curvatura_nariz` e `cy = 0.06 - 0.23 + ry`, a ponte tem controles `(0,0.06)`, `(0,0)`, `(-rx,cy+0.04)`, `(-rx,cy)`; a ponta usa `(rx*cos(theta),cy+ry*sin(theta))`, de pi a 2*pi. Apenas a nota federal controla `rx` e `ry`: a largura e a razão `ry/rx` aumentam com a nota, produzindo ponta fina à esquerda e arredondada à direita. Sem preenchimento; cor e espessura constantes. Coordenadas são escaladas e transladadas; ausências recebem `?`, nunca uma nota inventada.
+Olhos, sorriso e sobrancelhas permanecem como estavam. A função única `coordenadas_nariz()` gera o mesmo traçado aberto para mapa e comparação ampliada: ponte Bézier cúbica ligada tangencialmente à metade inferior de uma elipse. Início `(0,0.06)` e altura `0.29` são fixos. Com `rx = largura/2`, `ry = curvatura_nariz` e `cy = 0.06 - 0.29 + ry`, os controles são `(0,0.06)`, `(0,0)`, `(-rx,cy+0.04)`, `(-rx,cy)`; a ponta usa `(rx*cos(theta),cy+ry*sin(theta))`, de pi a 2*pi. A amplitude linear foi aumentada, sem normalizar pelos extremos observados. Apenas a nota federal controla largura e arredondamento; sem preenchimento, cor e espessura constantes. A comparação usa as notas reais mínima, mediana e máxima com o mesmo fator de ampliação. Ausências continuam explícitas.
 
 ## Integração
 

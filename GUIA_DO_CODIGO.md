@@ -85,4 +85,6 @@ Notas maiores abrem mais olhos e boca, arredondam a ponta do nariz e elevam as s
 
 A média não identifica a opinião individual de eleitores ou candidatos e não transforma uma posição partidária medida em 2022 em medição de 2026. Uma média perto de cinco tampouco demonstra consenso: posições diferentes podem se compensar.
 
+Para ler o nariz, a amplitude da largura foi reforçada sem mudar a escala 0–10. O painel também mostra os narizes ampliados das UFs com menor, mediano e maior índice federal real. As três curvas usam a mesma função do mapa e o mesmo aumento; não são extremos fictícios de esquerda/direita. `testar_legibilidade_nariz.R` verifica a separação dos valores reais, além das fixtures teóricas.
+
 **Referências locais:** `README.md` (fonte TSE), `dados/referencia/README_ideologia.md` (Bolognesi, Ribeiro, Codato e Silva, DOI `10.1590/1807-0191202531120`, Tabela 1/2022), `dados/referencia/README_layout.md` (grade `br_states_grid1`, geofacet) e `notas_geometria.md` (fórmulas).

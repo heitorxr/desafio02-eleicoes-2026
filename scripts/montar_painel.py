@@ -50,6 +50,7 @@ def montar():
     centros = [{"uf": r["uf"], "x": float(r["x"]), "y": float(r["y"]), "raio": float(r["raio"])}
                for r in ler_csv("resultados/centros_cartograma.csv")]
     dados = {"estados": estados, "centros": centros, "mapa": imagem("resultados/cartograma_brasil.svg"),
+             "narizes": imagem("resultados/comparacao_narizes.svg"),
              "csv": "data:text/csv;charset=utf-8;base64," + base64.b64encode(
                  (RAIZ / "resultados/indices_uf_cargo.csv").read_bytes()).decode("ascii")}
     texto = json.dumps(dados, ensure_ascii=False, allow_nan=False, separators=(",", ":")).replace("<", "\\u003c")

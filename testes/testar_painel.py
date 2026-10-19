@@ -2,6 +2,7 @@
 from pathlib import Path
 from html.parser import HTMLParser
 import base64
+import csv
 import json
 import subprocess
 import sys
@@ -35,6 +36,18 @@ dados = json.loads("".join(pagina.dados))
 assert not pagina.externos, pagina.externos
 assert len(dados["estados"]) == 27
 assert len(dados["centros"]) == 27
+assert 'id="narizes-comparacao"' in html, "Falta a comparação ampliada de narizes reais"
+narizes_svg = base64.b64decode(dados["narizes"].split(",", 1)[1])
+assert ET.fromstring(narizes_svg).tag.endswith("svg")
+assert narizes_svg == (RAIZ / "resultados/comparacao_narizes.svg").read_bytes()
+federais = sorted((i["nota"], uf) for uf, estado in dados["estados"].items()
+                  for i in estado["indices"] if i["cargo"] == "federal" and i["nota"] is not None)
+with (RAIZ / "resultados/comparacao_narizes.csv").open(encoding="utf-8-sig", newline="") as arquivo:
+    exemplos = list(csv.DictReader(arquivo))
+esperados = [federais[0], federais[len(federais) // 2], federais[-1]]
+assert len(exemplos) == len(esperados)
+for exemplo, (nota, uf) in zip(exemplos, esperados):
+    assert exemplo["uf"] == uf and abs(float(exemplo["nota"]) - nota) < 1e-12
 assert sum(len(x["indices"]) for x in dados["estados"].values()) == 135
 na = {(uf, i["cargo"]) for uf, x in dados["estados"].items() for i in x["indices"] if i["nota"] is None}
 assert not na, "Todos os 135 índices devem estar conciliados após recuperação de RO"

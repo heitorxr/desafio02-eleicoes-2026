@@ -68,6 +68,27 @@ desenhar_velocimetro <- function(nota, titulo = "", subtitulo = "",
   invisible(ponteiro)
 }
 
+coordenadas_nariz <- function(nota, x = 0, y = 0, raio = 1) {
+  if (length(nota) != 1L || length(x) != 1L || length(y) != 1L ||
+      !is.finite(x) || !is.finite(y) || length(raio) != 1L || !is.finite(raio) || raio <= 0)
+    stop("Informe uma nota, centro finito e raio positivo.")
+  t <- normalizar_nota(nota)
+  comprimento <- .29
+  largura <- .04 + .72 * t
+  curvatura <- .005 + .155 * t
+  raio_x <- largura / 2
+  centro_y <- .06 - comprimento + curvatura
+  s <- seq(0, 1, length.out = 21)
+  ponte <- outer((1 - s)^3, c(0, .06)) +
+    outer(3 * (1 - s)^2 * s, c(0, 0)) +
+    outer(3 * (1 - s) * s^2, c(-raio_x, centro_y + .04)) +
+    outer(s^3, c(-raio_x, centro_y))
+  theta <- seq(pi, 2 * pi, length.out = 61)
+  list(x = x + raio * c(ponte[, 1], raio_x * cos(theta)),
+       y = y + raio * c(ponte[, 2], centro_y + curvatura * sin(theta)),
+       comprimento = comprimento, largura = largura, curvatura = curvatura)
+}
+
 # Desenha sobre uma janela existente (asp = 1 preserva as proporções).
 desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
                           col = "#263238", cex = 1, ...) {
@@ -83,9 +104,10 @@ desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
   largura_olho <- .23
   abertura_olho <- .02 + .25 * t["governador"]
   distancia_olhos <- .34
-  comprimento_nariz <- .23
-  largura_nariz <- .04 + .30 * t["federal"]
-  curvatura_nariz <- .005 + .125 * t["federal"]
+  geometria_nariz <- coordenadas_nariz(notas["federal"], x, y, raio)
+  comprimento_nariz <- geometria_nariz$comprimento
+  largura_nariz <- geometria_nariz$largura
+  curvatura_nariz <- geometria_nariz$curvatura
   largura_boca <- .76
   abertura_boca <- .01 + .22 * t["senador"]
   comprimento_sobrancelha <- .36
@@ -108,18 +130,8 @@ desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
                         col = col, border = NA)
     }
   }
-  # Uma só família de traços abertos: fino à esquerda, ponta arredondada à direita.
-  # Altura e início fixos; somente a nota federal altera largura e raio da ponta.
-  raio_x <- largura_nariz / 2
-  centro_y <- .06 - comprimento_nariz + curvatura_nariz
-  s <- seq(0, 1, length.out = 21)
-  ponte <- outer((1 - s)^3, c(0, .06)) +
-    outer(3 * (1 - s)^2 * s, c(0, 0)) +
-    outer(3 * (1 - s) * s^2, c(-raio_x, centro_y + .04)) +
-    outer(s^3, c(-raio_x, centro_y))
-  theta_nariz <- seq(pi, 2 * pi, length.out = 61)
-  nariz <- list(x = x + raio * c(ponte[, 1], raio_x * cos(theta_nariz)),
-                y = y + raio * c(ponte[, 2], centro_y + curvatura_nariz * sin(theta_nariz)))
+  # A comparação ampliada usa exatamente estas coordenadas, não outro desenho.
+  nariz <- geometria_nariz[c("x", "y")]
   if (is.na(curvatura_nariz)) graphics::text(x, y - .08 * raio, "?", cex = .7 * cex, col = col)
   else graphics::lines(nariz$x, nariz$y, col = col, lwd = 1.6, lend = "round", ljoin = "round")
   if (is.na(altura_sobrancelha)) {

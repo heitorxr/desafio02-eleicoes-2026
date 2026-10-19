@@ -100,6 +100,29 @@ legenda_pdf <- function(indices, sobrepor = FALSE) {
                                   cex = if (j == 1) 1.6 else 1.1, font = if (j == 1) 2 else 1)
 }
 
+desenhar_comparacao_narizes <- function(indices) {
+  preparar_pagina()
+  par(cex = 1)
+  plot.new()
+  plot.window(c(0, 7.5), c(-.8, 1.4), asp = 1, xaxs = "i", yaxs = "i")
+  federal <- indices[indices$cargo == "federal" & is.finite(indices$nota), ]
+  federal <- federal[order(federal$nota, federal$uf), ]
+  if (!nrow(federal)) {
+    text(3.75, .3, "Sem índices federais disponíveis")
+    return(invisible(federal))
+  }
+  exemplos <- federal[c(1, ceiling(nrow(federal) / 2), nrow(federal)), ]
+  for (j in 1:3) {
+    centro <- c(1.25, 3.75, 6.25)[j]
+    p <- coordenadas_nariz(exemplos$nota[j], x = centro, y = .35, raio = 2.5)
+    lines(p$x, p$y, col = "#263238", lwd = 2, lend = "round", ljoin = "round")
+    text(centro, 1.06, paste0(exemplos$uf[j], " · ",
+      formatC(exemplos$nota[j], format = "f", digits = 2, decimal.mark = ",")), font = 2, cex = 1.05)
+    text(centro, -.60, c("Menor na amostra", "Mediano na amostra", "Maior na amostra")[j], cex = .82)
+  }
+  invisible(exemplos[c("uf", "nota")])
+}
+
 gerar_figuras <- function(raiz, indices, grade) {
   saida <- file.path(raiz, "resultados")
   dir.create(file.path(saida, "detalhes"), recursive = TRUE, showWarnings = FALSE)
@@ -109,6 +132,13 @@ gerar_figuras <- function(raiz, indices, grade) {
   write.csv(centros, file.path(saida, "centros_cartograma.csv"), row.names = FALSE)
   png(file.path(saida, "cartograma_brasil.png"), width = 1200, height = 1520, type = "cairo", bg = "#FCFBF8")
   desenhar_cartograma(indices, grade)
+  dev.off()
+  svg(file.path(saida, "comparacao_narizes.svg"), width = 7.5, height = 2.2, bg = "#FCFBF8")
+  exemplos_nariz <- desenhar_comparacao_narizes(indices)
+  dev.off()
+  write.csv(exemplos_nariz, file.path(saida, "comparacao_narizes.csv"), row.names = FALSE)
+  png(file.path(saida, "comparacao_narizes.png"), width = 1080, height = 317, res = 144, type = "cairo", bg = "#FCFBF8")
+  desenhar_comparacao_narizes(indices)
   dev.off()
   for (uf in grade$uf) {
     svg(file.path(saida, "detalhes", paste0(uf, ".svg")), width = 8, height = 8.1,

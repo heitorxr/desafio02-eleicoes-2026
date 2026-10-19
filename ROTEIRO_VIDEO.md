@@ -46,6 +46,8 @@ Material para os colegas prepararem a apresentação de Visualização de Dados 
 
 **Pausa visual:** apontar os cinco canais em uma única face, sem tentar deduzir valores exatos pela aparência.
 
+Para o nariz, mostrar a faixa ampliada sob a legenda: são três UFs reais, com menor, mediano e maior índice federal. Todas usam o mesmo aumento e a mesma curva do mapa. Os valores próximos explicam parte da semelhança; não houve normalização para fabricar extremos.
+
 ## 03:00–03:50 — Geometria complexa
 
 **Tela de apoio ao vídeo, separada do painel:** `resultados/contas_complexas.svg`; destacar a projeção horizontal e a vertical. A explicação será feita pelos colegas e não integra a apresentação principal dos gráficos.

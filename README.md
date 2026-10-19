@@ -11,6 +11,7 @@ Projeto da disciplina Visualização de Dados Aplicada, UFPR. Um cartograma com 
 - Usar números complexos na geometria dos velocímetros, sem explicação matemática no painel ou PDF principal. A explicação fica no apoio técnico para os colegas apresentarem no vídeo.
 - Entregar programação e notas breves para os colegas prepararem um vídeo de aproximadamente cinco minutos, não produzir o vídeo agora.
 - Cada cargo controla um traço: Presidente = cor; Senador = abertura do sorriso; Governador = abertura dos olhos; Federal = formato do nariz (mesmo traçado aberto, fino à esquerda e mais arredondado à direita); Estadual/distrital = altura das sobrancelhas, com comprimento fixo. Escala absoluta 0–10 preservada.
+- Narizes com amplitude reforçada e comparação ampliada de três notas federais reais (mínima, mediana e máxima), sem reescalar os dados. A comparação usa exatamente a mesma curva do cartograma.
 
 ## Estado atualizado
 
