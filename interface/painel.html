@@ -70,7 +70,7 @@ h2{font:normal 29px/1.2 Georgia,serif;margin:18px 0 5px}.subtitulo{font-size:13p
 </section>
 <h2>De onde vêm os dados</h2>
 <ol>
-<li><strong>Votos: Tribunal Superior Eleitoral.</strong> Usamos o conjunto “Resultados — 2026”, com os votos do primeiro turno nas 27 UFs. Lemos os arquivos por partido e os de detalhe da votação. Guardamos os originais e seus hashes, códigos que permitem conferir se os arquivos mudaram depois do download.<br><a href="https://dadosabertos.tse.jus.br/dataset/resultados-2026" target="_blank" rel="noopener noreferrer">Dados no site do TSE</a></li>
+<li><strong>Votos: Tribunal Superior Eleitoral.</strong> Usamos o conjunto “Resultados — 2026”, com os votos do primeiro turno nas 27 UFs. Lemos os arquivos por partido e os de detalhe da votação. Guardamos os originais e seus hashes.<br><a href="https://dadosabertos.tse.jus.br/dataset/resultados-2026" target="_blank" rel="noopener noreferrer">Dados no site do TSE</a></li>
 <li><strong>Notas dos partidos: Bolognesi, Ribeiro, Codato e Silva.</strong> Usamos a coluna “2022 (média)” da Tabela 1 do artigo “O desaparecimento do centro”, na escala de 0 a 10. O artigo integra o volume editorial de 2025.<br><a href="https://doi.org/10.1590/1807-0191202531120" target="_blank" rel="noopener noreferrer">Artigo e tabela de notas</a></li>
 <li><strong>Posição das UFs no mapa.</strong> A organização vem da tabela <code>br_states_grid1</code>, do pacote geofacet, de Ryan Hafen e colaboradores. Usamos apenas as posições das UFs; desenhamos os rostos e os ponteiros em R.<br><a href="https://github.com/hafen/geofacet" target="_blank" rel="noopener noreferrer">Código do geofacet</a></li>
 </ol>
