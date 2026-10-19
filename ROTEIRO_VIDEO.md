@@ -39,14 +39,14 @@ Material para os colegas prepararem a apresentação de Visualização de Dados 
 
 ## 02:05–03:00 — Leitura das faces
 
-**Tela:** aba Como Ler e retorno a um detalhe de UF, mantendo a legenda visível.
+**Tela:** Explorar, alternando os títulos clicáveis da legenda e destacando o guia curto de Chernoff no canto inferior direito.
 
 **Fala-base:**
 > A cor representa a Presidência, do vermelho ao verde. A abertura dos olhos representa o governo estadual; a abertura do sorriso, o Senado; o formato do nariz, deputados federais; e a altura das sobrancelhas, estaduais ou distritais. Todos os narizes usam o mesmo traçado aberto: fino à esquerda da escala e mais arredondado à direita, variando continuamente com o índice federal. Isso não indica aprovação ou personalidade. A legenda fica abaixo do mapa; a escala original e o espaço igual por UF foram preservados.
 
 **Pausa visual:** apontar os cinco canais em uma única face, sem tentar deduzir valores exatos pela aparência.
 
-Para o nariz, mostrar a faixa ampliada sob a legenda: são três UFs reais, com menor, mediano e maior índice federal. Todas usam o mesmo aumento e a mesma curva do mapa. Os valores próximos explicam parte da semelhança; não houve normalização para fabricar extremos.
+Na mesma faixa ampliada sob a legenda, clicar nos títulos para alternar cor, olhos, sorriso, nariz e sobrancelhas. Cada comparação usa três UFs reais do respectivo cargo, sempre com o mesmo aumento entre os três exemplos. As sobrancelhas têm referência fixa de altura. Não houve normalização para fabricar extremos. A aba Como ler não existe mais: a explicação está na própria tela Explorar.
 
 ## 03:00–03:50 — Geometria complexa
 
@@ -73,7 +73,7 @@ Para o nariz, mostrar a faixa ampliada sob a legenda: são três UFs reais, com 
 
 ## Checklist antes da gravação pelos colegas
 
-- Abrir o painel local e testar as abas Explorar, Como Ler e Fontes; para explicar os complexos no vídeo, usar separadamente o guia e o diagrama técnico. Se o painel não estiver disponível, usar os SVGs indicados e os documentos locais de referência.
+- Abrir o painel local e testar Explorar, Fontes e limites e os cinco títulos clicáveis da legenda; para explicar os complexos no vídeo, usar separadamente o guia e o diagrama técnico. Se o painel não estiver disponível, usar os SVGs indicados e os documentos locais de referência.
 - Manter a escala, o exemplo PR/Presidência com raio 0,9 e a recuperação dos dois cargos legislativos de RO consistentes em todas as falas.
 - Usar `dados/referencia/README_ideologia.md` e `README_layout.md` para a referência acadêmica e a grade; o DOI do artigo é `10.1590/1807-0191202531120`. Não inventar links ou notas partidárias.
 - Informar o uso de IA como apoio à programação e revisão, conforme registrado no README.

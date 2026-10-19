@@ -11,7 +11,8 @@ Projeto da disciplina Visualização de Dados Aplicada, UFPR. Um cartograma com 
 - Usar números complexos na geometria dos velocímetros, sem explicação matemática no painel ou PDF principal. A explicação fica no apoio técnico para os colegas apresentarem no vídeo.
 - Entregar programação e notas breves para os colegas prepararem um vídeo de aproximadamente cinco minutos, não produzir o vídeo agora.
 - Cada cargo controla um traço: Presidente = cor; Senador = abertura do sorriso; Governador = abertura dos olhos; Federal = formato do nariz (mesmo traçado aberto, fino à esquerda e mais arredondado à direita); Estadual/distrital = altura das sobrancelhas, com comprimento fixo. Escala absoluta 0–10 preservada.
-- Narizes com amplitude reforçada e comparação ampliada de três notas federais reais (mínima, mediana e máxima), sem reescalar os dados. A comparação usa exatamente a mesma curva do cartograma.
+- Os cinco títulos da legenda são clicáveis: alternam uma única área de exemplos ampliados com mínimo, mediano e máximo reais de cada cargo. Mesmas dimensões e padrão visual, usando o desenho real da face. O mapa e a escala 0–10 não mudam.
+- A explicação curta de Chernoff fica no canto inferior direito de Explorar. A aba Como ler foi removida; detalhes do cálculo foram preservados em Fontes e limites.
 
 ## Estado atualizado
 

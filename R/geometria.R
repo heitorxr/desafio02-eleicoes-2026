@@ -91,8 +91,10 @@ coordenadas_nariz <- function(nota, x = 0, y = 0, raio = 1) {
 
 # Desenha sobre uma janela existente (asp = 1 preserva as proporções).
 desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
-                          col = "#263238", cex = 1, ...) {
+                          col = "#263238", cex = 1, apenas = NULL, ...) {
   cargos <- c("presidente", "governador", "senador", "federal", "estadual")
+  if (!is.null(apenas) && (length(apenas) != 1L || is.na(apenas) || !apenas %in% cargos))
+    stop("Aspecto facial desconhecido.")
   if (is.logical(notas) && all(is.na(notas))) storage.mode(notas) <- "double"
   if (!is.numeric(notas) || length(notas) != 5L ||
       is.null(names(notas)) || !setequal(names(notas), cargos))
@@ -113,34 +115,42 @@ desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
   comprimento_sobrancelha <- .36
   altura_sobrancelha <- .58 + .25 * t["estadual"]
   contorno <- ponto_complexo(seq(0, 2 * pi, length.out = 121), raio, x + 1i * y)
-  graphics::polygon(Re(contorno), Im(contorno), col = cor_politica(notas["presidente"]),
-                    border = col, lwd = 1.5, ...)
-  # Ausência omite o traço dependente: nunca substitui uma nota pelo centro.
-  if (is.na(t["presidente"])) graphics::text(x, y + .88 * raio, "?", cex = .7 * cex, col = col)
-  if (is.na(abertura_olho)) {
-    graphics::text(x, y + .27 * raio, "?", cex = .8 * cex, col = col)
-  } else {
-    for (lado in c(-1, 1)) {
-      olho <- ponto_complexo(seq(0, 2 * pi, length.out = 41))
-      graphics::polygon(x + raio * (lado * distancia_olhos + largura_olho * Re(olho)),
-                        y + raio * (.27 + abertura_olho * Im(olho)),
-                        col = "#FFFFFF", border = col, lwd = 1.8)
-      graphics::polygon(x + raio * (lado * distancia_olhos + .065 * Re(olho)),
-                        y + raio * (.27 + min(.085, .65 * abertura_olho) * Im(olho)),
-                        col = col, border = NA)
+  if (is.null(apenas) || apenas == "presidente") {
+    graphics::polygon(Re(contorno), Im(contorno), col = cor_politica(notas["presidente"]),
+                      border = col, lwd = 1.5, ...)
+    if (is.na(t["presidente"])) graphics::text(x, y + .88 * raio, "?", cex = .7 * cex, col = col)
+  }
+  # O recorte das demonstrações reaproveita exatamente o desenho da face completa.
+  if (is.null(apenas) || apenas == "governador") {
+    if (is.na(abertura_olho)) {
+      graphics::text(x, y + .27 * raio, "?", cex = .8 * cex, col = col)
+    } else {
+      for (lado in c(-1, 1)) {
+        olho <- ponto_complexo(seq(0, 2 * pi, length.out = 41))
+        graphics::polygon(x + raio * (lado * distancia_olhos + largura_olho * Re(olho)),
+                          y + raio * (.27 + abertura_olho * Im(olho)),
+                          col = "#FFFFFF", border = col, lwd = 1.8)
+        graphics::polygon(x + raio * (lado * distancia_olhos + .065 * Re(olho)),
+                          y + raio * (.27 + min(.085, .65 * abertura_olho) * Im(olho)),
+                          col = col, border = NA)
+      }
     }
   }
   # A comparação ampliada usa exatamente estas coordenadas, não outro desenho.
   nariz <- geometria_nariz[c("x", "y")]
-  if (is.na(curvatura_nariz)) graphics::text(x, y - .08 * raio, "?", cex = .7 * cex, col = col)
-  else graphics::lines(nariz$x, nariz$y, col = col, lwd = 1.6, lend = "round", ljoin = "round")
-  if (is.na(altura_sobrancelha)) {
-    graphics::text(x, y + .67 * raio, "?", cex = .7 * cex, col = col)
-  } else {
-    for (lado in c(-1, 1)) graphics::segments(
-      x + raio * (lado * distancia_olhos - comprimento_sobrancelha / 2), y + altura_sobrancelha * raio,
-      x + raio * (lado * distancia_olhos + comprimento_sobrancelha / 2), y + altura_sobrancelha * raio,
-      col = col, lwd = 2.8)
+  if (is.null(apenas) || apenas == "federal") {
+    if (is.na(curvatura_nariz)) graphics::text(x, y - .08 * raio, "?", cex = .7 * cex, col = col)
+    else graphics::lines(nariz$x, nariz$y, col = col, lwd = 1.6, lend = "round", ljoin = "round")
+  }
+  if (is.null(apenas) || apenas == "estadual") {
+    if (is.na(altura_sobrancelha)) {
+      graphics::text(x, y + .67 * raio, "?", cex = .7 * cex, col = col)
+    } else {
+      for (lado in c(-1, 1)) graphics::segments(
+        x + raio * (lado * distancia_olhos - comprimento_sobrancelha / 2), y + altura_sobrancelha * raio,
+        x + raio * (lado * distancia_olhos + comprimento_sobrancelha / 2), y + altura_sobrancelha * raio,
+        col = col, lwd = 2.8)
+    }
   }
   u <- seq(-1, 1, length.out = 61)
   # Senado controla quanto o sorriso se abre, sem inversão para uma expressão triste.
@@ -148,8 +158,10 @@ desenhar_face <- function(x = 0, y = 0, raio = 1, notas,
   inferior <- superior - abertura_boca * (1 - u^2)
   boca <- list(x = x + raio * c(u, rev(u)) * largura_boca / 2,
                y = y + raio * c(superior, rev(inferior)))
-  if (is.na(abertura_boca)) graphics::text(x, y - .40 * raio, "?", cex = .7 * cex, col = col)
-  else graphics::polygon(boca$x, boca$y, col = col, border = col, lwd = 1.6)
+  if (is.null(apenas) || apenas == "senador") {
+    if (is.na(abertura_boca)) graphics::text(x, y - .40 * raio, "?", cex = .7 * cex, col = col)
+    else graphics::polygon(boca$x, boca$y, col = col, border = col, lwd = 1.6)
+  }
   invisible(list(notas = t, largura_olho = largura_olho, abertura_olho = abertura_olho,
                  abertura_boca = abertura_boca, distancia_olhos = distancia_olhos,
                  comprimento_nariz = comprimento_nariz, largura_nariz = largura_nariz,

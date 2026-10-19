@@ -85,6 +85,8 @@ Notas maiores abrem mais olhos e boca, arredondam a ponta do nariz e elevam as s
 
 A média não identifica a opinião individual de eleitores ou candidatos e não transforma uma posição partidária medida em 2022 em medição de 2026. Uma média perto de cinco tampouco demonstra consenso: posições diferentes podem se compensar.
 
-Para ler o nariz, a amplitude da largura foi reforçada sem mudar a escala 0–10. O painel também mostra os narizes ampliados das UFs com menor, mediano e maior índice federal real. As três curvas usam a mesma função do mapa e o mesmo aumento; não são extremos fictícios de esquerda/direita. `testar_legibilidade_nariz.R` verifica a separação dos valores reais, além das fixtures teóricas.
+Na legenda, clicar no título de qualquer um dos cinco aspectos alterna a mesma área de demonstração. Cada aspecto mostra as UFs com menor, mediano e maior índice real do cargo, sem reescalar a amostra. `desenhar_face(..., apenas = cargo)` isola o componente do renderer real: não existe uma imitação separada para os exemplos. O aumento é fixo por aspecto e igual nos três exemplos; sobrancelhas têm uma referência pontilhada fixa para comparar a altura. `testar_comparacoes.R` verifica geometria e exemplos, e o teste de navegador verifica cliques, teclado e dimensões estáveis no desktop e celular.
+
+A explicação concisa das faces de Chernoff está no canto inferior direito da tela Explorar, substituindo a aba Como ler. Detalhes do índice e limites metodológicos continuam em Fontes e limites. A referência original da técnica está vinculada no guia visual: Chernoff (1973), DOI `10.1080/01621459.1973.10482434`.
 
 **Referências locais:** `README.md` (fonte TSE), `dados/referencia/README_ideologia.md` (Bolognesi, Ribeiro, Codato e Silva, DOI `10.1590/1807-0191202531120`, Tabela 1/2022), `dados/referencia/README_layout.md` (grade `br_states_grid1`, geofacet) e `notas_geometria.md` (fórmulas).

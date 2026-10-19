@@ -2,6 +2,8 @@
 
 ESTADO ATUAL: amplitude do nariz reforçada (`largura = 0.04 + 0.72*t`, `raio vertical = 0.005 + 0.155*t`, altura fixa `0.29`). Mesmo traçado aberto e mesma escala absoluta 0–10. Nova função única `coordenadas_nariz()` usada no mapa e na faixa ampliada com mínimo/mediana/máximo federais reais. Outros traços e dados preservados. Novo teste verifica separação dos índices reais em uma miniatura de referência.
 
+INTERFACE VIGENTE (substitui referências antigas à aba Como ler): títulos dos cinco aspectos na legenda alternam um único espaço fixo de demonstração. SVGs com dimensões idênticas, mínimo/mediana/máximo reais de cada cargo e recorte do renderer da face via `apenas`. Explicação concisa de Chernoff no canto inferior direito de Explorar; só restam as abas Explorar e Fontes e limites. Testes de R, painel, PDF e navegador aprovados; verificação de dimensões considera coordenadas no documento para não confundir rolagem automática com mudança do layout.
+
 ## Histórico de revisões do nariz — descrições abaixo não vigentes
 
 ESTADO VIGENTE DO NARIZ: modelo único de traçado aberto inspirado no original. Altura e início fixos; nota federal controla largura e arredondamento da ponta: esquerda = fino, direita = arredondado. Ponte cúbica + meia elipse, sem preenchimento. Outros traços e dados preservados. As descrições abaixo registram estilos anteriores, não o estado vigente.
@@ -39,7 +41,7 @@ Faces maiores, olhos com abertura variável, sorriso com abertura variável, nar
 - `dados/referencia/ideologia_partidos.csv`: 32 notas reais da coluna 2022 da publicação, conferidas no HTML SciELO preservado; MISSÃO sem nota. Fonte e aliases em `README_ideologia.md`.
 - `R/geometria.R`: geometria complexa e desenhos em R base. Ângulo `pi * (1 - nota/10)`; coordenadas `Re(z)` e `Im(z)`; ausências não viram centro. Rótulos arredondados sem arredondar ponteiros.
 - `R/visualizar.R`: cartograma, 27 painéis de cinco velocímetros e diagrama de contas usando PR/Presidência real. Corrigido encolhimento automático de fonte do `mfrow` e espaçamento dos títulos.
-- `resultados/painel.html`: painel offline autossuficiente, com Explorar, Como ler e Fontes e limites. Por correção do autor, explicação dos complexos fica somente no apoio técnico ao vídeo, não no painel ou PDF principal. O PDF de apoio mostra mapa e velocímetros, não a explicação matemática.
+- `resultados/painel.html`: painel offline autossuficiente, com Explorar e Fontes e limites. A legenda clicável compartilha uma única área de demonstração dos cinco aspectos, e o guia de Chernoff ocupa o canto inferior direito. Explicação dos complexos fica somente no apoio técnico ao vídeo, não no painel ou PDF principal.
 - `resultados/cartograma_brasil.png` e `.svg`; `resultados/detalhes/*.svg`; `resultados/contas_complexas.svg`; `resultados/Figuras_desafio02.pdf` (material de apoio, não PDF final de entrega).
 - `resultados/indices_uf_cargo.csv`: 135 registros reais, todos com índice e cobertura; RO recuperado por fontes oficiais complementares.
 - `scripts/montar_painel.py` e `interface/painel.html`: empacotamento e interface; não calculam os índices.
@@ -50,7 +52,7 @@ Faces maiores, olhos com abertura variável, sorriso com abertura variável, nar
 - Testes de dados, geometria, fonte acadêmica e integridade dos ZIPs passaram.
 - Teste visual das 27 UFs e artefatos passou.
 - Teste de legibilidade de fonte passou após correção.
-- QA real em Chrome/Playwright: 27 seleções, três abas, CSV idêntico, índices recuperados de RO, legenda abaixo do mapa, tela de 390 px sem transbordamento e nenhum erro JavaScript.
+- QA real em Chrome/Playwright: 27 seleções, duas abas, cinco demonstrações em espaço estável, teclado, CSV idêntico, RO recuperado, tela de 390 px sem transbordamento e nenhum erro JavaScript.
 - Capturas em `C:/Users/heito/AppData/Local/hermes/cache/scratch/desafio02/painel_desktop.png`, `painel_rondonia.png`, `painel_contas.png`, `painel_mobile.png`.
 - Inspeção visual feita do cartograma, painel desktop e contas. Tipografia dos velocímetros ampliada e seleção da UF ajustada para não cobrir siglas vizinhas.
 

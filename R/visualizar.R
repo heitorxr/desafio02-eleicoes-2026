@@ -100,28 +100,37 @@ legenda_pdf <- function(indices, sobrepor = FALSE) {
                                   cex = if (j == 1) 1.6 else 1.1, font = if (j == 1) 2 else 1)
 }
 
-desenhar_comparacao_narizes <- function(indices) {
+desenhar_comparacao_aspecto <- function(indices, cargo) {
+  stopifnot(length(cargo) == 1L, cargo %in% names(nomes_cargos))
   preparar_pagina()
   par(cex = 1)
   plot.new()
   plot.window(c(0, 7.5), c(-.8, 1.4), asp = 1, xaxs = "i", yaxs = "i")
-  federal <- indices[indices$cargo == "federal" & is.finite(indices$nota), ]
-  federal <- federal[order(federal$nota, federal$uf), ]
-  if (!nrow(federal)) {
-    text(3.75, .3, "Sem índices federais disponíveis")
-    return(invisible(federal))
+  valores <- indices[indices$cargo == cargo & is.finite(indices$nota), ]
+  valores <- valores[order(valores$nota, valores$uf), ]
+  if (!nrow(valores)) {
+    text(3.75, .3, "Sem índices disponíveis para este cargo")
+    return(invisible(valores[c("uf", "nota")]))
   }
-  exemplos <- federal[c(1, ceiling(nrow(federal) / 2), nrow(federal)), ]
+  exemplos <- valores[c(1, ceiling(nrow(valores) / 2), nrow(valores)), ]
+  raios <- c(presidente = .48, governador = 1.6, senador = 2.5, federal = 2.5, estadual = 2)
+  alturas <- c(presidente = .26, governador = -.2, senador = 1.1, federal = .35, estadual = -1)
   for (j in 1:3) {
     centro <- c(1.25, 3.75, 6.25)[j]
-    p <- coordenadas_nariz(exemplos$nota[j], x = centro, y = .35, raio = 2.5)
-    lines(p$x, p$y, col = "#263238", lwd = 2, lend = "round", ljoin = "round")
+    notas <- setNames(rep(5, length(nomes_cargos)), names(nomes_cargos))
+    notas[cargo] <- exemplos$nota[j]
+    if (cargo == "estadual") segments(centro - 1.04, .16, centro + 1.04, .16,
+                                      col = "#B5BBB6", lty = 3, lwd = 1)
+    desenhar_face(x = centro, y = unname(alturas[cargo]), raio = unname(raios[cargo]),
+                  notas = notas, apenas = cargo)
     text(centro, 1.06, paste0(exemplos$uf[j], " · ",
       formatC(exemplos$nota[j], format = "f", digits = 2, decimal.mark = ",")), font = 2, cex = 1.05)
     text(centro, -.60, c("Menor na amostra", "Mediano na amostra", "Maior na amostra")[j], cex = .82)
   }
   invisible(exemplos[c("uf", "nota")])
 }
+
+desenhar_comparacao_narizes <- function(indices) desenhar_comparacao_aspecto(indices, "federal")
 
 gerar_figuras <- function(raiz, indices, grade) {
   saida <- file.path(raiz, "resultados")
@@ -140,6 +149,16 @@ gerar_figuras <- function(raiz, indices, grade) {
   png(file.path(saida, "comparacao_narizes.png"), width = 1080, height = 317, res = 144, type = "cairo", bg = "#FCFBF8")
   desenhar_comparacao_narizes(indices)
   dev.off()
+  for (cargo in names(nomes_cargos)) {
+    svg(file.path(saida, paste0("comparacao_", cargo, ".svg")), width = 7.5, height = 2.2, bg = "#FCFBF8")
+    exemplos <- desenhar_comparacao_aspecto(indices, cargo)
+    dev.off()
+    write.csv(exemplos, file.path(saida, paste0("comparacao_", cargo, ".csv")), row.names = FALSE)
+    png(file.path(saida, paste0("comparacao_", cargo, ".png")), width = 1080, height = 317,
+        res = 144, type = "cairo", bg = "#FCFBF8")
+    desenhar_comparacao_aspecto(indices, cargo)
+    dev.off()
+  }
   for (uf in grade$uf) {
     svg(file.path(saida, "detalhes", paste0(uf, ".svg")), width = 8, height = 8.1,
         pointsize = 16, bg = "#FCFBF8")
