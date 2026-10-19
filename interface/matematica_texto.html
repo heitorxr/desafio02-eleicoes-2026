@@ -2,62 +2,62 @@
 <p class="dica-formulas">Nas fórmulas mais longas, role para os lados para ler o restante.</p>
 <section>
 <h3>Das notas às coordenadas</h3>
-<p>A conta começa dividindo a nota de cada cargo por 10. O resultado, t, controla um atributo do rosto. Nas fórmulas das curvas, usamos outras letras: s percorre a Bézier, u percorre a boca e θ indica um ângulo.</p>
+<p>A conta começa dividindo a nota de cada cargo por <span class="mat-inline" data-tex="10"></span>. O resultado, <span class="mat-inline" data-tex="t"></span>, controla um atributo do rosto. Nas fórmulas das curvas, usamos outras letras: <span class="mat-inline" data-tex="s"></span> percorre a Bézier, <span class="mat-inline" data-tex="u"></span> percorre a boca e <span class="mat-inline" data-tex="\theta"></span> indica um ângulo.</p>
 <div class="equacao" data-tex="t=\frac{n}{10},\qquad 0\leq n\leq10,\quad 0\leq t\leq1."></div>
-<p>As fórmulas faciais usam coordenadas locais (ξ, η). O centro (x₀, y₀) e o raio r posicionam e dimensionam o desenho. No SVG, o eixo vertical cresce para baixo; por isso sua transformação inverte o sinal de η.</p>
+<p>As fórmulas faciais usam coordenadas locais <span class="mat-inline" data-tex="(\xi,\eta)"></span>. O centro <span class="mat-inline" data-tex="(x_0,y_0)"></span> e o raio <span class="mat-inline" data-tex="r"></span> posicionam e dimensionam o desenho. No SVG, o eixo vertical cresce para baixo; por isso sua transformação inverte o sinal de <span class="mat-inline" data-tex="\eta"></span>.</p>
 <div class="equacao" data-tex="(x,y)=(x_0+r\xi,\ y_0+r\eta),\qquad (X,Y)=(X_0+R\xi,\ Y_0-R\eta)."></div>
 <p>Para desenhar o círculo, usamos a identidade de Euler. A parte real do número complexo dá a coordenada horizontal; a parte imaginária dá a vertical.</p>
 <div class="equacao" data-tex="z=z_0+r e^{i\theta}=z_0+r(\cos\theta+i\sin\theta),\quad z_0=x_0+iy_0,\quad 0\leq\theta\leq2\pi."></div>
 </section>
 <section>
 <h3>Cor da face: Presidência</h3>
-<p>Usamos três cores como referência: vermelho, um tom claro e verde. A fórmula mistura seus canais RGB em dois trechos, antes e depois da nota 5. C₀, Cₘ e C₁ são os vetores de canais dessas cores.</p>
+<p>Usamos três cores como referência: vermelho, um tom claro e verde. A fórmula mistura seus canais RGB em dois trechos, antes e depois da nota <span class="mat-inline" data-tex="5"></span>. <span class="mat-inline" data-tex="C_0"></span>, <span class="mat-inline" data-tex="C_m"></span> e <span class="mat-inline" data-tex="C_1"></span> são os vetores de canais dessas cores.</p>
 <div class="equacao" data-tex="\begin{aligned}C_0&amp;=\operatorname{RGB}(\texttt{\#BF4D45}),\\C_m&amp;=\operatorname{RGB}(\texttt{\#F2E9D8}),\\C_1&amp;=\operatorname{RGB}(\texttt{\#43866A}).\end{aligned}"></div>
 <div class="equacao" data-tex="C(t)=\begin{cases}(1-2t)C_0+2tC_m,&amp;0\leq t\leq\frac12,\\(2-2t)C_m+(2t-1)C_1,&amp;\frac12&lt;t\leq1.\end{cases}"></div>
-<p>O R converte o resultado para cor com canais na escala de 0 a 255. Nota ausente recebe #B8B8B8; os demais atributos indisponíveis aparecem com interrogação, sem receber zero ou cinco.</p>
+<p>O R converte o resultado para cor com canais na escala de <span class="mat-inline" data-tex="0"></span> a <span class="mat-inline" data-tex="255"></span>. Nota ausente recebe a cor <code>#B8B8B8</code>; os demais atributos indisponíveis aparecem com interrogação, sem receber zero ou cinco.</p>
 </section>
 <section>
 <h3>Olhos e pupilas: Governo estadual</h3>
-<p>Cada olho é uma elipse centrada em (−0,34; 0,27) ou (0,34; 0,27). O semieixo horizontal fica constante; a nota altera o vertical. A pupila acompanha essa abertura até o limite de 0,085.</p>
+<p>Cada olho é uma elipse centrada em <span class="mat-inline" data-tex="(-0{,}34;\,0{,}27)"></span> ou <span class="mat-inline" data-tex="(0{,}34;\,0{,}27)"></span>. O semieixo horizontal fica constante; a nota altera o vertical. A pupila acompanha essa abertura até o limite de <span class="mat-inline" data-tex="0{,}085"></span>.</p>
 <div class="equacao" data-tex="b=0{,}02+0{,}25t_{\mathrm{gov}},\quad \ell\in\{-1,1\},\quad 0\leq\theta\leq2\pi."></div>
 <div class="equacao" data-tex="E_\ell(\theta)=(0{,}34\ell+0{,}23\cos\theta,\ 0{,}27+b\sin\theta)."></div>
 <div class="equacao" data-tex="P_\ell(\theta)=(0{,}34\ell+0{,}065\cos\theta,\ 0{,}27+\min(0{,}085,\,0{,}65b)\sin\theta)."></div>
 </section>
 <section>
 <h3>Nariz: Deputados federais</h3>
-<p>O nariz reúne uma ponte Bézier cúbica e a metade inferior de uma elipse. A altura total permanece em 0,29; a nota altera a largura e o raio vertical da ponta. Os quatro pontos de controle são os mesmos do código R.</p>
+<p>O nariz reúne uma ponte Bézier cúbica e a metade inferior de uma elipse. A altura total permanece em <span class="mat-inline" data-tex="0{,}29"></span>; a nota altera a largura e o raio vertical da ponta. Os quatro pontos de controle são os mesmos do código R.</p>
 <div class="equacao" data-tex="\begin{aligned}h&amp;=0{,}29,\\w&amp;=0{,}04+0{,}72t_{\mathrm{fed}},\\k&amp;=0{,}005+0{,}155t_{\mathrm{fed}},\\a&amp;=\frac w2,\qquad c=0{,}06-h+k.\end{aligned}"></div>
 <div class="equacao" data-tex="\begin{aligned}Q_0&amp;=(0,0{,}06),&amp;Q_1&amp;=(0,0),\\Q_2&amp;=(-a,c+0{,}04),&amp;Q_3&amp;=(-a,c).\end{aligned}"></div>
 <div class="equacao" data-tex="\begin{aligned}B(s)={}&amp;(1-s)^3Q_0+3(1-s)^2sQ_1\\&amp;+3(1-s)s^2Q_2+s^3Q_3,\\&amp;0\leq s\leq1.\end{aligned}"></div>
 <div class="equacao" data-tex="N(\theta)=(a\cos\theta,\ c+k\sin\theta),\quad \pi\leq\theta\leq2\pi."></div>
-<p>A ponte termina na extremidade esquerda do arco. Quando o raio vertical k aumenta, o centro da elipse sobe na mesma medida. Isso mantém a ponta em (0; −0,23).</p>
+<p>A ponte termina na extremidade esquerda do arco. Quando o raio vertical <span class="mat-inline" data-tex="k"></span> aumenta, o centro da elipse sobe na mesma medida. Isso mantém a ponta em <span class="mat-inline" data-tex="(0;\,-0{,}23)"></span>.</p>
 <div class="equacao" data-tex="N(3\pi/2)=(0,c-k)=(0,0{,}06-0{,}29)=(0,-0{,}23)."></div>
 </section>
 <section>
 <h3>Sobrancelhas e boca</h3>
-<p>A nota de Estaduais / distritais desloca duas sobrancelhas horizontais, cada uma com comprimento 0,36. Seus centros horizontais coincidem com os dos olhos.</p>
+<p>A nota de Estaduais / distritais desloca duas sobrancelhas horizontais, cada uma com comprimento <span class="mat-inline" data-tex="0{,}36"></span>. Seus centros horizontais coincidem com os dos olhos.</p>
 <div class="equacao" data-tex="H=0{,}58+0{,}25t_{\mathrm{est}},\quad S_\ell^-=(0{,}34\ell-0{,}18,H),\quad S_\ell^+=(0{,}34\ell+0{,}18,H)."></div>
-<p>O Senado controla a abertura entre duas parábolas. A boca tem largura total 0,76 e extremos fixos; a nota aumenta a abertura central, sem transformar o sorriso em expressão triste.</p>
+<p>O Senado controla a abertura entre duas parábolas. A boca tem largura total <span class="mat-inline" data-tex="0{,}76"></span> e extremos fixos; a nota aumenta a abertura central, sem transformar o sorriso em expressão triste.</p>
 <div class="equacao" data-tex="A=0{,}01+0{,}22t_{\mathrm{sen}},\quad -1\leq u\leq1,\quad \xi(u)=\frac{0{,}76}{2}u."></div>
 <div class="equacao" data-tex="\eta_{\mathrm{sup}}(u)=-0{,}35+0{,}08u^2,\qquad \eta_{\mathrm{inf}}(u)=\eta_{\mathrm{sup}}(u)-A(1-u^2)."></div>
 <p>O polígono percorre a parábola superior e retorna pela inferior, em ordem inversa.</p>
 </section>
 <section>
 <h3>Velocímetro e projeções</h3>
-<p>O ângulo diminui de π a zero quando a nota cresce. O ponteiro parte da origem e tem raio 0,78. As marcas de 0, 2, 4, 6, 8 e 10 ficam no raio 1,12.</p>
+<p>O ângulo diminui de <span class="mat-inline" data-tex="\pi"></span> a zero quando a nota cresce. O ponteiro parte da origem e tem raio <span class="mat-inline" data-tex="0{,}78"></span>. As marcas de <span class="mat-inline" data-tex="0,\,2,\,4,\,6,\,8"></span> e <span class="mat-inline" data-tex="10"></span> ficam no raio <span class="mat-inline" data-tex="1{,}12"></span>.</p>
 <div class="equacao" data-tex="\begin{aligned}\theta(n)&amp;=\pi\left(1-\frac n{10}\right),\\V(n)&amp;=0{,}78(\cos\theta(n),\sin\theta(n)),\\M_m&amp;=1{,}12(\cos\theta(m),\sin\theta(m)),\\m&amp;\in\{0,2,4,6,8,10\}.\end{aligned}"></div>
-<p>A faixa tem raios externo 1 e interno 0,84. O R a aproxima por 120 quadriláteros, coloridos pela nota média de cada intervalo, não pela média das cores.</p>
+<p>A faixa tem raios externo <span class="mat-inline" data-tex="1"></span> e interno <span class="mat-inline" data-tex="0{,}84"></span>. O R a aproxima por 120 quadriláteros, coloridos pela nota média de cada intervalo, não pela média das cores.</p>
 <div class="equacao" data-tex="n_j=\frac{10j}{120},\quad\theta_j=\theta(n_j),\quad j=0,\ldots,120,\qquad C_j=C\!\left(\frac{n_j+n_{j+1}}{20}\right)."></div>
 <div class="equacao" data-tex="F_j=\begin{bmatrix}\cos\theta_j&amp;\sin\theta_j\\\cos\theta_{j+1}&amp;\sin\theta_{j+1}\\0{,}84\cos\theta_{j+1}&amp;0{,}84\sin\theta_{j+1}\\0{,}84\cos\theta_j&amp;0{,}84\sin\theta_j\end{bmatrix},\quad j=0,\ldots,119."></div>
-<p>Cada linha dessa matriz dá as coordenadas de um vértice do quadrilátero, na ordem em que ele é desenhado.</p>
-<p>A figura de contas usa o mesmo ângulo, mas raio 0,9. Seus catetos são Re(z) e Im(z); o arco de indicação angular tem raio 0,25.</p>
+<p>Cada linha de <span class="mat-inline" data-tex="F_j"></span> dá as coordenadas de um vértice do quadrilátero, na ordem em que ele é desenhado. O índice <span class="mat-inline" data-tex="j"></span> identifica cada pedaço da faixa.</p>
+<p>A figura de contas usa o mesmo ângulo, mas raio <span class="mat-inline" data-tex="0{,}9"></span>. Seus catetos são <span class="mat-inline" data-tex="\operatorname{Re}(z)"></span> e <span class="mat-inline" data-tex="\operatorname{Im}(z)"></span>; o arco de indicação angular tem raio <span class="mat-inline" data-tex="0{,}25"></span>.</p>
 <div class="equacao" data-tex="z=0{,}9e^{i\theta},\quad (\operatorname{Re}z,\operatorname{Im}z)=(0{,}9\cos\theta,0{,}9\sin\theta),\quad z_{\mathrm{arco}}(\varphi)=0{,}25e^{i\varphi},\quad 0\leq\varphi\leq\theta."></div>
 </section>
 
 
 <section>
 <h3>Média ponderada e cobertura</h3>
-<p>A geometria representa a média já calculada por UF e cargo. Para partidos classificados K, v é o número de votos e a é a nota partidária. A cobertura divide os votos classificados pelo total de votos válidos auditado; não mede comparecimento.</p>
+<p>A geometria representa a média já calculada por UF e cargo. Para cada partido <span class="mat-inline" data-tex="p"></span>, <span class="mat-inline" data-tex="v_p"></span> é o número de votos válidos naquela UF e cargo, e <span class="mat-inline" data-tex="a_p"></span> é sua nota partidária de 2022. O conjunto <span class="mat-inline" data-tex="K"></span> reúne os partidos com nota disponível. A cobertura divide os votos classificados pelo total de votos válidos auditado; não mede comparecimento.</p>
 <div class="equacao" data-tex="\begin{aligned}n&amp;=\frac{\sum_{p\in K}v_pa_p}{\sum_{p\in K}v_p},\\\mathrm{cobertura}&amp;=\frac{\sum_{p\in K}v_p}{V_{\mathrm{v\acute{a}lidos}}}.\end{aligned}"></div>
 <p>Sem votos classificados, a nota fica ausente; com total válido nulo, a cobertura fica ausente. Totais eleitorais não conciliados também tornam a nota indisponível. Nenhuma dessas situações cria uma nova posição na escala.</p>
 </section>

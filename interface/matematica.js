@@ -54,11 +54,13 @@ function geometriaDemo(notas) {
     document.getElementById('demo-ponteiro').setAttribute('x2',g.ponteiro.x);
     document.getElementById('demo-ponteiro').setAttribute('y2',g.ponteiro.y);
     for(const c of cargos) document.getElementById('valor-'+c).textContent=notas[c].toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1});
-    document.getElementById('parametro-presidente').textContent='Cor RGB: '+g.cor+' · t = '+numero.format(notas.presidente/10);
-    document.getElementById('parametro-governador').textContent='Semieixo vertical: '+numero.format(p.abertura_olho)+' r';
-    document.getElementById('parametro-senador').textContent='Abertura no centro: '+numero.format(p.abertura_boca)+' r';
-    document.getElementById('parametro-federal').textContent='Largura: '+numero.format(p.largura_nariz)+' r · raio vertical da ponta: '+numero.format(p.curvatura_nariz)+' r';
-    document.getElementById('parametro-estadual').textContent='Altura: '+numero.format(p.altura_sobrancelha)+' r';
+    document.getElementById('cor-demo-valor').textContent=g.cor;
+    document.getElementById('t-demo-valor').textContent=numero.format(notas.presidente/10);
+    document.getElementById('parametro-governador-valor').textContent=numero.format(p.abertura_olho);
+    document.getElementById('parametro-senador-valor').textContent=numero.format(p.abertura_boca);
+    document.getElementById('largura-nariz-valor').textContent=numero.format(p.largura_nariz);
+    document.getElementById('raio-nariz-valor').textContent=numero.format(p.curvatura_nariz);
+    document.getElementById('parametro-estadual-valor').textContent=numero.format(p.altura_sobrancelha);
     document.getElementById('descricao-rosto-demo').textContent='Exemplo hipotético. '+cargos.map(c=>nomes[c]+': '+notas[c].toLocaleString('pt-BR')).join('; ')+'.';
   }
   for(const c of cargos) document.getElementById('slider-'+c).addEventListener('input',atualizar);

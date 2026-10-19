@@ -44,7 +44,15 @@ with sync_playwright() as p:
     assert page.locator('#matematica input[type=range]').count() == 5
     assert page.locator('#matematica .katex').count() >= 15
     assert page.locator('#matematica .katex-error').count() == 0
-    assert page.locator('#matematica math').count() == page.locator('#matematica .equacao').count()
+    assert page.locator('#matematica .equacao math').count() == page.locator('#matematica .equacao').count()
+    inline = page.locator('#matematica .mat-inline')
+    assert inline.count() >= 15, 'As variáveis dentro dos parágrafos também precisam de TeX'
+    assert inline.locator('.katex-display').count() == 0, 'Matemática no texto não deve virar um bloco separado'
+    assert inline.locator('math').count() == inline.count()
+    for expressao in ('t', 's', 'u', 'K', 'v_p', 'a_p'):
+        assert page.locator(f'.texto-matematica p .mat-inline[data-tex="{expressao}"]').count() >= 1, expressao
+    assert page.locator('.texto-matematica p .mat-inline[data-tex="a_p"] .katex').count() == 1
+    inline_antes = inline.count()
     page.evaluate('document.fonts.ready')
     assert page.evaluate("document.fonts.check('16px KaTeX_Main')")
     dados_antes = page.locator('#dados').text_content()
@@ -71,6 +79,7 @@ with sync_playwright() as p:
     assert page.locator('#demo-olhos').inner_html() == antes
     assert page.locator('#dados').text_content() == dados_antes
     page.locator('#demo-reiniciar').click()
+    assert inline.count() == inline_antes and inline.locator('math').count() == inline_antes
     page.locator('#laboratorio-face').screenshot(path=str(SCRATCH / 'matematica_demo_desktop.png'))
     for largura in (390, 320):
         page.set_viewport_size({'width': largura, 'height': 844})
@@ -85,6 +94,8 @@ with sync_playwright() as p:
     page.locator('.texto-matematica').screenshot(path=str(SCRATCH / 'matematica_formulas.png'))
     page.set_viewport_size({'width':1440,'height':1080})
     page.locator('.texto-matematica section').nth(3).screenshot(path=str(SCRATCH / 'matematica_formula_nariz.png'))
+    page.locator('.texto-matematica section').first.screenshot(path=str(SCRATCH / 'matematica_variaveis_inline.png'))
+    page.locator('.texto-matematica section').last.screenshot(path=str(SCRATCH / 'matematica_media_inline.png'))
     assert not erros and not rede, (erros, rede)
     context.close()
     toque = browser.new_context(viewport={'width':390,'height':844},has_touch=True,is_mobile=True,offline=True)

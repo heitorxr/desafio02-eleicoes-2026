@@ -65,15 +65,18 @@ def matematica_offline():
     if not (biblioteca / "dist/katex.min.css").exists():
         raise RuntimeError("Execute npm ci na raiz para instalar o KaTeX usado no empacotamento.")
     artigo = (RAIZ / "interface/matematica_texto.html").read_text(encoding="utf-8")
-    padrao = re.compile(r'(<div class="equacao" data-tex="([^"]*)">)</div>')
-    formulas = [html.unescape(m[1]) for m in padrao.findall(artigo)]
+    demo = (RAIZ / "interface/matematica_demo.html").read_text(encoding="utf-8")
+    demo = demo.replace("__MATEMATICA_TEXTO__", artigo)
+    padrao = re.compile(r'(<(?P<tag>div|span) class="(?:equacao|mat-inline)" data-tex="(?P<tex>[^"]*)">)</(?P=tag)>')
+    formulas = [{"tex": html.unescape(m["tex"]), "displayMode": m["tag"] == "div"}
+                for m in padrao.finditer(demo)]
     if not formulas:
         raise ValueError("Faltam as fórmulas TeX da aba de matemática.")
     processo = subprocess.run(["node", str(RAIZ / "scripts/renderizar_formulas.cjs")],
                               input=json.dumps(formulas), text=True, encoding="utf-8",
                               capture_output=True, cwd=RAIZ, check=True)
     renderizadas = iter(json.loads(processo.stdout))
-    artigo = padrao.sub(lambda m: m[1] + next(renderizadas) + "</div>", artigo)
+    demo = padrao.sub(lambda m: m[1] + next(renderizadas) + "</" + m["tag"] + ">", demo)
     css = (biblioteca / "dist/katex.min.css").read_text(encoding="utf-8")
     def fonte_local(m):
         caminhos = [x.strip("\"'") for x in re.findall(r"url\(([^)]+)\)", m[0])]
@@ -84,8 +87,6 @@ def matematica_offline():
     # Nunca consumir o fechamento da regra nem o @font-face seguinte.
     css = re.sub(r"src:[^;}]+;?", fonte_local, css)
     css += (RAIZ / "interface/matematica.css").read_text(encoding="utf-8")
-    demo = (RAIZ / "interface/matematica_demo.html").read_text(encoding="utf-8")
-    demo = demo.replace("__MATEMATICA_TEXTO__", artigo)
     licenca = (biblioteca / "LICENSE").read_text(encoding="utf-8")
     demo += "\n<!-- KaTeX, licença MIT:\n" + licenca + "\n-->"
     javascript = (RAIZ / "interface/matematica.js").read_text(encoding="utf-8")
