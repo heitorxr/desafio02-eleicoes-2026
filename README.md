@@ -4,6 +4,14 @@ Autor: **Heitor Cardoso Fernandes**.
 
 Projeto da disciplina Visualização de Dados Aplicada, UFPR. Um cartograma com uma face de Chernoff para cada estado e Distrito Federal e velocímetros separados para presidente, governador, senador, deputado federal e deputado estadual/distrital.
 
+## Acesso público
+
+- Painel interativo: https://heitorxr.github.io/faces-do-voto-site/
+- Código e materiais deste trabalho: https://github.com/heitorxr/desafio02-eleicoes-2026
+- Repositório separado, contendo somente o site: https://github.com/heitorxr/faces-do-voto-site
+
+O site é uma cópia de `resultados/painel.html`, publicada como `index.html`. Depois de regenerar o painel, atualize também a cópia no repositório do site para disponibilizar a nova versão.
+
 ## Decisões confirmadas pelo autor
 
 - Usar resultados oficiais do primeiro turno de 2026, não pesquisas de intenção de voto.
@@ -50,4 +58,4 @@ A disponibilidade do conjunto e da página oficial de resultados foi verificada 
 
 ## Histórico
 
-Repositório local com commits de etapas efetivas. Não fabricar datas, autoria ou retrospectiva de desenvolvimento. Uso de IA como apoio à programação e revisão será explicitado. Nenhum remoto foi solicitado.
+Repositório com commits de etapas efetivas, publicado no GitHub por solicitação do autor. Não fabricar datas, autoria ou retrospectiva de desenvolvimento. Uso de IA como apoio à programação e revisão explicitado no painel.
