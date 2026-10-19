@@ -95,7 +95,10 @@ with sync_playwright() as p:
         assert page.locator('[role="tabpanel"]:visible').count() == 1
     page.locator("#aba-fontes").click()
     linhas_partidos = page.locator("#corpo-partidos tr[data-partido]")
-    assert page.locator("#fontes > :last-child").inner_text() == "Uso de IA como apoio à programação e revisão."
+    assert page.locator("#fontes > :last-child").inner_text() == "Usamos IA como apoio na programação e na revisão."
+    assert page.locator("#fontes h2").all_text_contents() == ["Notas dos partidos", "De onde vêm os dados"]
+    assert '2022 (média)' in page.locator("#fontes").inner_text()
+    assert page.locator('#fontes a[href="https://doi.org/10.1590/1807-0191202531120"]').count() == 1
     assert "Painel e PDF de figuras são materiais de apoio" not in page.locator("body").inner_text()
     assert linhas_partidos.count() == len(dados_reais["partidos"])
     for partido in dados_reais["partidos"]:
