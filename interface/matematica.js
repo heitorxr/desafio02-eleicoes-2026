@@ -36,14 +36,8 @@ function geometriaDemo(notas) {
   const numero = new Intl.NumberFormat('pt-BR',{minimumFractionDigits:3,maximumFractionDigits:3});
   const pontos = g => g.x.map((x,i) => x+','+g.y[i]).join(' ');
   const curva = (id,g) => document.getElementById(id).setAttribute('points',pontos(g));
-  const faixa = document.getElementById('demo-faixa'), ns = 'http://www.w3.org/2000/svg';
-  for (let j=0;j<120;j++) {
-    const a=Math.PI*(1-j/120),b=Math.PI*(1-(j+1)/120);
-    const poligono = document.createElementNS(ns,'polygon');
-    poligono.setAttribute('points',[[Math.cos(a),Math.sin(a)],[Math.cos(b),Math.sin(b)],[.84*Math.cos(b),.84*Math.sin(b)],[.84*Math.cos(a),.84*Math.sin(a)]].map(p=>p.join(',')).join(' '));
-    poligono.setAttribute('fill',dados.paleta_faixa_demo[j]);
-    faixa.append(poligono);
-  }
+  // A textura vem do mesmo campo angular do R; dois arcos SVG delimitam a faixa.
+  document.getElementById('demo-gradiente').setAttribute('href',dados.gradiente_angular);
   function atualizar() {
     const notas = Object.fromEntries(cargos.map(c => [c,Number(document.getElementById('slider-'+c).value)]));
     const g = geometriaDemo(notas), p = g.parametros;

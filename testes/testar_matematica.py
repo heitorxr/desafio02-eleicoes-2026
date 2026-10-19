@@ -56,7 +56,8 @@ with sync_playwright() as p:
     page.evaluate('document.fonts.ready')
     assert page.evaluate("document.fonts.check('16px KaTeX_Main')")
     dados_antes = page.locator('#dados').text_content()
-    assert page.locator('#demo-faixa polygon').evaluate_all("els => els.map(e=>e.getAttribute('fill'))") == referencia['faixa']
+    assert page.locator('#demo-faixa polygon').count() == 0
+    assert page.locator('#demo-gradiente').get_attribute('href').startswith('data:image/png;base64,')
     for caso in referencia['casos']:
         real = page.evaluate('(notas) => geometriaDemo(notas)', caso['notas'])
         perto(real, {k: v for k, v in caso.items() if k != 'notas'})

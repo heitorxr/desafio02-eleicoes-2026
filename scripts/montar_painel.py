@@ -27,7 +27,8 @@ def numero(valor):
 
 
 def imagem(relativo):
-    return "data:image/svg+xml;base64," + base64.b64encode((RAIZ / relativo).read_bytes()).decode("ascii")
+    tipo = {".svg": "image/svg+xml", ".png": "image/png"}[Path(relativo).suffix.lower()]
+    return "data:" + tipo + ";base64," + base64.b64encode((RAIZ / relativo).read_bytes()).decode("ascii")
 
 
 def chave_partido(sigla):
@@ -124,7 +125,7 @@ def montar():
              "comparacoes": comparacoes,
              "partidos": tabela_partidos(indices),
              "paleta_demo": json.loads((RAIZ / "interface/paleta_demo.json").read_text()),
-             "paleta_faixa_demo": json.loads((RAIZ / "interface/paleta_faixa_demo.json").read_text()),
+             "gradiente_angular": imagem("resultados/gradiente_angular.png"),
              "csv": "data:text/csv;charset=utf-8;base64," + base64.b64encode(
                  (RAIZ / "resultados/indices_uf_cargo.csv").read_bytes()).decode("ascii")}
     texto = json.dumps(dados, ensure_ascii=False, allow_nan=False, separators=(",", ":")).replace("<", "\\u003c")

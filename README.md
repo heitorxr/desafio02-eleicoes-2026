@@ -1,5 +1,7 @@
 # Desafio 02 — Faces do voto no Brasil (2026)
 
+Autor: **Heitor Cardoso Fernandes**.
+
 Projeto da disciplina Visualização de Dados Aplicada, UFPR. Um cartograma com uma face de Chernoff para cada estado e Distrito Federal e velocímetros separados para presidente, governador, senador, deputado federal e deputado estadual/distrital.
 
 ## Decisões confirmadas pelo autor
@@ -8,7 +10,7 @@ Projeto da disciplina Visualização de Dados Aplicada, UFPR. Um cartograma com 
 - Representar as 27 unidades da Federação em disposição reconhecível como Brasil.
 - Faces com linguagem de emoji; vermelho para esquerda, verde para direita na dimensão presidencial, sempre com escala numérica.
 - O professor autorizou ggplot posteriormente ao PDF; priorizar funções geométricas compreensíveis em R.
-- Usar números complexos na geometria dos velocímetros. A pedido posterior do autor, o painel ganhou a aba Matemática entre Explorar e Mais informações, com fórmulas TeX e um rosto de exemplo com cinco sliders. O PDF de figuras não foi alterado por essa revisão.
+- Usar números complexos na geometria dos velocímetros. A pedido posterior do autor, o painel ganhou a aba Matemática entre Explorar e Mais informações, com fórmulas TeX e um rosto de exemplo com cinco sliders. A preferência pessoal do autor pelo tema e seu objetivo de mostrar uma aplicação na visualização estatística estão explicitados nessa aba.
 - Entregar programação e notas breves para os colegas prepararem um vídeo de aproximadamente cinco minutos, não produzir o vídeo agora.
 - Cada cargo controla um traço: Presidente = cor; Senador = abertura do sorriso; Governador = abertura dos olhos; Federal = formato do nariz (mesmo traçado aberto, fino à esquerda e mais arredondado à direita); Estadual/distrital = altura das sobrancelhas, com comprimento fixo. Escala absoluta 0–10 preservada.
 - Os cinco títulos da legenda são clicáveis: alternam uma única área de exemplos ampliados com mínimo, mediano e máximo reais de cada cargo. Mesmas dimensões e padrão visual, usando o desenho real da face. O mapa e a escala 0–10 não mudam.
@@ -27,6 +29,12 @@ O exemplo interativo usa as mesmas coordenadas e os mesmos parâmetros de `R/geo
 O texto está em `interface/matematica_texto.html`, com fórmulas TeX em atributos `data-tex`. O KaTeX 0.19.0 compila as fórmulas durante o empacotamento; HTML, MathML e fontes WOFF2 ficam dentro do resultado. O painel pronto continua funcionando sem conexão e sem servidor. Para regenerar, são necessários Python e Node.js; instalar a dependência uma vez com `npm ci` e executar `python scripts/montar_painel.py`.
 
 `uv run --with playwright python testes/testar_matematica.py` compara o exemplo com saídas reais do R em casos artificiais, verifica as paletas, os sliders, o teclado, o reinício e a exibição offline. É preciso ter o R instalado para esse teste. As paletas em `interface/paleta_demo.json` e `interface/paleta_faixa_demo.json` são exportadas por `testes/exportar_demo.R`; não são notas partidárias ou dados de votação.
+
+### Gradientes contínuos
+
+Os velocímetros usam a região entre os raios 0,84 e 1, com cor definida pelo ângulo do número complexo. O ponteiro continua no raio 0,78, sem mudar sua direção. A faixa não é mais montada com 120 quadriláteros. No R, o campo de cores vira uma textura raster com transparência, reutilizada nos SVGs, PNGs e PDF; a formulação é contínua, mas a imagem exportada tem pixels. Na demonstração do navegador, dois arcos SVG recortam a mesma textura de `resultados/gradiente_angular.png`.
+
+A barra abaixo do mapa usa a mesma função de cor ao longo da posição horizontal, em uma única textura, sem a sequência de retângulos. O gradiente da barra é linear; o dos velocímetros é angular. Nenhuma dessas mudanças altera votos, notas partidárias ou índices calculados. `testes/testar_gradientes.R` verifica o campo matemático e `testes/testar_gradientes_navegador.py` verifica as imagens geradas e suas cores.
 
 ## Cuidados metodológicos
 

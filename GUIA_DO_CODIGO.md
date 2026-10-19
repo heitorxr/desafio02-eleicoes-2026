@@ -53,6 +53,8 @@ Resultado real: índice **6,699614**, **6.406.847** votos classificados de **6.5
 
 ## 3. Do índice ao número complexo
 
+A construção vigente usa `z = centro + rho * exp(1i * pi * (1 - t))`, com `t = nota/10`. Os raios 0,84 e 1 delimitam a faixa; 0,78 posiciona a ponta do ponteiro. O preenchimento depende de `t = 1 - Arg(z-centro)/pi`, e não da posição horizontal. A barra do mapa usa, por sua vez, interpolação horizontal da mesma função RGB. As antigas fatias poligonais foram substituídas por texturas do campo contínuo, geradas no R para compatibilidade com as exportações. O gradiente exportado tem pixels; isso não significa que as bordas ou a escala sejam definidas por 120 quadriláteros. O demo SVG recorta a textura com dois arcos reais.
+
 Para nota `s` entre 0 e 10, `theta = pi * (1 - s/10)` em radianos. Com centro na origem, `z = raio * exp(1i * theta)`; pela identidade de Euler, `x = Re(z)` e `y = Im(z)`. O complexo representa uma posição, não uma ideologia complexa.
 
 Continuação do exemplo anterior:

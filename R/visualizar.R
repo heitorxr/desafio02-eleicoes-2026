@@ -30,9 +30,7 @@ desenhar_cartograma <- function(indices, grade) {
       y = 100 * (1 - grconvertY(y, from = "user", to = "ndc")),
       raio = 100 * (grconvertX(x + .45, "user", "ndc") - grconvertX(x, "user", "ndc"))))
   }
-  escala <- seq(0, 10, length.out = 101)
-  for (j in 1:100) rect(.9 + (j - 1) * .045, -.02, .9 + j * .045, .13,
-                        col = cor_politica(mean(escala[c(j, j + 1)])), border = NA)
+  desenhar_gradiente_linear()
   text(c(.9, 3.15, 5.4), -.23, c("0 · esquerda", "5", "10 · direita"), cex = .72)
   text(3.15, -.53, "Cor: Presidência · referência partidária de 2022", cex = .70)
   invisible(centros)
@@ -85,7 +83,7 @@ legenda_pdf <- function(indices, sobrepor = FALSE) {
   if (sobrepor) par(new = TRUE)
   plot.new()
   plot.window(c(0, 1), c(0, 1))
-  linhas <- c("FACES DO VOTO", "Votos de 2026 × posições partidárias de 2022", "",
+  linhas <- c("FACES DO VOTO", "Votos de 2026 × posições partidárias de 2022", "Autor: Heitor Cardoso Fernandes",
     "Cor da face       Presidência", "Abertura dos olhos Governo estadual",
     "Abertura do sorriso Senado", "Formato do nariz Deputados federais",
     "Altura das sobrancelhas Estaduais / distritais", "",
@@ -145,6 +143,7 @@ desenhar_comparacao_narizes <- function(indices) desenhar_comparacao_aspecto(ind
 gerar_figuras <- function(raiz, indices, grade) {
   saida <- file.path(raiz, "resultados")
   dir.create(file.path(saida, "detalhes"), recursive = TRUE, showWarnings = FALSE)
+  exportar_gradiente_angular(file.path(saida, "gradiente_angular.png"))
   svg(file.path(saida, "cartograma_brasil.svg"), width = 7.5, height = 9.5, bg = "#FCFBF8")
   centros <- desenhar_cartograma(indices, grade)
   dev.off()

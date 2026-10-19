@@ -36,4 +36,5 @@ if (acao[1] == "testar") {
   source("testes/testar_legibilidade_nariz.R", encoding = "UTF-8")
   source("testes/testar_comparacoes.R", encoding = "UTF-8")
   source("testes/testar_recuperacao_ro.R", encoding = "UTF-8")
+  source("testes/testar_gradientes.R", encoding = "UTF-8")
 }

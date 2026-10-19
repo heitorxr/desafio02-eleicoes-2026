@@ -44,14 +44,23 @@
 </section>
 <section>
 <h3>Velocímetro e projeções</h3>
-<p>O ângulo diminui de <span class="mat-inline" data-tex="\pi"></span> a zero quando a nota cresce. O ponteiro parte da origem e tem raio <span class="mat-inline" data-tex="0{,}78"></span>. As marcas de <span class="mat-inline" data-tex="0,\,2,\,4,\,6,\,8"></span> e <span class="mat-inline" data-tex="10"></span> ficam no raio <span class="mat-inline" data-tex="1{,}12"></span>.</p>
-<div class="equacao" data-tex="\begin{aligned}\theta(n)&amp;=\pi\left(1-\frac n{10}\right),\\V(n)&amp;=0{,}78(\cos\theta(n),\sin\theta(n)),\\M_m&amp;=1{,}12(\cos\theta(m),\sin\theta(m)),\\m&amp;\in\{0,2,4,6,8,10\}.\end{aligned}"></div>
-<p>A faixa tem raios externo <span class="mat-inline" data-tex="1"></span> e interno <span class="mat-inline" data-tex="0{,}84"></span>. O R a aproxima por 120 quadriláteros, coloridos pela nota média de cada intervalo, não pela média das cores.</p>
-<div class="equacao" data-tex="n_j=\frac{10j}{120},\quad\theta_j=\theta(n_j),\quad j=0,\ldots,120,\qquad C_j=C\!\left(\frac{n_j+n_{j+1}}{20}\right)."></div>
-<div class="equacao" data-tex="F_j=\begin{bmatrix}\cos\theta_j&amp;\sin\theta_j\\\cos\theta_{j+1}&amp;\sin\theta_{j+1}\\0{,}84\cos\theta_{j+1}&amp;0{,}84\sin\theta_{j+1}\\0{,}84\cos\theta_j&amp;0{,}84\sin\theta_j\end{bmatrix},\quad j=0,\ldots,119."></div>
-<p>Cada linha de <span class="mat-inline" data-tex="F_j"></span> dá as coordenadas de um vértice do quadrilátero, na ordem em que ele é desenhado. O índice <span class="mat-inline" data-tex="j"></span> identifica cada pedaço da faixa.</p>
-<p>A figura de contas usa o mesmo ângulo, mas raio <span class="mat-inline" data-tex="0{,}9"></span>. Seus catetos são <span class="mat-inline" data-tex="\operatorname{Re}(z)"></span> e <span class="mat-inline" data-tex="\operatorname{Im}(z)"></span>; o arco de indicação angular tem raio <span class="mat-inline" data-tex="0{,}25"></span>.</p>
+<p>Uma mesma expressão posiciona a ponta do ponteiro e as bordas da faixa. O centro é o número complexo <span class="mat-inline" data-tex="c=x_c+iy_c"></span>; no velocímetro, ele fica na origem, <span class="mat-inline" data-tex="c=0+0i"></span>. A nota <span class="mat-inline" data-tex="n"></span> determina o parâmetro <span class="mat-inline" data-tex="t"></span>, e o raio <span class="mat-inline" data-tex="\rho"></span> escolhe a distância ao centro.</p>
+<div class="equacao" data-tex="z(\rho,t)=c+\rho\exp\!\left(i\pi(1-t)\right),\qquad t=\frac n{10},\qquad 0\leq t\leq1."></div>
+<p>Com <span class="mat-inline" data-tex="\rho=0{,}78"></span>, obtemos a ponta do ponteiro, que parte de <span class="mat-inline" data-tex="c"></span>. Com <span class="mat-inline" data-tex="\rho=0{,}84"></span> e <span class="mat-inline" data-tex="\rho=1"></span>, obtemos as bordas interna e externa. Cada raio fixo descreve uma semicircunferência centrada em <span class="mat-inline" data-tex="c"></span>. As coordenadas do ponto são suas partes real e imaginária.</p>
+<div class="equacao" data-tex="(x,y)=\bigl(\operatorname{Re}z,\operatorname{Im}z\bigr),\qquad \theta=\operatorname{Arg}(z-c)=\pi(1-t),\quad 0\leq\theta\leq\pi."></div>
+<p>O argumento <span class="mat-inline" data-tex="\operatorname{Arg}(z-c)"></span> recupera o ângulo em relação ao centro, na metade superior do plano. Quando a nota cresce, esse ângulo diminui de <span class="mat-inline" data-tex="\pi"></span> a <span class="mat-inline" data-tex="0"></span>. A cor usa a mesma função <span class="mat-inline" data-tex="C(t)"></span> definida para a face:</p>
+<div class="equacao" data-tex="\operatorname{cor}(z)=C\!\left(1-\frac{\operatorname{Arg}(z-c)}{\pi}\right),\qquad 0{,}84\leq|z-c|\leq1,\quad 0\leq\operatorname{Arg}(z-c)\leq\pi."></div>
+<p>Assim, a cor depende do ângulo, não do raio <span class="mat-inline" data-tex="\rho"></span>: toda a espessura da faixa tem a mesma cor na direção de uma nota. Um gradiente horizontal distribuiria as cores pela coordenada <span class="mat-inline" data-tex="x"></span>, que varia com o cosseno do ângulo e com o raio. Ele não acompanharia a escala de notas ao longo do arco. O gradiente angular acompanha essa escala porque o ângulo varia linearmente com a nota.</p>
+<p>O campo de cores é contínuo no modelo matemático. Na exportação pelo R, ele vira uma textura de imagem formada por pixels, inclusive nos arquivos SVG e PDF; não é uma sequência de fatias poligonais nem uma imagem inteiramente vetorial. No navegador, uma imagem PNG do mesmo campo é recortada entre as duas bordas do arco em SVG, sem depender de um gradiente angular nativo do SVG. Essa escolha muda o desenho, não os índices estatísticos.</p>
+<p>As marcas de <span class="mat-inline" data-tex="0,\,2,\,4,\,6,\,8"></span> e <span class="mat-inline" data-tex="10"></span> ficam no raio <span class="mat-inline" data-tex="1{,}12"></span>:</p>
+<div class="equacao" data-tex="M_m=z\!\left(1{,}12,\frac m{10}\right),\qquad m\in\{0,2,4,6,8,10\}."></div>
+<p>A figura de contas mantém o centro na origem e usa o mesmo ângulo, mas raio <span class="mat-inline" data-tex="0{,}9"></span>. As projeções horizontal e vertical são <span class="mat-inline" data-tex="\operatorname{Re}(z)"></span> e <span class="mat-inline" data-tex="\operatorname{Im}(z)"></span>; o arco de indicação angular tem raio <span class="mat-inline" data-tex="0{,}25"></span>.</p>
 <div class="equacao" data-tex="z=0{,}9e^{i\theta},\quad (\operatorname{Re}z,\operatorname{Im}z)=(0{,}9\cos\theta,0{,}9\sin\theta),\quad z_{\mathrm{arco}}(\varphi)=0{,}25e^{i\varphi},\quad 0\leq\varphi\leq\theta."></div>
+</section>
+<section>
+<h3>Barra de cores do mapa</h3>
+<p>Na barra horizontal, a posição entre a extremidade esquerda <span class="mat-inline" data-tex="x_E=0{,}9"></span> e a direita <span class="mat-inline" data-tex="x_D=5{,}4"></span> determina o parâmetro <span class="mat-inline" data-tex="t"></span>. A barra usa a mesma interpolação RGB <span class="mat-inline" data-tex="C(t)"></span>, agora ao longo de uma reta, com notas de <span class="mat-inline" data-tex="0"></span> a <span class="mat-inline" data-tex="10"></span>.</p>
+<div class="equacao" data-tex="t=\frac{x-x_E}{x_D-x_E},\qquad \operatorname{cor}(x)=C(t),\qquad n=10t,\quad x_E\leq x\leq x_D."></div>
 </section>
 
 
@@ -60,5 +69,11 @@
 <p>A geometria representa a média já calculada por UF e cargo. Para cada partido <span class="mat-inline" data-tex="p"></span>, <span class="mat-inline" data-tex="v_p"></span> é o número de votos válidos naquela UF e cargo, e <span class="mat-inline" data-tex="a_p"></span> é sua nota partidária de 2022. O conjunto <span class="mat-inline" data-tex="K"></span> reúne os partidos com nota disponível. A cobertura divide os votos classificados pelo total de votos válidos auditado; não mede comparecimento.</p>
 <div class="equacao" data-tex="\begin{aligned}n&amp;=\frac{\sum_{p\in K}v_pa_p}{\sum_{p\in K}v_p},\\\mathrm{cobertura}&amp;=\frac{\sum_{p\in K}v_p}{V_{\mathrm{v\acute{a}lidos}}}.\end{aligned}"></div>
 <p>Sem votos classificados, a nota fica ausente; com total válido nulo, a cobertura fica ausente. Totais eleitorais não conciliados também tornam a nota indisponível. Nenhuma dessas situações cria uma nova posição na escala.</p>
+</section>
+<section>
+<h3>Por que usei números complexos</h3>
+<p>Escolhi usar números complexos porque gosto do tema e queria mostrar uma aplicação deles na visualização de dados estatísticos.</p>
+<p>— Heitor Cardoso Fernandes</p>
+<p>Aqui, os números complexos descrevem posições e ângulos do desenho. As notas e a média ponderada continuam sendo números reais; a parte imaginária é uma coordenada, não uma opinião atribuída ao eleitor.</p>
 </section>
 </article>

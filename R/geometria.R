@@ -28,6 +28,21 @@ cor_politica <- function(nota) {
   cores
 }
 
+# C(t) mantém a interpolação RGB de cor_politica, sem outra escala de cor.
+campo_gradiente_linear <- function(t) cor_politica(10 * t)
+
+# Campo analítico no semianel: z = x + iy, t = 1 - Arg(z)/pi.
+# A tolerância só absorve arredondamento de ponto flutuante nas fronteiras.
+campo_gradiente_angular <- function(x, y) {
+  z <- x + 1i * y
+  rho <- Mod(z)
+  visivel <- is.finite(z) & Im(z) >= 0 &
+    rho >= .84 - 8 * .Machine$double.eps & rho <= 1 + 8 * .Machine$double.eps
+  cores <- rep("#00000000", length(z))
+  cores[visivel] <- campo_gradiente_linear(1 - Arg(z[visivel]) / pi)
+  cores
+}
+
 angulo_ponteiro <- function(nota) pi * (1 - normalizar_nota(nota))
 
 coordenadas_ponteiro <- function(nota, raio = 1, centro = c(0, 0)) {
@@ -38,21 +53,68 @@ coordenadas_ponteiro <- function(nota, raio = 1, centro = c(0, 0)) {
   list(x = Re(z), y = Im(z), z = z, theta = theta)
 }
 
+# O campo é contínuo; a exportação o amostra nos centros dos pixels.
+# PNG, SVG e PDF usam a mesma imagem: SVG contém raster, não um gradiente
+# angular vetorial nativo. A máscara radial é analítica, mas sua borda tem
+# precisão de pixel (2/768 na configuração padrão), sem polígonos setoriais.
+textura_gradiente_angular <- local({
+  cache <- new.env(parent = emptyenv())
+  function(largura = 768L, altura = 384L) {
+    if (length(largura) != 1L || length(altura) != 1L ||
+        !is.finite(largura) || !is.finite(altura) ||
+        largura < 2 || altura < 2 || largura != as.integer(largura) || altura != as.integer(altura))
+      stop("A textura requer dimensões inteiras de pelo menos dois pixels.")
+    chave <- paste(largura, altura, sep = "x")
+    if (!exists(chave, envir = cache, inherits = FALSE)) {
+      x <- -1 + (seq_len(largura) - .5) * 2 / largura
+      y <- 1 - (seq_len(altura) - .5) / altura
+      cores <- campo_gradiente_angular(rep(x, each = altura), rep(y, times = largura))
+      cache[[chave]] <- grDevices::as.raster(matrix(cores, nrow = altura, ncol = largura))
+    }
+    cache[[chave]]
+  }
+})
+
+textura_gradiente_linear <- local({
+  cache <- NULL
+  function() {
+    if (is.null(cache)) cache <<- grDevices::as.raster(
+      matrix(campo_gradiente_linear(seq(0, 1, length.out = 1025L)), nrow = 1L))
+    cache
+  }
+})
+
+desenhar_gradiente_angular <- function() {
+  textura <- textura_gradiente_angular()
+  graphics::rasterImage(textura, -1, 0, 1, 1, interpolate = FALSE)
+  invisible(textura)
+}
+
+desenhar_gradiente_linear <- function() {
+  textura <- textura_gradiente_linear()
+  graphics::rasterImage(textura, .9, -.02, 5.4, .13, interpolate = FALSE)
+  invisible(textura)
+}
+
+# Bounds x=[-1,1], y=[0,1]; primeira linha PNG corresponde ao topo y=1.
+# Sem margem, reamostragem ou fundo opaco; mesma textura usada nos painéis.
+exportar_gradiente_angular <- function(caminho) {
+  textura <- textura_gradiente_angular()
+  grDevices::png(caminho, width = ncol(textura), height = nrow(textura),
+                type = "cairo", bg = "transparent")
+  on.exit(grDevices::dev.off(), add = TRUE)
+  grid::grid.raster(textura, width = grid::unit(1, "npc"),
+                    height = grid::unit(1, "npc"), interpolate = FALSE)
+  invisible(caminho)
+}
+
 # Cria somente a janela do velocímetro, no dispositivo já aberto pelo chamador.
 desenhar_velocimetro <- function(nota, titulo = "", subtitulo = "",
                                 col = "#263238", cex = 1, ...) {
   ponteiro <- coordenadas_ponteiro(nota, raio = .78)
   graphics::plot.new()
   graphics::plot.window(c(-1.22, 1.22), c(-.30, 1.63), asp = 1)
-  intervalos <- seq(0, 10, length.out = 121)
-  for (j in seq_len(length(intervalos) - 1L)) {
-    limites <- angulo_ponteiro(intervalos[c(j, j + 1L)])
-    fora <- ponto_complexo(limites)
-    dentro <- ponto_complexo(rev(limites), .84)
-    cor <- cor_politica(mean(intervalos[c(j, j + 1L)]))
-    graphics::polygon(Re(c(fora, dentro)), Im(c(fora, dentro)),
-                      col = cor, border = cor, lwd = .3)
-  }
+  desenhar_gradiente_angular()
   marcas <- ponto_complexo(angulo_ponteiro(seq(0, 10, 2)), 1.12)
   graphics::text(Re(marcas), Im(marcas), labels = seq(0, 10, 2), col = col, cex = .8 * cex)
   if (is.na(nota)) {
