@@ -54,16 +54,7 @@
 <div class="equacao" data-tex="z=0{,}9e^{i\theta},\quad (\operatorname{Re}z,\operatorname{Im}z)=(0{,}9\cos\theta,0{,}9\sin\theta),\quad z_{\mathrm{arco}}(\varphi)=0{,}25e^{i\varphi},\quad 0\leq\varphi\leq\theta."></div>
 </section>
 
-<section>
-<h3>Cartograma e área de seleção</h3>
-<p>Cada UF ocupa uma célula de igual tamanho, sem representar sua área territorial. Coluna e linha determinam o centro; o rosto usa raio 0,42 e a área clicável usa 0,45.</p>
-<div class="equacao" data-tex="x=\mathrm{coluna},\quad y=9-\mathrm{linha},\quad r_{\mathrm{face}}=0{,}42,\quad r_{\mathrm{hit}}=0{,}45."></div>
-<p>Os botões ficam sobre as faces mesmo quando a imagem muda de tamanho. Para isso, o R converte as coordenadas em frações da imagem com <code>grconvertX</code> e <code>grconvertY</code>. Chamando essas conversões de U e V:</p>
-<div class="equacao" data-tex="X_{\%}=100U(x),\qquad Y_{\%}=100[1-V(y)],\qquad R_{\%,x}=100[U(x+0{,}45)-U(x)]."></div>
-<p>Como as margens do gráfico são nulas, podemos escrever U e V com os limites efetivos da janela:</p>
-<div class="equacao" data-tex="U(x)=\frac{x-x_{\min}}{x_{\max}-x_{\min}},\qquad V(y)=\frac{y-y_{\min}}{y_{\max}-y_{\min}}."></div>
-<p>O código pede os intervalos [0,4; 6,6] e [−0,7; 8,85], mas <code>asp = 1</code> pode ampliar um deles para manter a mesma escala nos dois eixos. Por isso usamos os limites efetivos na conversão, e não simplesmente os valores pedidos. No celular, os botões também têm tamanho mínimo para facilitar o toque.</p>
-</section>
+
 <section>
 <h3>Média ponderada e cobertura</h3>
 <p>A geometria representa a média já calculada por UF e cargo. Para partidos classificados K, v é o número de votos e a é a nota partidária. A cobertura divide os votos classificados pelo total de votos válidos auditado; não mede comparecimento.</p>
