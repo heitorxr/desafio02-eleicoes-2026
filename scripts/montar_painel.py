@@ -80,7 +80,9 @@ def matematica_offline():
         caminho = next(x for x in caminhos if x.endswith(".woff2"))
         conteudo = base64.b64encode((biblioteca / "dist" / caminho).read_bytes()).decode("ascii")
         return 'src:url("data:font/woff2;base64,' + conteudo + '") format("woff2");'
-    css = re.sub(r"src:[^;]+;", fonte_local, css)
+    # O CSS minificado pode encerrar src com }, sem ponto e vírgula.
+    # Nunca consumir o fechamento da regra nem o @font-face seguinte.
+    css = re.sub(r"src:[^;}]+;?", fonte_local, css)
     css += (RAIZ / "interface/matematica.css").read_text(encoding="utf-8")
     demo = (RAIZ / "interface/matematica_demo.html").read_text(encoding="utf-8")
     demo = demo.replace("__MATEMATICA_TEXTO__", artigo)
