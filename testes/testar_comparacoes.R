@@ -3,6 +3,8 @@ source("R/geometria.R", encoding = "UTF-8")
 source("R/visualizar.R", encoding = "UTF-8")
 stopifnot("apenas" %in% names(formals(desenhar_face)),
           exists("desenhar_comparacao_aspecto", mode = "function"))
+stopifnot(exists("enquadramento_comparacao", mode = "function"))
+stopifnot(identical(enquadramento_comparacao("estadual"), enquadramento_comparacao("presidente")))
 indices_aspectos <- read.csv("resultados/indices_uf_cargo.csv", fileEncoding = "UTF-8")
 prova_aspectos <- tempfile(tmpdir = "C:/Users/heito/AppData/Local/hermes/cache/scratch", fileext = ".svg")
 svg(prova_aspectos, width = 7.5, height = 2.2, bg = "#FCFBF8")

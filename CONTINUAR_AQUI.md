@@ -1,5 +1,7 @@
 # Checkpoint para retomada — 16/10/2026
 
+ÚLTIMA REVISÃO DA INTERFACE: aviso destacado de estudo acadêmico sem posicionamento político no topo; ressalvas locais solicitadas removidas; descrições padronizadas em cargo / esquerda / direita. Sobrancelhas dentro de contorno neutro com o mesmo enquadramento da cor (`raio=0.48`, `y=0.26`), com referência fixa. Lista de partidos sem nota por UF/cargo agora abre por clique/toque abaixo da tabela, substituindo o antigo tooltip. Dados e cartograma preservados.
+
 ESTADO ATUAL: amplitude do nariz reforçada (`largura = 0.04 + 0.72*t`, `raio vertical = 0.005 + 0.155*t`, altura fixa `0.29`). Mesmo traçado aberto e mesma escala absoluta 0–10. Nova função única `coordenadas_nariz()` usada no mapa e na faixa ampliada com mínimo/mediana/máximo federais reais. Outros traços e dados preservados. Novo teste verifica separação dos índices reais em uma miniatura de referência.
 
 INTERFACE VIGENTE (substitui referências antigas à aba Como ler): títulos dos cinco aspectos na legenda alternam um único espaço fixo de demonstração. SVGs com dimensões idênticas, mínimo/mediana/máximo reais de cada cargo e recorte do renderer da face via `apenas`. Explicação concisa de Chernoff no canto inferior direito de Explorar; só restam as abas Explorar e Fontes e limites. Testes de R, painel, PDF e navegador aprovados; verificação de dimensões considera coordenadas no documento para não confundir rolagem automática com mudança do layout.

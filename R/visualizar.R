@@ -89,7 +89,7 @@ legenda_pdf <- function(indices, sobrepor = FALSE) {
     "Cor da face       Presidência", "Abertura dos olhos Governo estadual",
     "Abertura do sorriso Senado", "Formato do nariz Deputados federais",
     "Altura das sobrancelhas Estaduais / distritais", "",
-    "Nota maior: mais abertura, nariz redondo, sobrancelhas altas.", "Os traços não indicam aprovação ou personalidade.", "",
+    "Nota maior: mais abertura, nariz redondo, sobrancelhas altas.", "Estudo acadêmico, sem posicionamento político.", "",
     "Índice = soma(votos × nota) / votos classificados", "Notas ausentes não recebem zero nem cinco.",
     "? indica atributo indisponível.", "",
     paste0(sum(indices$integro), " de ", nrow(indices), " totais UF/cargo conciliados."),
@@ -98,6 +98,13 @@ legenda_pdf <- function(indices, sobrepor = FALSE) {
     "Cartograma esquemático: não representa áreas.")
   for (j in seq_along(linhas)) text(.02, .94 - (j - 1) * .039, linhas[j], adj = 0,
                                   cex = if (j == 1) 1.6 else 1.1, font = if (j == 1) 2 else 1)
+}
+
+enquadramento_comparacao <- function(cargo) {
+  stopifnot(length(cargo) == 1L, cargo %in% names(nomes_cargos))
+  raios <- c(presidente = .48, governador = 1.6, senador = 2.5, federal = 2.5, estadual = .48)
+  alturas <- c(presidente = .26, governador = -.2, senador = 1.1, federal = .35, estadual = .26)
+  list(raio = unname(raios[cargo]), y = unname(alturas[cargo]))
 }
 
 desenhar_comparacao_aspecto <- function(indices, cargo) {
@@ -113,15 +120,18 @@ desenhar_comparacao_aspecto <- function(indices, cargo) {
     return(invisible(valores[c("uf", "nota")]))
   }
   exemplos <- valores[c(1, ceiling(nrow(valores) / 2), nrow(valores)), ]
-  raios <- c(presidente = .48, governador = 1.6, senador = 2.5, federal = 2.5, estadual = 2)
-  alturas <- c(presidente = .26, governador = -.2, senador = 1.1, federal = .35, estadual = -1)
+  quadro <- enquadramento_comparacao(cargo)
   for (j in 1:3) {
     centro <- c(1.25, 3.75, 6.25)[j]
     notas <- setNames(rep(5, length(nomes_cargos)), names(nomes_cargos))
     notas[cargo] <- exemplos$nota[j]
-    if (cargo == "estadual") segments(centro - 1.04, .16, centro + 1.04, .16,
-                                      col = "#B5BBB6", lty = 3, lwd = 1)
-    desenhar_face(x = centro, y = unname(alturas[cargo]), raio = unname(raios[cargo]),
+    if (cargo == "estadual") {
+      rosto <- ponto_complexo(seq(0, 2 * pi, length.out = 121), quadro$raio, centro + 1i * quadro$y)
+      polygon(Re(rosto), Im(rosto), col = "#FCFBF8", border = "#263238", lwd = 1.5)
+      referencia <- quadro$y + .58 * quadro$raio
+      segments(centro - .30, referencia, centro + .30, referencia, col = "#B5BBB6", lty = 3, lwd = 1)
+    }
+    desenhar_face(x = centro, y = quadro$y, raio = quadro$raio,
                   notas = notas, apenas = cargo)
     text(centro, 1.06, paste0(exemplos$uf[j], " · ",
       formatC(exemplos$nota[j], format = "f", digits = 2, decimal.mark = ",")), font = 2, cex = 1.05)

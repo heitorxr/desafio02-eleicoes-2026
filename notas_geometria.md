@@ -28,7 +28,7 @@ Olhos, sorriso e sobrancelhas permanecem como estavam. A função única `coorde
 
 ## Integração
 
-As cinco demonstrações são geradas por `desenhar_comparacao_aspecto()` em telas SVG idênticas de 7,5 × 2,2 polegadas. Cada cargo usa seus próprios mínimo, mediano e máximo reais. O argumento `apenas` de `desenhar_face()` mascara os outros componentes sem alterar fórmulas ou coordenadas da face completa. O aumento e o deslocamento são fixos dentro de cada aspecto, nunca ajustados por UF. A referência pontilhada das sobrancelhas não acompanha sua altura: permanece em `0.16` para evidenciar a diferença vertical. Todos os exemplos alternam na mesma imagem do painel, acionada pelos títulos da legenda.
+As cinco demonstrações são geradas por `desenhar_comparacao_aspecto()` em telas SVG idênticas de 7,5 × 2,2 polegadas. Cada cargo usa seus próprios mínimo, mediano e máximo reais. O argumento `apenas` de `desenhar_face()` mascara os outros componentes sem alterar fórmulas ou coordenadas da face completa. `enquadramento_comparacao()` fixa aumento e deslocamento por aspecto, nunca por UF. A demonstração das sobrancelhas usa o mesmo raio `0.48` e centro vertical `0.26` da demonstração da cor, dentro de um contorno neutro (não codifica uma nota presidencial). A linha pontilhada permanece em `0.26 + 0.58*0.48`, sem acompanhar as sobrancelhas. Todos os exemplos alternam na mesma imagem do painel, acionada pelos títulos da legenda.
 
 ```r
 source("R/geometria.R", encoding = "UTF-8")

@@ -42,7 +42,7 @@ Material para os colegas prepararem a apresentação de Visualização de Dados 
 **Tela:** Explorar, alternando os títulos clicáveis da legenda e destacando o guia curto de Chernoff no canto inferior direito.
 
 **Fala-base:**
-> A cor representa a Presidência, do vermelho ao verde. A abertura dos olhos representa o governo estadual; a abertura do sorriso, o Senado; o formato do nariz, deputados federais; e a altura das sobrancelhas, estaduais ou distritais. Todos os narizes usam o mesmo traçado aberto: fino à esquerda da escala e mais arredondado à direita, variando continuamente com o índice federal. Isso não indica aprovação ou personalidade. A legenda fica abaixo do mapa; a escala original e o espaço igual por UF foram preservados.
+> A cor representa a Presidência, do vermelho ao verde. A abertura dos olhos representa o governo estadual; a abertura do sorriso, o Senado; o formato do nariz, deputados federais; e a altura das sobrancelhas, estaduais ou distritais. Todos os narizes usam o mesmo traçado aberto: fino à esquerda da escala e mais arredondado à direita, variando continuamente com o índice federal. Trata-se de um estudo acadêmico sem posicionamento político, como informa o aviso no topo. A legenda fica abaixo do mapa; a escala original e o espaço igual por UF foram preservados.
 
 **Pausa visual:** apontar os cinco canais em uma única face, sem tentar deduzir valores exatos pela aparência.
 

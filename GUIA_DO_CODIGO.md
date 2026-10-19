@@ -89,4 +89,8 @@ Na legenda, clicar no título de qualquer um dos cinco aspectos alterna a mesma 
 
 A explicação concisa das faces de Chernoff está no canto inferior direito da tela Explorar, substituindo a aba Como ler. Detalhes do índice e limites metodológicos continuam em Fontes e limites. A referência original da técnica está vinculada no guia visual: Chernoff (1973), DOI `10.1080/01621459.1973.10482434`.
 
+O aviso de neutralidade do estudo está centralizado no topo, em vez de repetir ressalvas junto aos traços. As descrições têm formato uniforme: cargo, direção esquerda e direção direita. A demonstração das sobrancelhas inclui o contorno neutro do rosto, com o mesmo enquadramento da cor; a posição varia segundo a fórmula real, sem atribuir nota presidencial ao fundo.
+
+O antigo `title` das linhas da tabela foi substituído por um campo expansível “Partidos sem classificação acadêmica nesta UF”. A lista usa exatamente `partidos_sem_nota` de cada cargo e muda junto com a UF; ausência de partidos sem nota aparece como “Nenhum”. A nota de cobertura explica por que os votos sem classificação não entram na média. O QA confere as listas das 27 UFs contra o JSON, além de abertura por clique, toque e teclado.
+
 **Referências locais:** `README.md` (fonte TSE), `dados/referencia/README_ideologia.md` (Bolognesi, Ribeiro, Codato e Silva, DOI `10.1590/1807-0191202531120`, Tabela 1/2022), `dados/referencia/README_layout.md` (grade `br_states_grid1`, geofacet) e `notas_geometria.md` (fórmulas).

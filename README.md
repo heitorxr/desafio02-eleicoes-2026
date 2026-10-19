@@ -13,6 +13,8 @@ Projeto da disciplina Visualização de Dados Aplicada, UFPR. Um cartograma com 
 - Cada cargo controla um traço: Presidente = cor; Senador = abertura do sorriso; Governador = abertura dos olhos; Federal = formato do nariz (mesmo traçado aberto, fino à esquerda e mais arredondado à direita); Estadual/distrital = altura das sobrancelhas, com comprimento fixo. Escala absoluta 0–10 preservada.
 - Os cinco títulos da legenda são clicáveis: alternam uma única área de exemplos ampliados com mínimo, mediano e máximo reais de cada cargo. Mesmas dimensões e padrão visual, usando o desenho real da face. O mapa e a escala 0–10 não mudam.
 - A explicação curta de Chernoff fica no canto inferior direito de Explorar. A aba Como ler foi removida; detalhes do cálculo foram preservados em Fontes e limites.
+- Um aviso de estudo acadêmico sem posicionamento político aparece no topo. As descrições seguem o padrão cargo / esquerda / direita. As sobrancelhas são demonstradas em um contorno de rosto neutro do mesmo tamanho usado na comparação da cor.
+- Partidos sem nota acadêmica podem ser consultados abaixo da tabela da UF, abrindo o campo por clique ou toque. A lista é atualizada por cargo e substitui a dica nativa de passar o cursor.
 
 ## Estado atualizado
 

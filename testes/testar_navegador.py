@@ -30,6 +30,22 @@ with sync_playwright() as p:
     legenda = page.locator("#legenda-face")
     assert legenda.is_visible()
     assert legenda.locator("dt").count() == 5
+    aviso_neutralidade = page.locator("#aviso-neutralidade")
+    assert aviso_neutralidade.is_visible()
+    assert aviso_neutralidade.bounding_box()["y"] + aviso_neutralidade.bounding_box()["height"] < 1080
+    assert "sem posicionamento político" in aviso_neutralidade.inner_text()
+    assert "e não indicam aprovação ou personalidade" not in page.locator("body").inner_text()
+    assert ", não emoções ou personalidade" not in page.locator("body").inner_text()
+    assert "Passe o cursor sobre uma linha" not in page.locator("body").inner_text()
+    for descricao in legenda.locator("dd").all_text_contents():
+        assert "Esquerda:" in descricao and "Direita:" in descricao
+    partidos = page.locator("#partidos-sem-nota")
+    partidos.locator("summary").click()
+    assert partidos.get_attribute("open") is not None
+    dados_reais = page.locator("#dados").evaluate("el => JSON.parse(el.textContent)")
+    for linha in dados_reais["estados"]["PR"]["indices"]:
+        texto = page.locator(f'#lista-partidos-sem-nota li[data-cargo="{linha["cargo"]}"]').inner_text()
+        assert (linha["partidos_sem_nota"] or "Nenhum") in texto
     assert page.locator("#aba-leitura").count() == 0
     assert page.locator("#guia-chernoff").is_visible()
     assert page.locator(".aspecto-titulo").count() == 5
@@ -58,6 +74,9 @@ with sync_playwright() as p:
         assert page.locator("#uf").input_value() == uf
         assert page.locator("#valores tr").count() == 5
         assert page.locator(f'.uf-hit[data-uf="{uf}"]').get_attribute("aria-pressed") == "true"
+        for linha in dados_reais["estados"][uf]["indices"]:
+            texto = page.locator(f'#lista-partidos-sem-nota li[data-cargo="{linha["cargo"]}"]').inner_text()
+            assert (linha["partidos_sem_nota"] or "Nenhum") in texto
     page.locator('.uf-hit[data-uf="RO"]').click()
     assert page.locator('#valores tr[data-cargo="federal"] td').nth(1).inner_text() != "—"
     assert page.locator('#valores tr[data-cargo="estadual"] td').nth(1).inner_text() != "—"
@@ -84,6 +103,19 @@ with sync_playwright() as p:
         assert page.evaluate("document.documentElement.scrollWidth <= window.innerWidth + 1")
     page.screenshot(path=str(SCRATCH / "painel_mobile.png"), full_page=True)
     assert not erros, erros
+    touch_context = browser.new_context(viewport={"width": 390, "height": 844}, has_touch=True, is_mobile=True)
+    touch_page = touch_context.new_page()
+    touch_page.goto((RAIZ / "resultados/painel.html").as_uri(), wait_until="load")
+    touch_partidos = touch_page.locator("#partidos-sem-nota")
+    touch_partidos.locator("summary").tap()
+    assert touch_partidos.get_attribute("open") is not None
+    assert touch_page.locator("#lista-partidos-sem-nota li").count() == 5
+    touch_partidos.locator("summary").tap()
+    assert touch_partidos.get_attribute("open") is None
+    touch_partidos.locator("summary").focus()
+    touch_page.keyboard.press("Enter")
+    assert touch_partidos.get_attribute("open") is not None
+    touch_context.close()
     context.close()
     browser.close()
 print("OK: 27 UFs, cinco demonstrações no mesmo espaço, teclado, duas abas e layout móvel; nenhum erro JavaScript.")
